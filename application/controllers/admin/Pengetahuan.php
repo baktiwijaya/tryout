@@ -5,7 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Pengetahuan extends CI_Controller {
 
     protected $user_type; 
-    private $_kategori = 2;
+    private $_kategori = 3;
     private $_kategori_soal = 'Pengetahuan dan Pemahamam Umum';
 
     public function __construct() {
