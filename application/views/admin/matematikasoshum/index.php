@@ -12,7 +12,6 @@ $user_type = $this->session->userdata('user_type');
             </div>
         </div>
     </div>
-    <hr>
     <div class="card-body">
         <div id="content"></div>
     </div>
@@ -24,7 +23,7 @@ $user_type = $this->session->userdata('user_type');
     function load() {
         $.ajax({
             type: 'GET',
-            url: '<?= base_url() ?>admin/penalaran/load_table',
+            url: '<?= base_url() ?>admin/matematikasoshum/load_table',
             beforeSend: function (data) {
                 $.blockUI({
                     message: '<i class="icon-spinner4 spinner"></i>',
@@ -56,7 +55,7 @@ $user_type = $this->session->userdata('user_type');
     function add() {
         $.ajax({
             type: 'GET',
-            url: '<?= base_url() ?>admin/penalaran/add',
+            url: '<?= base_url() ?>admin/matematikasoshum/add',
             beforeSend: function (data) {
                 $.blockUI({
                     message: '<i class="icon-spinner4 spinner"></i>',

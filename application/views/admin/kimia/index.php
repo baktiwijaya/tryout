@@ -24,7 +24,7 @@ $user_type = $this->session->userdata('user_type');
     function load() {
         $.ajax({
             type: 'GET',
-            url: '<?= base_url() ?>admin/penalaran/load_table',
+            url: '<?= base_url() ?>admin/kimia/load_table',
             beforeSend: function (data) {
                 $.blockUI({
                     message: '<i class="icon-spinner4 spinner"></i>',
@@ -56,7 +56,7 @@ $user_type = $this->session->userdata('user_type');
     function add() {
         $.ajax({
             type: 'GET',
-            url: '<?= base_url() ?>admin/penalaran/add',
+            url: '<?= base_url() ?>admin/kimia/add',
             beforeSend: function (data) {
                 $.blockUI({
                     message: '<i class="icon-spinner4 spinner"></i>',

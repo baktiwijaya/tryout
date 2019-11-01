@@ -7,24 +7,28 @@ $user_type = $this->session->userdata('user_type');
         <h6 class="card-title"><?= $title ?></h6>
         <div class="header-elements">
             <div class="list-icons">
-                <a href="#" class="btn btn-success btn-sm" onclick="add()" title="Tambah">Tambah</a>
-                <a href="#" class="btn btn-primary btn-sm" onclick="load()" title="Reload">Reload</a></a>
+                <a href="#" class="btn btn-success btn-sm" onclick="add_jawaban()" title="Tambah">Tambah</a>
+                <a href="#" class="btn btn-primary btn-sm" onclick="load_jawaban()" title="Reload">Reload</a></a>
             </div>
         </div>
     </div>
-    <hr>
     <div class="card-body">
-        <div id="content"></div>
+        <div id="content_jawaban"></div>
+        <br>
+        <button type="button" class="btn btn-danger" onclick="load()">Kembali</button>
     </div>
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        load();
+        load_jawaban();
     })
-    function load() {
+    function load_jawaban() {
         $.ajax({
-            type: 'GET',
-            url: '<?= base_url() ?>admin/penalaran/load_table',
+            type: 'POST',
+            url: '<?= base_url() ?>admin/ekonomi/load_jawaban',
+            data: {
+                id: '<?php echo $this->session->userdata('id_soal') ?>'
+            },
             beforeSend: function (data) {
                 $.blockUI({
                     message: '<i class="icon-spinner4 spinner"></i>',
@@ -49,14 +53,14 @@ $user_type = $this->session->userdata('user_type');
             },
             success: function (data) {
                 $.unblockUI();
-                $('#content').html(data);
+                $('#content_jawaban').html(data);
             }
         })
     }
-    function add() {
+    function add_jawaban(id) {
         $.ajax({
-            type: 'GET',
-            url: '<?= base_url() ?>admin/penalaran/add',
+            type: 'POST',
+            url: '<?= base_url() ?>admin/ekonomi/add_jawaban',
             beforeSend: function (data) {
                 $.blockUI({
                     message: '<i class="icon-spinner4 spinner"></i>',
@@ -81,7 +85,7 @@ $user_type = $this->session->userdata('user_type');
             },
             success: function (data) {
                 $.unblockUI();
-                $('#content').html(data);
+                $('#content_jawaban').html(data);
             }
         })
     }
