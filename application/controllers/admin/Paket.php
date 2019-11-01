@@ -45,6 +45,7 @@ class Paket extends CI_Controller {
         $data = array(
             'nama_paket' => $nama_paket,
             'id_kategori' => $id_kategori,
+            'waktu_pengerjaan' => $waktu_pengerjaan
         );
        
         $add = $this->Crud_m->add('master_paket', $data);
@@ -64,6 +65,7 @@ class Paket extends CI_Controller {
         $data = array(
             'nama_paket' => $nama_paket,
             'id_kategori' => $id_kategori,
+            'waktu_pengerjaan' => $waktu_pengerjaan
         );
 
         $update = $this->Crud_m->edit('master_paket', $data,'id_paket',$id);

@@ -25,6 +25,15 @@ echo form_open_multipart('admin/paket/update', $form_attribute, $hidden_form);
         ?>
     </select>
 </div>
+
+<label class="col-form-label">Waktu Pengerjaan</label>
+<div class="input-group">
+    <input type="number" class="form-control col-md-5" name="waktu_pengerjaan" placeholder="Input Waktu Pengerjaan.." value="<?php echo $detail->waktu_pengerjaan ?>">
+    <span class="input-group-append">
+        <span class="input-group-text">Menit</span>
+    </span>
+</div>
+<br>
 <div class="form-group">
     <label></label>
     <input type="button" value="Batal" class="btn btn-danger" onclick="load();">

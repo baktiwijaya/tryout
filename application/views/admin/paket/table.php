@@ -10,6 +10,7 @@
                 <th style="text-align: center;width: 5%;">#</th>
                 <th style="width: 30%;text-align: center;">Nama Paket</th>
                 <th style="width: 20%;text-align: center;">Kategori Pelajaran</th>
+                <th style="width: 20%;text-align: center;">Waktu Pengerjaan</th>
                 <th style="width: 15%;text-align: center;">Action</th>
             </tr>
         </thead>
@@ -23,6 +24,7 @@
                     
                     <td><?= $key['nama_paket'] ?></td>
                     <td style="text-align: center"><?= $this->Global_m->getvalue('nama_kategori','master_kategori','id_kategori',$key['id_kategori']) ?></td>
+                    <td style="text-align: center"><?= $key['waktu_pengerjaan'] ?> Menit</td>
                     <td style="text-align: center;">
                         <a href="#" class="btn btn-default" onclick="load_soal('<?= $key['id_paket'] ?>')"><i class="fa fa-plus" data-popup="tooltip" title="Tambah Soal" data-original-title="Tambah Soal" data-placement="bottom"></i></a>
                         <a href="#" class="btn btn-default" onclick="edit('<?= $key['id_paket'] ?>')"><i class="icon-pencil" data-popup="tooltip" title="Edit Paket" data-original-title="Edit Paket" data-placement="bottom"></i></a>
