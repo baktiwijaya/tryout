@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteBase /tryout/
+
+RewriteCond $1 !^(index\.php|assets|movi|rss|common_file)
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?/$1 [L,QSA]
