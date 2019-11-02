@@ -81,24 +81,16 @@ class Authentication extends CI_Controller {
                 $session_data = array(
                     'id' => $data['id'],
                     'name' => $data['name'],
-                    'pen_name' => $data['pen_name'],
                     'user_type' => $data['user_type'],
                     'email' => $data['email'],
                     'session_id' => session_id(),
                     'logged_in' => TRUE,
-                    'kanal_management' => $data['kanal_management']
                 );
                 $this->session->set_userdata($session_data);
                 if ($data['user_type'] == 1) {
                     redirect("admin/dashboard");
-                } else if ($data['user_type'] == 2) {
-                    redirect("reporter/Dashboard");
                 } else if ($data['user_type'] == 3) {
-                    redirect("admin/Dashboard");
-                } else if ($data['user_type'] == 4) {
-                    redirect("admin/Dashboard");
-                } else if ($data['user_type'] == 5) {
-                    redirect("home_editor/Dashboard");
+                    redirect("user/dashboard");
                 } else {
                     redirect('Registration/index');
                 }
@@ -382,6 +374,38 @@ class Authentication extends CI_Controller {
                 $this->session->set_flashdata('message', "Registration successfully.");
             }
             redirect('registration');
+        }
+    }
+
+    function signup() {
+        $this->load->view('registration/signup');
+    }
+
+    public function save() {
+        extract($_POST);
+        $check_status = $this->Global_m->isExists('email', $email, 'user_info');
+        if ($check_status) {
+            $this->session->set_flashdata('exception', "Username telah terdaftar !.");
+            redirect('Authentication/signup');
+        } else {
+            if ($email == '' || $password == '') {
+                $message = array(false, 'Proses Gagal!', 'Informasi tidak boleh kosong !');
+            } else {
+                    $data = array(
+                        'email' => $email,
+                        'password' => md5($password),
+                        'user_type' => 3,
+                        'status' => 1
+                    );
+                $add = $this->Crud_m->add('user_info', $data);
+                if ($add) {
+                    $this->session->set_flashdata('message', "Proses Daftar Berhasil. Silahkan login.");
+                    redirect('Registration/index');
+                } else {
+                    $this->session->set_flashdata('message', "Proses daftar gagal.");
+                    redirect('signup');
+                }
+            }
         }
     }
 

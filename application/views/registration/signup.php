@@ -37,66 +37,46 @@
                     <!-- Login form -->
                     <div class="card mb-0">
                         <div class="card-body">
-                            <div class="text-center mb-3">
-                               
-                                <h5 class="mb-0">Masuk</h5>
-                            </div>
                             <?php
                             $form_attributes = array('class' => 'login-form', 'id' => 'myform');
-                            $exception = $this->session->userdata('exception');
-                            $message = $this->session->userdata('message');
+                            $message = $this->session->userdata('exception');
                             $session_id = $this->session->userdata('email');
                             ?>
-                            <?= form_open('Authentication/check_user', $form_attributes); ?>
+                            <?= form_open('Authentication/save', $form_attributes); ?>
                             <div class="row-fluid">
                                 <?php
-                                if (isset($exception) && $exception != '') {
-                                    echo '<div class="alert alert-danger"><button class="close" data-dismiss="alert">&times;</button>' . $exception . '</div>';
+                                if (isset($message) && $message != '') {
+                                    echo '<div class="alert alert-danger"><button class="close" data-dismiss="alert">&times;</button>' . $message . '</div>';
                                     $this->session->unset_userdata('exception');
                                 }
                                 ?>
-                                <?php
-                                if (isset($message) && $message != '') {
-                                    echo '<div class="alert alert-success"><button class="close" data-dismiss="alert">&times;</button>' . $message . '</div>';
-                                    $this->session->unset_userdata('message');
-                                }
-                                ?>
+                            </div>
+                            <div class="text-center mb-3">
+                                <i class="icon-plus3 icon-2x text-success border-success border-3 rounded-round p-3 mb-3 mt-1"></i>
+                                <h5 class="mb-0">Buat Akun</h5>
+                                <span class="d-block text-muted">Semua field harus di isi !</span>
+                            </div>
+
+                            <div class="form-group text-center text-muted content-divider">
+                                <span class="px-2">Data registrasi</span>
                             </div>
                             <div class="form-group form-group-feedback form-group-feedback-left">
-                                <input type="text" class="form-control" placeholder="Alamat email" name="email">
+                                <input type="email" class="form-control" placeholder="Alamat email" name="email" required>
                                 <div class="form-control-feedback">
                                     <i class="icon-user text-muted"></i>
                                 </div>
                             </div>
                             <div class="form-group form-group-feedback form-group-feedback-left">
-                                <input type="password" class="form-control" placeholder="Katasandi" name="password">
+                                <input type="password" class="form-control" placeholder="Katasandi" name="password" required>
                                 <div class="form-control-feedback">
                                     <i class="icon-lock2 text-muted"></i>
                                 </div>
                             </div>
-                            <div class="form-group d-flex align-items-center">
-                                <div class="form-check mb-0">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" name="remember" class="form-input-styled" checked data-fouc>
-                                        Ingatkan saya
-                                    </label>
-                                </div>
-                                <a href="login_password_recover.html" class="ml-auto">Lupa katasandi?</a>
-                            </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-block" name="mysubmit_for_login">MASUK <i class="icon-circle-right2 ml-2"></i></button>
+                                <button type="submit" class="btn btn-success btn-block" name="mysubmit_for_login">DAFTAR <i class="icon-circle-right2 ml-2"></i></button>
                             </div>
                             <?= form_close(); ?>
-                            <div class="form-group text-center text-muted content-divider">
-                                <span class="px-2">Tidak Punya Akun ?</span>
-                            </div>
-
-                            <div class="form-group">
-                                <a href="<?php echo base_url() ?>Authentication/signup" class="btn btn-light btn-block">Daftar</a>
-                            </div>
                         </div>
-                        
-                        
                     </div>
                     
 
