@@ -6,7 +6,7 @@
                 <i class="icon-poins icon-2x text-success-400 border-success-400 border-3 rounded-round p-3 mb-3 mt-1"></i>
                     <h5 class="card-title"><?php echo $key['nama_paketpoin'] ?></h5>
                     <p class="mb-3"><b>Jumlah Poin</b> : <?php echo number_format($key['jumlah_paketpoin']); ?></p>
-                    <p class="mb-3"><b>Harga Poin</b> : <?php echo number_format($key['harga_paketpoin'],2,',','.'); ?></p>
+                    <p class="mb-3"><b>Instruksi</b> : <?php echo $key['instruksi_paketpoin']; ?></p>
                     <a href="#" class="btn bg-success-400" onclick="save('<?php echo $key['id_paketpoin'] ?>')">Beli</a>
                 </div>
             </div>
