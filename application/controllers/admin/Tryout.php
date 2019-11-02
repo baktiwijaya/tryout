@@ -59,9 +59,10 @@ class Tryout extends CI_Controller {
                     'id_paket' => $value,
                     'id_tryout' => $id_tryout
                 );
-
                 array_push($array, $data2);
+                
             }
+            
             $insert_batch = $this->Crud_m->add_batch('master_isitryout',$array);
             if($insert_batch) {
                 $message = array(TRUE, 'Proses Berhasil !', 'Proses penyimpanan data berhasil !');
@@ -131,22 +132,29 @@ class Tryout extends CI_Controller {
         extract($_POST);
         
         $array = [];
-    
+        $id_tryout = $this->session->userdata('id_tryout');
         foreach($id_paket as $key => $value) {
             $data2 = array(
                 'id_paket' => $value,
-                'id_tryout' => $this->session->userdata('id_tryout')
+                'id_tryout' => $id_tryout
             );
-            array_push($array, $data2);
-        }
 
-        $insert_batch = $this->Crud_m->add_batch('master_isitryout',$array);
-        if($insert_batch) {
-            $message = array(TRUE, 'Proses Berhasil !', 'Proses penyimpanan data berhasil !');
-        } else {
-            $message = array(FALSE, 'Proses Gagal !', 'Proses penyimpanan data gagal !');
+            $exists = $this->Global_m->isExists2Key('id_tryout',$id_tryout,'id_paket',$value,'master_isitryout');
+
+            if(!$exists) {
+                array_push($array, $data2);
+            }
         }
-            
+        if(count($array) >= 1) {
+            $insert_batch = $this->Crud_m->add_batch('master_isitryout',$array);
+            if($insert_batch) {
+                $message = array(TRUE, 'Proses Berhasil !', 'Proses penyimpanan data berhasil !');
+            } else {
+                $message = array(FALSE, 'Proses Gagal !', 'Proses penyimpanan data gagal !');
+            }
+        }  else {
+            $message = array(TRUE, 'Proses Berhasil !', 'Tidak ada data yang ditambah !');
+        }
         
         echo json_encode($message);
     }
