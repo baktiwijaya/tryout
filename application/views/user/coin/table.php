@@ -24,6 +24,9 @@
                 <td style="text-align: center"><?= $no ?></td>
                 <td style="text-align: left"><?= $this->Global_m->getvalue('nama_paketcoin','master_paketcoin','id_paketcoin',$key['id_paketcoin']); ?></td>
                 <td style="text-align: center"><?= number_format($this->Global_m->getvalue('harga_paketcoin','master_paketcoin','id_paketcoin',$key['id_paketcoin']),'2',',','.'); ?></td>
+                
+                <td style="text-align: center;"><?php echo ($key['tanggal_verifikasi'] != '') ? $key['tanggal_verifikasi'] : '-' ?></td>
+                <td style="text-align: center;"><?php echo ($key['verified_by'] != '') ? $key['verified_by'] : '-' ?></td>
                 <td style="text-align: center;">
                     <?php 
                         if($key['status'] == 0) {
@@ -37,16 +40,14 @@
                         }
                     ?>    
                 </td>
-                <td style="text-align: center;"><?php echo ($key['tanggal_verifikasi'] != '') ? $key['tanggal_verifikasi'] : '-' ?></td>
-                <td style="text-align: center;"><?php echo ($key['verified_by'] != '') ? $key['verified_by'] : '-' ?></td>
                 <td style="text-align: center;">
                     <?php if($key['status'] == 0) { ?>
                         <a href="#" class="btn btn-default" onclick="edit('<?= $key['id_transaksi'] ?>')"><i class="icon-upload"></i></a>
                     <?php } else if($key['status'] == 1) { ?>
                         <a href="#" class="btn btn-default" onclick="hapus('<?= $key['id_transaksi'] ?>')"><i class="icon-trash"></i></a>
                     <?php } ?>
-                    
                 </td> 
+
             </tr>
             <?php
             $no++;
