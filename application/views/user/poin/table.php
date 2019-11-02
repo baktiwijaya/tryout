@@ -24,9 +24,12 @@
             ?>
             <tr>
                 <td style="text-align: center"><?= $no ?></td>
-                <td style="text-align: center"><?= $no ?></td>
-                <td style="text-align: left"><?= $this->Global_m->getvalue('nama_paketpoin','master_paketpoin','id_paketpoin',$key['id_paketpoin']); ?></td>
-                <td style="text-align: center"><?= number_format($this->Global_m->getvalue('harga_paketpoin','master_paketpoin','id_paketpoin',$key['id_paketpoin']),'2',',','.'); ?></td>
+                <td style="text-align: left"></td>
+                <td style="text-align: center">
+                    <?= $this->Global_m->getvalue('nama_paketpoin','master_paketpoin','id_paketpoin',$key['id_paketpoin']); ?>
+                </td>
+                
+                <td style="text-align: center"><?= number_format($this->Global_m->getvalue('jumlah_paketpoin','master_paketpoin','id_paketpoin',$key['id_paketpoin']),'2',',','.'); ?></td>
                 
                 <td style="text-align: center;"><?php echo ($key['tanggal_verifikasi'] != '') ? $key['tanggal_verifikasi'] : '-' ?></td>
                 <td style="text-align: center"><?php echo $this->Global_m->getvalue('nama_lengkap','user_info','id',$key['verified_by']) ?></td>
@@ -43,6 +46,9 @@
                         }
                     ?>    
                 </td>
+                <td>
+                    
+                </td> 
                 <td style="text-align: center;">
                     <?php if($key['status'] == 0) { ?>
                         <a href="#" class="btn btn-default" onclick="edit('<?= $key['id_transaksi'] ?>')"><i class="icon-upload"></i></a>
@@ -50,9 +56,7 @@
                         <a href="#" class="btn btn-default" onclick="hapus('<?= $key['id_transaksi'] ?>')"><i class="icon-trash"></i></a>
                     <?php } ?>
                 </td>
-                <td>
-                    
-                </td> 
+                
 
             </tr>
             <?php
