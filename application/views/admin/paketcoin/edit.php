@@ -1,63 +1,48 @@
-<div class="card">
-    <div class="card-header header-elements-inline">
-        <h6 class="card-title"><?= $title ?></h6>
-        <div class="header-elements">
-            <div class="list-icons">
-                <a class="list-icons-item" data-action="collapse"></a>
-                <a class="list-icons-item" data-action="reload" onclick="load()"></a>
-            </div>
+
+<?php
+$form_attribute = array('method' => 'post', 'class' => 'myform', 'id' => 'myform');
+$hidden_form = array('id' => $id);
+echo form_open_multipart('admin/paketcoin/update', $form_attribute, $hidden_form);
+?>
+<div class="form-row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Paket Koin</label>
+            <input type="text" name="nama_paketcoin" class="form-control"value="<?php echo $detail->nama_paketcoin ?>">
+        </div>
+
+        <div class="form-group">
+            <label>Jumlah Koin</label>
+            <input type="number" name="jumlah_koin" class="form-control"value="<?php echo $detail->jumlah_paketcoin ?>">
+        </div>
+
+        <div class="form-group">
+            <label>Harga Koin</label>
+            <input type="number" name="harga_koin" class="form-control"value="<?php echo $detail->harga_paketcoin ?>">
         </div>
     </div>
-    <?php
-    $attributes = array('class' => 'myform', 'name' => '', 'id' => 'myform');
-    echo form_open_multipart('admin/User/save', $attributes);
-    ?>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>Nama Lengkap</label>
-                    <input type="text" name="name" class="form-control" required="">
-                </div>
-                <div class="form-group">
-                    <label>Nama Pena</label>
-                    <input type="text" name="pen_name" class="form-control" required="">
-                </div>
-                <div class="form-group">
-                    <label>Alamat Email</label>
-                    <input type="text" name="email" class="form-control" required="">
-                </div>
-                <div class="form-group">
-                    <label>Katasandi</label>
-                    <input type="password" name="password" class="form-control" required="">
-                </div>               
-                <div class="form-group">
-                    <label>No. HP</label>
-                    <input type="text" name="mobile" class="form-control" required="">
-                </div>   
-                <div class="form-group">
-                    <label>Foto</label>
-                    <input type="file" name="photo" class="form-control">
-                </div>   
-                <div class="form-group">
-                    <label>Sebagai</label>
-                    <select name="type" class="form-control" id="type">
-                        <option value="">-- Pilih User Role --</option>
-                        <?php foreach ($user_role as $key) : ?>
-                            <option value="<?= $key['id'] ?>"><?= $key['user_type'] ?></option>   
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                </div> 
-            </div>    
-        </div>
-    </div>
-    <?= form_close(); ?>
 </div>
+
+<div class="form-group">
+    <label></label>
+    <input type="button" value="Batal" class="btn btn-danger" onclick="load();">
+    <input type="submit" name="save" value="Ubah" class="btn btn-primary">
+</div>
+<?= form_close(); ?>
 <script type="text/javascript">
+
     $('.select2').select2();
+
+    $('#start_date').on('click', function (e) {
+        $('#start_date').AnyTime_noPicker().AnyTime_picker().focus();
+        e.preventDefault();
+    });
+
+    $('#end_date').on('click', function (e) {
+        $('#end_date').AnyTime_noPicker().AnyTime_picker().focus();
+        e.preventDefault();
+    });
+
     var validator = $('.myform').validate({
         ignore: 'input[type=hidden], .select2-search__field', // ignore hidden fields
         errorClass: 'validation-invalid-label',
@@ -84,12 +69,12 @@
         },
         submitHandler: function (form) {
             swalInit({
-                title: 'Konfirmasi!',
-                text: 'Apakah anda sudah yakin ini ingin menyimpan data?',
+                title: 'Konfirmasi !',
+                text: 'Apakah anda yakin ingin mengubah data ?',
                 type: 'warning',
-                confirmButtonText: 'Ya!',
+                confirmButtonText: 'Ya !',
                 showCancelButton: true,
-                cancelButtonText: 'Tidak!',
+                cancelButtonText: 'Tidak !',
             }).then(function (result) {
                 if (result.value) {
                     var data = new FormData(form);
@@ -130,7 +115,7 @@
                                     text: obj[2]
                                 }).then(function (con) {
                                     if (con.value) {
-                                        $('#myform')[0].reset;
+                                        load();
                                     }
                                 })
                             } else {
@@ -139,7 +124,6 @@
                                     text: obj[2]
                                 })
                             }
-
                         }
                     })
                 }
