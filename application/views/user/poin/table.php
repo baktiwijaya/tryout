@@ -6,15 +6,14 @@
 <table class="table" id="datatable">
     <thead>
         <tr>
-            <th style="text-align: center;width: 5%;">#</th>
-            <th style="width: 20%;text-align: center;">Gambar</th>
-            <th style="width: 15%;text-align: center;">Paket Poin</th>
-            <th style="width: 15%;text-align: center;">Jumlah Poin</th>
-            <th style="width: 20%;text-align: center;">Nama Sosmed</th>
-            <th style="width: 20%;text-align: center;">Instruksi Poin</th>
-            <th style="width: 15%;text-align: center;">Expired</th>
-            <th style="width: 15%;text-align: center;">Status</th>
-            <th style="width: 15%;text-align: center;">Action</th>
+            <th style="text-align: center;">#</th>
+            <th style="text-align: center;">Paket Poin</th>
+            <th style="text-align: center;">Jumlah Poin</th>
+            <th style="text-align: center;">Nama Sosmed</th>
+            <th style="text-align: center;">Instruksi Poin</th>
+            <th style="text-align: center;">Expired</th>
+            <th style="text-align: center;">Status</th>
+            <th style="text-align: center;">Action</th>
         </tr>
     </thead>
     <tbody>
@@ -24,15 +23,19 @@
             ?>
             <tr>
                 <td style="text-align: center"><?= $no ?></td>
-                <td style="text-align: left"></td>
                 <td style="text-align: center">
                     <?= $this->Global_m->getvalue('nama_paketpoin','master_paketpoin','id_paketpoin',$key['id_paketpoin']); ?>
                 </td>
                 
                 <td style="text-align: center"><?= number_format($this->Global_m->getvalue('jumlah_paketpoin','master_paketpoin','id_paketpoin',$key['id_paketpoin']),'2',',','.'); ?></td>
-                
-                <td style="text-align: center;"><?php echo ($key['tanggal_verifikasi'] != '') ? $key['tanggal_verifikasi'] : '-' ?></td>
-                <td style="text-align: center"><?php echo $this->Global_m->getvalue('nama_lengkap','user_info','id',$key['verified_by']) ?></td>
+                <td style="text-align: center">
+                    <?php $id_sosmed = $this->Global_m->getvalue('id_sosmed','master_paketpoin','id_paketpoin',$key['id_paketpoin']) ?>
+                    <?= $this->Global_m->getvalue('nama_sosmed','master_sosmed','id_sosmed',$id_sosmed); ?></td>
+                <td style="text-align: center;">
+                    <?php $gambar = $this->Global_m->getvalue('gambar','master_paketpoin','id_paketpoin',$key['id_paketpoin']); ?>
+                    <button type="button" class="btn btn-default" onclick="instruksi('<?= $this->Global_m->getvalue('instruksi_paketpoin','master_paketpoin','id_paketpoin',$key['id_paketpoin']); ?>','<?php echo base_url() ?>uploads/sosmed/<?php echo $gambar ?>')"><i class="icon-list"></i></button>
+                </td>
+                <td style="text-align: center"><?php echo $this->Global_m->getvalue('end_date','master_paketpoin','id_paketpoin',$key['id_paketpoin']); ?></td>
                 <td style="text-align: center;">
                     <?php 
                         if($key['status'] == 0) {
@@ -46,9 +49,6 @@
                         }
                     ?>    
                 </td>
-                <td>
-                    
-                </td> 
                 <td style="text-align: center;">
                     <?php if($key['status'] == 0) { ?>
                         <a href="#" class="btn btn-default" onclick="edit('<?= $key['id_transaksi'] ?>')"><i class="icon-upload"></i></a>
@@ -56,8 +56,6 @@
                         <a href="#" class="btn btn-default" onclick="hapus('<?= $key['id_transaksi'] ?>')"><i class="icon-trash"></i></a>
                     <?php } ?>
                 </td>
-                
-
             </tr>
             <?php
             $no++;
@@ -70,6 +68,7 @@
     $(document).ready(function () {
         $('#datatable').DataTable({
             bSort: false,
+            autoWidth: true,
             bLengthChange: false,
             "oLanguage": {
                 "sSearch": ""
@@ -152,5 +151,19 @@
             }
         });
 
+    }
+
+    function instruksi(id,gambar) {
+        console.log(id);
+        swalInit({
+          title: 'Instruksi',
+          text: id,
+          imageUrl: gambar,
+          imageWidth: 400,
+          imageHeight: 200,
+          imageAlt: 'Custom image',
+          animation: false,
+          confirmButtonText: 'Ya !',
+        })
     }
 </script>
