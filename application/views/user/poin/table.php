@@ -51,6 +51,7 @@
                 </td>
                 <td style="text-align: center;">
                     <?php if($key['status'] == 0) { ?>
+                        <a href="<?php echo base_url() ?>uploads/sosmed/<?php echo $gambar ?>" target="_blank" class="btn btn-default"><i class="icon-download"></i></a>
                         <a href="#" class="btn btn-default" onclick="edit('<?= $key['id_transaksi'] ?>')"><i class="icon-upload"></i></a>
                     <?php } else if($key['status'] == 1) { ?>
                         <a href="#" class="btn btn-default" onclick="hapus('<?= $key['id_transaksi'] ?>')"><i class="icon-trash"></i></a>
