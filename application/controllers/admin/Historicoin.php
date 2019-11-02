@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Transaksicoin extends CI_Controller {
+class Historicoin extends CI_Controller {
 
     protected $user_type;
 
@@ -20,14 +20,14 @@ class Transaksicoin extends CI_Controller {
     }
 
     public function index() {
-        $data['title'] = 'Verifikasi Pembelian Coin';
-        $data['content'] = 'admin/transaksicoin/index';
+        $data['title'] = 'Histori Pembelian Coin';
+        $data['content'] = 'admin/historicoin/index';
         $this->load->view('admin/template/main', $data);
     }
 
     public function load_table() {
-        $data['list'] = $this->Crud_m->all_data('transaksi_coin', '*','status=1');
-        $this->load->view('admin/transaksicoin/table', $data);
+        $data['list'] = $this->Crud_m->all_data('transaksi_coin', '*','status=2');
+        $this->load->view('admin/historicoin/table', $data);
     }
 
     public function update() {
