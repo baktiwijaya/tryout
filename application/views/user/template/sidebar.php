@@ -37,6 +37,8 @@
                         <div class="font-size-xs opacity-50">
                             <i class="icon-user"></i> &nbsp;
                             <?= $this->Global_m->getvalue('user_type','user_type','id',$this->session->userdata('user_type')) ?>
+                            <br>
+                            <?= $this->Global_m->getvalue('total_koin','transaksi_koinpoin','id_user',$this->session->userdata('id')) ?> Koin
                             &nbsp;
                             
                             
