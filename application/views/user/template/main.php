@@ -6,16 +6,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Tryout Shocca</title>
 
-        <?php $this->load->view('admin/template/css') ?>
-        <?php $this->load->view('admin/template/js') ?>
+        <?php $this->load->view('user/template/css') ?>
+        <?php $this->load->view('user/template/js') ?>
     </head>
     <body>
         <!-- Main navbar -->
-        <?php $this->load->view('admin/template/header') ?>
+        <?php $this->load->view('user/template/header') ?>
         <!-- /main navbar -->
 
         <div class="page-content">
-            <?php $this->load->view('admin/template/sidebar') ?>
+            <?php $this->load->view('user/template/sidebar') ?>
 
             <!-- Main content -->
             <div class="content-wrapper">
@@ -33,7 +33,7 @@
                 <div class="content">
                     <?php $this->load->view($content) ?>
                 </div>
-                <?php $this->load->view('admin/template/footer'); ?>
+                <?php $this->load->view('user/template/footer'); ?>
             </div>
     </body>
 </html>

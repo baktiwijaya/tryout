@@ -38,7 +38,8 @@
                             <i class="icon-user"></i> &nbsp;
                             <?= $this->Global_m->getvalue('user_type','user_type','id',$this->session->userdata('user_type')) ?>
                             <br>
-                            <?= $this->Global_m->getvalue('total_koin','transaksi_koinpoin','id_user',$this->session->userdata('id')) ?> Koin
+                            <?php $koin = $this->Global_m->getvalue('total_koin','transaksi_koinpoin','id_user',$this->session->userdata('id')); ?>
+                            <?php echo ($koin != '') ? $koin : 0; ?> Koin
                             &nbsp;
                             
                             

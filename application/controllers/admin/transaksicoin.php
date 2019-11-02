@@ -63,7 +63,7 @@ class Transaksicoin extends CI_Controller {
                 $jumlah_koin   = $this->Global_m->getvalue('jumlah_paketcoin','master_paketcoin','id_paketcoin',$id_paketcoin);
 
                 $data2 = array(
-                    'total_poin' => $jumlah_koin,
+                    'total_koin' => $jumlah_koin,
                     'id_user' => $id_pembeli
 
                 );
