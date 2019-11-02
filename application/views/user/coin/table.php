@@ -26,14 +26,14 @@
                 <td style="text-align: center"><?= number_format($this->Global_m->getvalue('harga_paketcoin','master_paketcoin','id_paketcoin',$key['id_paketcoin']),'2',',','.'); ?></td>
                 
                 <td style="text-align: center;"><?php echo ($key['tanggal_verifikasi'] != '') ? $key['tanggal_verifikasi'] : '-' ?></td>
-                <td style="text-align: center;"><?php echo ($key['verified_by'] != '') ? $key['verified_by'] : '-' ?></td>
+                <td style="text-align: center"><?php echo $this->Global_m->getvalue('nama_lengkap','user_info','id',$key['verified_by']) ?></td>
                 <td style="text-align: center;">
                     <?php 
                         if($key['status'] == 0) {
                             echo "Belum diproses";
                         } else if($key['status'] == 1) {
                             echo "Sedang Review";
-                        } else if($key['status'] == 3){
+                        } else if($key['status'] == 2){
                             echo "Sudah diverifikasi";
                         } else {
                             echo "Transaksi Dibatalkan";
