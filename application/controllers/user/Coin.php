@@ -26,7 +26,7 @@ class Coin extends CI_Controller {
     }
 
     public function load_table() {
-        $data['list'] = $this->Crud_m->all_data('transaksi_coin', '*');
+        $data['list'] = $this->Crud_m->all_data('transaksi_coin', '*',"id_user=".$this->session->userdata('id'));
         $this->load->view('user/coin/table', $data);
     }
 

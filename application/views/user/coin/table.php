@@ -6,13 +6,13 @@
 <table class="table" id="datatable">
     <thead>
         <tr>
-            <th style="text-align: center;width: 5%;">#</th>
-            <th style="width: 20%;text-align: center;">Nama Paket Coin</th>
-            <th style="width: 15%;text-align: center;">Jumlah Bayar</th>
-            <th style="width: 15%;text-align: center;">Diverifikasi oleh</th>
-            <th style="width: 20%;text-align: center;">Tanggal Verifikasi</th>
-            <th style="width: 20%;text-align: center;">Status</th>
-            <th style="width: 15%;text-align: center;">Action</th>
+            <th style="text-align: center;">#</th>
+            <th style="text-align: center;">Nama Paket Coin</th>
+            <th style="text-align: center;">Jumlah Bayar</th>
+            <th style="text-align: center;">Diverifikasi oleh</th>
+            <th style="text-align: center;">Tanggal Verifikasi</th>
+            <th style="text-align: center;">Status</th>
+            <th style="text-align: center;">Action</th>
         </tr>
     </thead>
     <tbody>
@@ -60,6 +60,7 @@
     $(document).ready(function () {
         $('#datatable').DataTable({
             bSort: false,
+            autoWidth: true,
             bLengthChange: false,
             "oLanguage": {
                 "sSearch": ""

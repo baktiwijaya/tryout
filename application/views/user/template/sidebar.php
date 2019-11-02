@@ -39,7 +39,10 @@
                             <?= $this->Global_m->getvalue('user_type','user_type','id',$this->session->userdata('user_type')) ?>
                             <br>
                             <?php $koin = $this->Global_m->getvalue('total_koin','transaksi_koinpoin','id_user',$this->session->userdata('id')); ?>
-                            <?php echo ($koin != '') ? $koin : 0; ?> Koin
+                            <?php echo ($koin != '') ? number_format($koin,2,',','.') : 0; ?> Koin
+                            <br>
+                            <?php $poin = $this->Global_m->getvalue('total_poin','transaksi_koinpoin','id_user',$this->session->userdata('id')); ?>
+                            <?php echo ($poin != '') ? number_format($poin,2,',','.') : 0; ?> Poin
                             &nbsp;
                             
                             
