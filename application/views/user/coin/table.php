@@ -8,7 +8,8 @@
         <tr>
             <th style="text-align: center;width: 5%;">#</th>
             <th style="width: 20%;text-align: center;">Nama Paket Coin</th>
-            <th style="width: 20%;text-align: center;">Diverifikasi oleh</th>
+            <th style="width: 15%;text-align: center;">Jumlah Bayar</th>
+            <th style="width: 15%;text-align: center;">Diverifikasi oleh</th>
             <th style="width: 20%;text-align: center;">Tanggal Verifikasi</th>
             <th style="width: 20%;text-align: center;">Status</th>
             <th style="width: 15%;text-align: center;">Action</th>
@@ -20,8 +21,9 @@
         foreach ($list as $key) {
             ?>
             <tr>
-                <td><?= $no ?></td>
-                <td><?= $this->Global_m->getvalue('nama_paketcoin','master_paketcoin','id_paketcoin',$key['id_paketcoin']); ?></td>
+                <td style="text-align: center"><?= $no ?></td>
+                <td style="text-align: left"><?= $this->Global_m->getvalue('nama_paketcoin','master_paketcoin','id_paketcoin',$key['id_paketcoin']); ?></td>
+                <td style="text-align: center"><?= number_format($this->Global_m->getvalue('harga_paketcoin','master_paketcoin','id_paketcoin',$key['id_paketcoin']),'2',',','.'); ?></td>
                 <td style="text-align: center;">
                     <?php 
                         if($key['status'] == 0) {
