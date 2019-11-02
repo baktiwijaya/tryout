@@ -9,10 +9,10 @@
             <th style="text-align: center;width: 5%;">#</th>
             <th style="width: 15%;text-align: center;">Nama Paket Poin</th>
             <th style="width: 15%;text-align: center;">Jumlah Poin</th>
-            <th style="width: 15%;text-align: center;">User Pembeli</th>
-            <th style="width: 20%;text-align: center;">Tanggal Pembelian</th>
-            <th style="width: 20%;text-align: center;">Status</th>
-            <th style="width: 20%;text-align: center;">Action</th>
+            <th style="width: 15%;text-align: center;">Tanggal Event Poin</th>
+            <th style="width: 15%;text-align: center;">User</th>
+            <th style="width: 15%;text-align: center;">Tanggal Verifikasi</th>
+            <th style="width: 15%;text-align: center;">Diverifikasi Oleh</th>
         </tr>
     </thead>
     <tbody>
@@ -24,28 +24,11 @@
                 <td style="text-align: center"><?= $no ?></td>
                 <td style="text-align: center"><?= $this->Global_m->getvalue('nama_paketpoin','master_paketpoin','id_paketpoin',$key['id_paketpoin']); ?></td>
                 <td style="text-align: center"><?= number_format($this->Global_m->getvalue('jumlah_paketpoin','master_paketpoin','id_paketpoin',$key['id_paketpoin']),'2',',','.'); ?></td>
-                <td style="text-align: center"><?php echo $this->Global_m->getvalue('nama_lengkap','user_info','id',$key['id_user']) ?></td>
                 <td style="text-align: center;"><?php echo ($key['tanggal_pembelian'] != '') ? $key['tanggal_pembelian'] : '-' ?></td>
+                <td style="text-align: center"><?php echo $this->Global_m->getvalue('nama_lengkap','user_info','id',$key['id_user']) ?></td>
+                <td style="text-align: center;"><?php echo ($key['tanggal_verifikasi'] != '') ? $key['tanggal_verifikasi'] : '-' ?></td>
                 <td style="text-align: center;">
-                    <?php 
-                        if($key['status'] == 0) {
-                            echo "Belum diproses";
-                        } else if($key['status'] == 1) {
-                            echo "Sedang Review";
-                        } else if($key['status'] == 3){
-                            echo "Sudah diverifikasi";
-                        } else {
-                            echo "Transaksi Dibatalkan";
-                        }
-                    ?>    
-                </td>
-                <td style="text-align: center;">
-                    <?php if($key['status'] == 0) { ?>
-                        <a href="#" class="btn btn-default" onclick="edit('<?= $key['id_transaksi'] ?>')"><i class="icon-upload"></i></a>
-                    <?php } else if($key['status'] == 1) { ?>
-                        <a href="#" class="btn btn-default" onclick="hapus('<?= $key['id_transaksi'] ?>','<?php echo base_url() ?>uploads/bukti_pembayaran/<?php echo $key['gambar'] ?>','<?php echo $key['note'] ?>')"><i class="icon-check"></i></a>
-                    <?php } ?>
-                    
+                   <?php echo $this->Global_m->getvalue('nama_lengkap','user_info','id',$key['verified_by']) ?>
                 </td> 
             </tr>
             <?php
@@ -67,7 +50,7 @@
     })
     function edit(id,gambar,note) {
         $.ajax({
-            url: "<?= base_url() ?>admin/transaksipoin/edit",
+            url: "<?= base_url() ?>admin/historipoin/edit",
             type: "POST",
             data: {
                 id: id
@@ -103,8 +86,8 @@
 
     function hapus(id,gambar,note) {
         swalInit({
-            title: 'Bukti Share Gambar',
-            text: 'Verifikasi data ini ?',
+            title: 'Bukti Pembayaran',
+            text: 'Verifikasi transaksi ini ?',
             imageUrl: gambar,
             imageWidth: 400,
             imageHeight: 200,
@@ -115,7 +98,7 @@
         }).then(function (result) {
             if (result.value) {
                 $.ajax({
-                    url: "<?= base_url() ?>admin/transaksipoin/update",
+                    url: "<?= base_url() ?>admin/historipoin/update",
                     type: "POST",
                     data: {
                         id: id
