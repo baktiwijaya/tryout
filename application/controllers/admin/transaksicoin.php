@@ -40,7 +40,40 @@ class Transaksicoin extends CI_Controller {
         );
         $update = $this->Crud_m->edit('transaksi_coin', $data, 'id_transaksi', $id);
         if ($update) {
-            $message = array(TRUE, 'Proses Berhasil !', 'Proses pengubahan data berhasil !');
+            $id_pembeli = $this->Global_m->getvalue('id_user','transaksi_coin','id_transaksi',$id);
+            $exist = $this->Global_m->isExists('id_user',$id_pembeli,'transaksi_koinpoin');
+
+            if($exist) {
+                $total_koin    = $this->Global_m->getvalue('total_koin','transaksi_koinpoin','id_user',$id_pembeli);
+                $id_paketcoin  = $this->Global_m->getvalue('id_paketcoin','transaksi_coin','id_transaksi',$id);
+                $jumlah_koin   = $this->Global_m->getvalue('jumlah_paketcoin','master_paketcoin','id_paketcoin',$id_paketcoin);
+
+                $data2 = array(
+                    'total_koin' => ($total_koin + $jumlah_koin)
+                );
+
+                $update_jumlah = $this->Crud_m->edit('transaksi_koinpoin', $data2, 'id_user', $id_pembeli);
+                if($update_jumlah) {
+                    $message = array(TRUE, 'Proses Berhasil !', 'Proses pengubahan data berhasil !');
+                } else {
+                    $message = array(FALSE, 'Proses Gagal !', 'Proses pengubahan data gagal !');
+                }
+            } else {
+                $id_paketcoin  = $this->Global_m->getvalue('id_paketcoin','transaksi_coin','id_transaksi',$id);
+                $jumlah_koin   = $this->Global_m->getvalue('jumlah_paketcoin','master_paketcoin','id_paketcoin',$id_paketcoin);
+
+                $data2 = array(
+                    'total_poin' => $jumlah_koin,
+                    'id_user' => $id_pembeli
+
+                );
+                $update_jumlah = $this->Crud_m->add('transaksi_koinpoin', $data2);
+                if($update_jumlah) {
+                    $message = array(TRUE, 'Proses Berhasil !', 'Proses pengubahan data berhasil !');
+                } else {
+                    $message = array(FALSE, 'Proses Gagal !', 'Proses pengubahan data gagal !');
+                }
+            }
         } else {
             $message = array(FALSE, 'Proses Gagal !', 'Proses pengubahan data gagal !');
         }

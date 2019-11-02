@@ -96,7 +96,7 @@ class Coin extends CI_Controller {
         extract($_POST);
 
         $data = array(
-            'status' => 4
+            'status' => 3
         );
         $update = $this->Crud_m->edit('transaksi_coin', $data, 'id_transaksi', $id);
         if ($update) {
