@@ -7,7 +7,7 @@
     <thead>
         <tr>
             <th style="text-align: center;width: 5%;">#</th>
-            <th style="width: 15%;text-align: center;">Nama Paket Coin</th>
+            <th style="width: 15%;text-align: center;">Nama Paket Poin</th>
             <th style="width: 15%;text-align: center;">Jumlah Poin</th>
             <th style="width: 15%;text-align: center;">User Pembeli</th>
             <th style="width: 20%;text-align: center;">Tanggal Pembelian</th>
