@@ -2,11 +2,10 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class User_list extends CI_Controller {
+class Admin_list extends CI_Controller {
 
     protected $user_type; 
     private $_kategori = 8;
-    private $_kategori_soal = 'Biologi';
 
     public function __construct() {
         parent::__construct();
@@ -18,14 +17,14 @@ class User_list extends CI_Controller {
     }
 
     public function index() {
-        $data['title'] = 'Master Soal'." ".$this->_kategori_soal;
-        $data['content'] = 'admin/user_list/index';
+        $data['title'] = 'Master User';
+        $data['content'] = 'admin/admin_list/index';
         $this->load->view('admin/template/main', $data);
     }
 
     public function load_table() {
-        $data['list'] = $this->Crud_m->all_data('user_info', '*','user_type=3');
-        $this->load->view('admin/user_list/table', $data);
+        $data['list'] = $this->Crud_m->all_data('user_info', '*','user_type=1');
+        $this->load->view('admin/admin_list/table', $data);
     }
 
 }
