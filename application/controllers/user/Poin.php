@@ -26,7 +26,7 @@ class Poin extends CI_Controller {
     }
 
     public function load_table() {
-        $data['list'] = $this->Crud_m->all_data('transaksi_poin', '*');
+        $data['list'] = $this->Crud_m->all_data('transaksi_poin', '*','id_user='.$this->session->userdata('id'));
         $this->load->view('user/poin/table', $data);
     }
 
