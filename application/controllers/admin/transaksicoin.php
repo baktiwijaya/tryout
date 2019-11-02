@@ -20,7 +20,7 @@ class Transaksicoin extends CI_Controller {
     }
 
     public function index() {
-        $data['title'] = 'Pembelian Coin';
+        $data['title'] = 'Verifikasi Pembelian Coin';
         $data['content'] = 'admin/transaksicoin/index';
         $this->load->view('admin/template/main', $data);
     }
