@@ -26,7 +26,7 @@ class Beli_tryout extends CI_Controller {
     }
 
     public function load_table() {
-        $data['list'] = $this->Crud_m->all_data('transaksi_tryout', '*');
+        $data['list'] = $this->Crud_m->all_data('transaksi_tryout', '*',"id_user=".$this->session->userdata('id'));
         $this->load->view('user/beli_tryout/table', $data);
     }
 
