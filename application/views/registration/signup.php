@@ -61,6 +61,12 @@
                                 <span class="px-2">Data registrasi</span>
                             </div>
                             <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="text" class="form-control" placeholder="Nama Lengkap" name="nama_lengkap" required>
+                                <div class="form-control-feedback">
+                                    <i class="icon-user text-muted"></i>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
                                 <input type="email" class="form-control" placeholder="Alamat email" name="email" required>
                                 <div class="form-control-feedback">
                                     <i class="icon-user text-muted"></i>

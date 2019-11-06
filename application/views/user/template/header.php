@@ -50,7 +50,8 @@
                 <li class="nav-item dropdown dropdown-user">
                     <a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
                         <img src="<?= base_url() ?>assets/limitless/global_assets/images/placeholders/placeholder.jpg" class="rounded-circle mr-2" height="34" alt="">
-                        <span><?= $this->session->userdata('name') ?></span>
+                        <?php $id = $this->session->userdata('id'); ?>
+                        <span><?php echo $this->Global_m->getvalue('nama_lengkap','user_info','id',$id); ?></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="<?= base_url() ?>profil" class="dropdown-item"><i class="icon-user-plus"></i> Profil Saya</a>

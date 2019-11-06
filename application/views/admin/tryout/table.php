@@ -32,6 +32,12 @@
                         <a href="#" class="btn btn-default" onclick="load_paket('<?= $key['id_tryout'] ?>')"><i class="icon-eye" data-popup="tooltip" title="View Paket" data-original-title="View Paket" data-placement="bottom"></i></a>
                         <a href="#" class="btn btn-default" onclick="edit('<?= $key['id_tryout'] ?>')"><i class="icon-pencil" data-popup="tooltip" title="Edit tryout" data-original-title="Edit tryout" data-placement="bottom"></i></a>
                         <a href="#" class="btn btn-default" onclick="hapus('<?= $key['id_tryout'] ?>')" data-popup="tooltip" title="Hapus tryout" data-original-title="Hapus tryout" data-placement="bottom"><i class="icon-trash"></i></a>
+                        <?php if($key['status'] == 2) { ?>
+                            <a href="#" class="btn btn-default" onclick="aktif('<?= $key['id_tryout'] ?>')"><i class="icon-check" data-popup="tooltip" title="Aktifkan Tryout" data-original-title="Aktifkan Tryout" data-placement="bottom"></i></a>
+                        <?php } else { ?>
+                            <a href="#" class="btn btn-default" onclick="nonaktif('<?= $key['id_tryout'] ?>')"><i class="icon-cross2" data-popup="tooltip" title="Nonaktifkan Tryout" data-original-title="Nonaktifkan Tryout" data-placement="bottom"></i></a>
+                        <?php } ?>
+                        
                     </td> 
                 </tr>
                 <?php
@@ -65,6 +71,90 @@
             if (result.value) {
                 $.ajax({
                     url: "<?= base_url() ?>admin/tryout/delete",
+                    type: "POST",
+                    data: {
+                        id: id
+                    },
+                    error: function (data) {
+                    },
+                    success: function (data) {
+                        var obj = JSON.parse(data);
+                        if (obj[0]) {
+                            swalInit({
+                                type: 'success',
+                                text: obj[2]
+                            }).then(function (con) {
+                                if (con.value) {
+                                    load()
+                                }
+                            })
+                        } else {
+                            swalInit({
+                                type: 'warning',
+                                text: obj[2]
+                            })
+                        }
+                    }
+                });
+            }
+        });
+
+    }
+
+    function aktif(id) {
+        swalInit({
+            title: 'Konfirmasi !',
+            text: 'Apakah anda yakin ingin mengaktifkan data ?',
+            type: 'warning',
+            confirmButtonText: 'Ya !',
+            showCancelButton: true,
+            cancelButtonText: 'Tidak !',
+        }).then(function (result) {
+            if (result.value) {
+                $.ajax({
+                    url: "<?= base_url() ?>admin/tryout/aktif",
+                    type: "POST",
+                    data: {
+                        id: id
+                    },
+                    error: function (data) {
+                    },
+                    success: function (data) {
+                        var obj = JSON.parse(data);
+                        if (obj[0]) {
+                            swalInit({
+                                type: 'success',
+                                text: obj[2]
+                            }).then(function (con) {
+                                if (con.value) {
+                                    load()
+                                }
+                            })
+                        } else {
+                            swalInit({
+                                type: 'warning',
+                                text: obj[2]
+                            })
+                        }
+                    }
+                });
+            }
+        });
+
+    }
+
+    function nonaktif(id) {
+        swalInit({
+            title: 'Konfirmasi !',
+            text: 'Apakah anda yakin ingin menonaktifkan data ?',
+            type: 'warning',
+            confirmButtonText: 'Ya !',
+            showCancelButton: true,
+            cancelButtonText: 'Tidak !',
+        }).then(function (result) {
+            if (result.value) {
+                $.ajax({
+                    url: "<?= base_url() ?>admin/tryout/nonaktif",
                     type: "POST",
                     data: {
                         id: id

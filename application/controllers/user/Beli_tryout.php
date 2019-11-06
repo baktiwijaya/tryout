@@ -31,7 +31,7 @@ class Beli_tryout extends CI_Controller {
     }
 
     public function add() {
-        $data['tryout'] = $this->Crud_m->all_data('master_tryout', '*');
+        $data['tryout'] = $this->Crud_m->all_data('master_tryout', '*','status=1');
         $this->load->view('user/beli_tryout/add',$data);
     }
 

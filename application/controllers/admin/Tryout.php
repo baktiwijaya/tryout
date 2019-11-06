@@ -48,7 +48,8 @@ class Tryout extends CI_Controller {
             'harga_koin' => $harga_koin,
             'harga_poin' => $harga_poin,
             'start_date' => $start_date,
-            'end_date' => $end_date
+            'end_date' => $end_date,
+            'status' => 2
         );
         
         $add = $this->Crud_m->add('master_tryout', $data1);
@@ -168,6 +169,42 @@ class Tryout extends CI_Controller {
         } else {
             $message = array(FALSE, 'Proses Gagal !', 'Proses hapus data gagal !');
         }
+        echo json_encode($message);
+    }
+
+    public function aktif() {
+
+        extract($_POST);
+        
+        $data = array(
+            'status' => 1,
+        );
+
+        $update = $this->Crud_m->edit('master_tryout', $data,'id_tryout',$id);
+        if ($update) {
+            $message = array(TRUE, 'Proses Berhasil !', 'Proses penyimpanan data berhasil !');
+        } else {
+            $message = array(FALSE, 'Proses Gagal !', 'Proses penyimpanan data gagal !');
+        }
+
+        echo json_encode($message);
+    }
+
+    public function nonaktif() {
+
+        extract($_POST);
+        
+        $data = array(
+            'status' => 2,
+        );
+
+        $update = $this->Crud_m->edit('master_tryout', $data,'id_tryout',$id);
+        if ($update) {
+            $message = array(TRUE, 'Proses Berhasil !', 'Proses penyimpanan data berhasil !');
+        } else {
+            $message = array(FALSE, 'Proses Gagal !', 'Proses penyimpanan data gagal !');
+        }
+
         echo json_encode($message);
     }
 

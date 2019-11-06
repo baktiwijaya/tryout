@@ -392,6 +392,7 @@ class Authentication extends CI_Controller {
                 $message = array(false, 'Proses Gagal!', 'Informasi tidak boleh kosong !');
             } else {
                     $data = array(
+                        'nama_lengkap' => $nama_lengkap,
                         'email' => $email,
                         'password' => md5($password),
                         'user_type' => 3,
