@@ -7,7 +7,8 @@
     <thead>
         <tr>
             <th style="text-align: center;width: 5%;">#</th>
-            <th style="width: 20%;text-align: center;">Tryout</th>
+            <th style="width: 20%;text-align: center;">Nama Paket</th>
+            <th style="width: 20%;text-align: center;">Action</th>
         </tr>
     </thead>
     <tbody>
@@ -17,7 +18,11 @@
             ?>
             <tr>
                 <td><?= $no ?></td>
-                <td><?= $this->Global_m->getvalue('nama_tryout','master_tryout','id_tryout',$key['id_tryout']); ?></td>
+                <td><?= $this->Global_m->getvalue('nama_paket','master_paket','id_paket',$key['id_paket']); ?></td>
+                <td style="text-align: center;">
+                    <button type="button" class="btn btn-success">Petunjuk Pengerjaan</button>
+                    <button type="button" class="btn btn-danger" onclick="do_test('<?php echo $key['id_paket'] ?>')">Kerjakan Tryout</button>
+                </td>
             </tr>
             <?php
             $no++;
@@ -36,9 +41,9 @@
             }
         })
     })
-    function edit(id) {
+    function do_test(id) {
         $.ajax({
-            url: "<?= base_url() ?>admin/tags/edit",
+            url: "<?= base_url() ?>user/do_tryout/do_test",
             type: "POST",
             data: {
                 id: id

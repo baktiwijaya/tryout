@@ -42,18 +42,93 @@ class Beli_tryout extends CI_Controller {
         $this->load->view('user/beli_tryout/edit', $data);
     }
 
-    public function save() {
+    public function save_koin() {
         extract($_POST);
-        $data = array(
-            'id_tryout' => $id_tryout,
-            'created_date' => date('Y-m-d H:i:s')
-        );
+        
+        $id_user = $this->session->userdata('id');
+        $koin = $this->Global_m->getvalue('total_koin','transaksi_koinpoin','id_user',$id_user);
+        $harga_koin = $this->Global_m->getvalue('harga_koin','master_tryout','id_tryout',$id_tryout);
 
-        $add = $this->Crud_m->add('transaksi_tryout', $data);
-        if ($add) {
-            $message = array(TRUE, 'Proses Berhasil !', 'Proses penyimpanan data berhasil !');
+
+        if( (float)$koin - (float)$harga_koin < 0) {
+            $message = array(FALSE, 'Proses Gagal !', 'Pembelian gagal karena saldo tidak cukup !');
         } else {
-            $message = array(FALSE, 'Proses Gagal !', 'Proses penyimpanan data gagal !');
+            $data = array(
+                'id_user' => $id_user,
+                'id_tryout' => $id_tryout,
+                'jumlah_pengurangan' => $harga_koin,
+                'tanggal_beli' => date('Y-m-d H:i:s'),
+                'tipe_beli' => 1 
+            );
+            $add = $this->Crud_m->add('transaksi_tryout',$data);
+            if($add) {
+                $data2 = array(
+                    'id_tryout' => $id_tryout,
+                    'id_user' => $id_user,
+                    'test_status' => 0 // Belum dikerjakan
+                );
+                $add2 = $this->Crud_m->add('library_tryout',$data2);
+                if($add2) {
+                    $data3 = array(
+                        'total_koin' => ((float)$koin - (float)$harga_koin)
+                    );
+                    $update = $this->Crud_m->edit('transaksi_koinpoin',$data3,'id_user',$id_user);
+                    if($update) {
+                        $message = array(TRUE, 'Proses Berhasil !', 'Pembelian berhasil !');
+                    } else {
+                        $message = array(FALSE, 'Proses Gagal !', 'Pembelian gagal dilakukan !');
+                    }
+                }
+
+            } else {
+                $message = array(FALSE, 'Proses Gagal !', 'Pembelian gagal dilakukan !');
+            }
+        }
+
+        echo json_encode($message);
+    }
+
+    public function save_poin() {
+        extract($_POST);
+        
+        $id_user = $this->session->userdata('id');
+        $poin = $this->Global_m->getvalue('total_poin','transaksi_koinpoin','id_user',$id_user);
+        $harga_poin = $this->Global_m->getvalue('harga_poin','master_tryout','id_tryout',$id_tryout);
+
+
+        if( (float)$poin - (float)$harga_poin < 0) {
+            $message = array(FALSE, 'Proses Gagal !', 'Pembelian gagal karena saldo tidak cukup !');
+        } else {
+            $data = array(
+                'id_user' => $id_user,
+                'id_tryout' => $id_tryout,
+                'jumlah_pengurangan' => $harga_poin,
+                'tanggal_beli' => date('Y-m-d H:i:s'),
+                'tipe_beli' => 2
+            );
+            $add = $this->Crud_m->add('transaksi_tryout',$data);
+            if($add) {
+                $data2 = array(
+                    'id_tryout' => $id_tryout,
+                    'id_user' => $id_user,
+                    'test_status' => 0 // Belum dikerjakan
+                );
+                $add2 = $this->Crud_m->add('library_tryout',$data2);
+                if($add2) {
+                    $data3 = array(
+                        'total_poin' => ((float)$poin - (float)$harga_poin)
+                    );
+                    $update = $this->Crud_m->edit('transaksi_koinpoin',$data3,'id_user',$id_user);
+                    if($update) {
+                        $message = array(TRUE, 'Proses Berhasil !', 'Pembelian berhasil !');
+                    } else {
+                        $message = array(FALSE, 'Proses Gagal !', 'Pembelian gagal dilakukan !');
+                    }
+                }
+
+            } else {
+                $message = array(FALSE, 'Proses Gagal !', 'Pembelian gagal dilakukan !');
+            }
         }
 
         echo json_encode($message);

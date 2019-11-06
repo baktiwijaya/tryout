@@ -8,6 +8,7 @@
         <tr>
             <th style="text-align: center;width: 5%;">#</th>
             <th style="width: 20%;text-align: center;">Tryout</th>
+            <th style="width: 20%;text-align: center;">Action</th>
         </tr>
     </thead>
     <tbody>
@@ -18,6 +19,9 @@
             <tr>
                 <td><?= $no ?></td>
                 <td><?= $this->Global_m->getvalue('nama_tryout','master_tryout','id_tryout',$key['id_tryout']); ?></td>
+                <td style="text-align: center;">
+                    <button type="button" class="btn btn-success" onclick="edit('<?php echo $key['id_library'] ?>')">Kerjakan Tryout</button>
+                </td>
             </tr>
             <?php
             $no++;
@@ -38,7 +42,7 @@
     })
     function edit(id) {
         $.ajax({
-            url: "<?= base_url() ?>admin/tags/edit",
+            url: "<?= base_url() ?>user/do_tryout/take_test",
             type: "POST",
             data: {
                 id: id
