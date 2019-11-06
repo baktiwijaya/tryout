@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : LOCALHOST
+ Source Server         : crud
  Source Server Type    : MySQL
  Source Server Version : 50637
  Source Host           : localhost:3306
@@ -11,11 +11,24 @@
  Target Server Version : 50637
  File Encoding         : 65001
 
- Date: 06/11/2019 14:32:38
+ Date: 06/11/2019 14:50:08
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for library_isitryout
+-- ----------------------------
+DROP TABLE IF EXISTS `library_isitryout`;
+CREATE TABLE `library_isitryout`  (
+  `id_isilibrary` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int(11) NULL DEFAULT NULL,
+  `id_paket` int(11) NULL DEFAULT NULL,
+  `id_jawaban` int(11) NULL DEFAULT NULL,
+  `is_true` char(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id_isilibrary`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for library_tryout
@@ -380,7 +393,7 @@ CREATE TABLE `transaksi_coin`  (
   `note` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
   `note_admin` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
   PRIMARY KEY (`id_transaksi`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of transaksi_coin
@@ -398,6 +411,7 @@ INSERT INTO `transaksi_coin` VALUES (10, 29, 3, '1572729305_95d67299-e3b3-4394-8
 INSERT INTO `transaksi_coin` VALUES (11, 28, 3, '1572729278_320998 mrk (1).JPG', '2', 30, '2019-11-03 04:14:14', '2019-11-03 04:18:51', '2019-11-03 04:14:38', '', NULL);
 INSERT INTO `transaksi_coin` VALUES (12, 29, 2, '1572729315_arrow.png', '2', 30, '2019-11-03 04:14:18', '2019-11-03 04:18:54', '2019-11-03 04:15:15', '', NULL);
 INSERT INTO `transaksi_coin` VALUES (13, 28, 2, '1572932756_demo.jpg', '1', NULL, '2019-11-05 12:45:40', NULL, '2019-11-05 12:45:56', 'sudah di upload', NULL);
+INSERT INTO `transaksi_coin` VALUES (14, 31, 2, '1573026182_Hydrangeas.jpg', '2', 1, '2019-11-06 14:42:44', '2019-11-06 14:43:38', '2019-11-06 14:43:02', 'ini udah kubayar anjing', NULL);
 
 -- ----------------------------
 -- Table structure for transaksi_koinpoin
@@ -409,13 +423,14 @@ CREATE TABLE `transaksi_koinpoin`  (
   `total_poin` decimal(18, 2) NULL DEFAULT NULL,
   `total_koin` decimal(18, 2) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of transaksi_koinpoin
 -- ----------------------------
 INSERT INTO `transaksi_koinpoin` VALUES (1, 28, 14243.00, 69000.00);
 INSERT INTO `transaksi_koinpoin` VALUES (3, 29, 24243.00, 79754.00);
+INSERT INTO `transaksi_koinpoin` VALUES (4, 31, NULL, 10000.00);
 
 -- ----------------------------
 -- Table structure for transaksi_poin
@@ -499,7 +514,7 @@ CREATE TABLE `user_info`  (
   `status` tinyint(2) NULL DEFAULT NULL,
   `post_ap_status` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of user_info
@@ -508,6 +523,7 @@ INSERT INTO `user_info` VALUES (1, 'administrator@gmail.com', '01751194212', '12
 INSERT INTO `user_info` VALUES (28, 'inul@gmail.com', NULL, NULL, 'e10adc3949ba59abbe56e057f20f883e', 'Dadang Kaya', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, NULL, NULL, 1, 0);
 INSERT INTO `user_info` VALUES (29, 'ambon@gmail.com', NULL, NULL, 'e10adc3949ba59abbe56e057f20f883e', 'Ambon', 'Ambon', 'Situm', NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, NULL, NULL, 1, 0);
 INSERT INTO `user_info` VALUES (30, 'gg@gmail.com', NULL, NULL, 'e10adc3949ba59abbe56e057f20f883e', 'Archie', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 1, 0);
+INSERT INTO `user_info` VALUES (31, 'budi@gmail.com', NULL, NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, NULL, NULL, 1, 0);
 
 -- ----------------------------
 -- Table structure for user_type
