@@ -45,9 +45,9 @@ class Do_tryout extends CI_Controller {
 
     public function do_test() {
         extract($_POST);
-        
-        $this->session->set_userdata('id_paket',$id);
-        $this->load->view($this->_module.'/table_do');
+        $id_user = $this->session->userdata('id');
+        $data['list'] = $this->tbl_tryout->all_data($id_user,$id);
+        $this->load->view($this->_module.'/table_do',$data);
     }
 
     public function jumlah_soal() {

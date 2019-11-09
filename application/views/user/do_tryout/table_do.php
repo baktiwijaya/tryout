@@ -1,127 +1,110 @@
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("[rel=tooltip]").tooltip({placement: 'right'});
-    });
-</script>
 <div class="row">
     <div class="col-md-8">
-        <div class="panel">
-            <div class="panel-heading">
-                <h6 class="panel-title">Soal<a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
+        <?php $no = 1; foreach ($list as $key) : ?>
+            <div id="soal_<?php echo $no ?>">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <h6>Soal Nomor <?php echo $no ?></span></h6>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <?php echo $this->Global_m->getvalue('nama_soal','master_soal','id_soal',$key['id_soal']); ?>
+                        <hr>
+                        <?php $jawaban = $this->Crud_m->all_data('master_jawaban','*',"id_soal=".$key['id_soal']); ?>
+
+                        <?php $nos = 1;foreach($jawaban as $value) : ?>
+                            <input type="radio" name="id_jawaban_<?php echo $key['nomor'] ?>" onclick="jawaban(this.value,'<?php echo $key['nomor'] ?>');check_value('<?php echo $key['nomor'] ?>')" value="<?php echo $value['id_jawaban'] ?>">&nbsp;<?php echo $value['label']; ?>.&nbsp;<?php echo $value['nama_jawaban']; ?>
+                            <hr>
+                        <?php $nos++;endforeach; ?>
+                        <button type="button" class="btn btn-md btn-danger" onclick="javascript:show_prev('<?php echo $no ?>');" id="btnprev_<?php echo $no; ?>" hidden>Kembali</button>
+                        <button type="button" class="btn btn-md btn-success" onclick="javascript:show_next('<?php echo $no ?>');" id="btnnext_<?php echo $no; ?>">Lanjut</button>
+                    </div>
+                </div>
             </div>
-            <div class="panel-body">
-                <div id="content_soal" class="table-responsive"></div>
-            </div>
-        </div>        
+        <?php $no++; endforeach; ?>
     </div>
     <div class="col-md-4">
-       <div class="panel">
+        <div class="panel">
             <div class="panel-heading">
-                <h6 class="panel-title">Jumlah Soal<a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
+                <div class="panel-title">
+                    <h6>Jumlah Soal : <?php echo count($list) ?></h6>
+                </div>
             </div>
             <div class="panel-body">
-                <div id="jumlah_soal" class="table-responsive"></div>
+                <div class="row">
+                    <?php for($i = 1;$i <= count($list); $i++) { ?>
+                        <div class="col-md-3">
+                            <div class="panel" id="<?php echo $i ?>" onclick="change('<?php echo $i ?>')">
+                                <div class="panel-body">
+                                    <?php echo $i ?>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
             </div>
-        </div>  
+        </div>
     </div>
 </div>
+<?php for($i = 1;$i <= count($list); $i++) { ?>
+    <input type="text" name="jawab_<?php echo $i ?>" id="jawab_<?php echo $i ?>">
+<?php } ?>
 
-<?php
-    $form_attribute = array('method' => 'post', 'class' => 'myform', 'id' => 'myform');
-    echo form_open_multipart('user/do_tryout/save', $form_attribute);
-?>
-<input type="hidden" name="id_jawaban" id="id_jawaban">
-<?= form_close(); ?>
+<input type="hidden" id="posisi">
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('#datatable').DataTable({
-            bSort: false,
-            bLengthChange: false,
-            "oLanguage": {
-                "sSearch": ""
-            }
-        })
-        ganti_soal(1);
-        jumlah_soal();
+    var total = '<?php echo count($list)?>';
+
+    for(i = 2;i <= total;i++) {
+        $('#soal_'+i).hide();
+    }
+
+    $('#posisi').val(1);
+
+    function check_value(nomor) {
         
-    })
-
-    function save() {
-
-        $('#myform').submit();
-        $('#id_jawaban').val('');
-    }
-
-    var validator = $('.myform').validate({
-        ignore: 'input[type=hidden], .select2-search__field', // ignore hidden fields
-        errorClass: 'validation-invalid-label',
-        successClass: 'validation-valid-label',
-        validClass: 'validation-valid-label',
-        highlight: function (element, errorClass) {
-            $(element).removeClass(errorClass);
-        },
-        unhighlight: function (element, errorClass) {
-            $(element).removeClass(errorClass);
-        },
-        errorPlacement: function (error, element) {
-            if (element.parents().hasClass('form-check')) {
-                error.appendTo(element.parents('.form-check').parent());
-            } else if (element.parents().hasClass('form-group-feedback') || element.hasClass('select2-hidden-accessible')) {
-                error.appendTo(element.parent());
-            } else if (element.parent().is('.uniform-uploader, .uniform-select') || element.parents().hasClass('input-group')) {
-                error.appendTo(element.parent().parent());
-            }
-            // Other elements
-            else {
-                error.insertAfter(element);
-            }
-        },
-        submitHandler: function (form) {
-            var data = new FormData(form);
-            $.ajax({
-                type: 'POST',
-                url: $("#myform").attr('action'),
-                data: data,
-                contentType: false,
-                processData: false,
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    if(obj[0] == true) {
-                        var nomor = '<?php echo $this->session->userdata('nomor_soal') ?>';
-                        var id_paket = '<?php echo $this->session->userdata('id_paket') ?>';
-                        var total_soal = '<?php echo $this->session->userdata('total_soal') ?>';
-                        
-                    }
-                    
-                }
-            })
+        if($('#jawab_'+nomor).val() == '' || $('#jawab_'+nomor).val() == null) {
+            console.log($('#jawab_'+nomor).val());
+            $('#'+nomor).addClass('bg-danger');
+        } else {
+            $('#'+nomor).addClass('bg-green');
         }
-    });
-                
-    function ganti_soal(id) {
-        $.ajax({
-            url: "<?= base_url() ?>user/do_tryout/ganti_soal",
-            type: "POST",
-            data: {
-                nomor: id
-            },
-            success: function (data) {
-                $('#content_soal').html(data);
-            }
-        });
     }
 
-    function jumlah_soal(id) {
-        $.ajax({
-            url: "<?= base_url() ?>user/do_tryout/jumlah_soal",
-            type: "POST",
-            data: '',
-            success: function (data) {
-                $.unblockUI();
-                $('#jumlah_soal').html(data);
-            }
-        });
+    $('#btnnext_'+total).hide();
+    $('#btnprev_1').hide();
+
+    function show_next(id) {
+        check_value(id);
+        var next = parseInt(id) + 1;
+        $('#soal_'+id).hide();
+        $('#soal_'+next).show();
+        $('#posisi').val(next);
     }
-   
-    
+
+    function show_prev(id) {
+        check_value(id);
+        var prev = parseInt(id) - 1;
+        $('#soal_'+id).hide();
+        $('#soal_'+prev).show();
+        $('#posisi').val(prev);
+    }
+
+    function jawaban(id,nomor) {
+      $('#jawab_'+nomor).val(id);
+    }
+
+    function change(nomor) {
+
+        var posisi = $('#posisi').val();
+        check_value(posisi);
+        for(i = 1;i <= total;i++) {
+
+            $('#soal_'+i).hide();
+        }
+        $('#soal_'+nomor).show();
+        $('#posisi').val(nomor);
+    }
+
+
 </script>
