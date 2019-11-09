@@ -5,11 +5,11 @@
 </script>
 <div class="row">
     <div class="col-md-8">
-        <div class="card">
-            <div class="card-header header-elements-inline">
-                <h6 class="card-title">Soal</h6>
+        <div class="panel">
+            <div class="panel-heading">
+                <h6 class="panel-title">Soal<a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
             </div>
-            <div class="card-body">
+            <div class="panel-body">
                 <div id="content_soal" class="table-responsive">
         
                 </div>
@@ -18,16 +18,16 @@
         </div>        
     </div>
     <div class="col-md-4">
-        <div class="card">
-            <div class="card-header header-elements-inline">
-                <h6 class="card-title">Jumlah Soal</h6>
+        <div class="panel">
+            <div class="panel-heading">
+                <h6 class="panel-title">Jumlah Soal</h6>
             </div>
-            <div class="card-body">
+            <div class="panel-body">
                 <div class="row">
                     <?php $no = 1;foreach($list as $key) : ?>
                         <div class="col-md-3">
-                            <div class="card">
-                                <div class="card-body">
+                            <div class="panel">
+                                <div class="panel-body">
                                     <a href="#" onclick="ganti_soal('<?php echo $key['id_soal'] ?>')">
                                         <?php echo $no; ?> 
                                     </a>
@@ -52,7 +52,6 @@
                 "sSearch": ""
             }
         })
-        $("#1").trigger("click"); 
     })
    
     function ganti_soal(id) {
