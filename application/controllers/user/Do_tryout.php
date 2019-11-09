@@ -45,11 +45,17 @@ class Do_tryout extends CI_Controller {
 
     public function do_test() {
         extract($_POST);
-        $id_user = $this->session->userdata('id');
+        
         $this->session->set_userdata('id_paket',$id);
-        $data['list'] = $this->tbl_tryout->get_datasoal($id,$id_user);
+        $this->load->view($this->_module.'/table_do');
+    }
+
+    public function jumlah_soal() {
+        $id_user = $this->session->userdata('id');
+        $id_paket = $this->session->userdata('id_paket');
+        $data['list'] = $this->tbl_tryout->get_datasoal($id_paket,$id_user);
         $this->session->set_userdata('total_soal',count($data['list']));
-        $this->load->view($this->_module.'/table_do',$data);
+        $this->load->view($this->_module.'/table_jumlahsoal',$data);
     }
 
     public function ganti_soal() {
@@ -68,7 +74,12 @@ class Do_tryout extends CI_Controller {
         $id_user = $this->session->userdata('id');
         $id_paket = $this->session->userdata('id_paket');
         $nomor = $this->session->userdata('nomor_soal');
-        $data = array('id_jawaban' => $id_jawaban,'is_done' => 1);
+        if(!empty($id_jawaban)) {
+            $is_done = 1;
+        } else {
+            $is_done = 2;
+        }
+        $data = array('id_jawaban' => $id_jawaban,'is_done' => $is_done);
 
         $update = $this->Crud_m->edit_3key('library_isitryout',$data,'id_user',$id_user,'id_paket',$id_paket,'nomor',$nomor);
         if ($update) {

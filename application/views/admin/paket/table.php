@@ -25,8 +25,8 @@
                     
                     <td><?= $key['nama_paket'] ?></td>
                     <td style="text-align: left"><?= $this->Global_m->getvalue('nama_kategori','master_kategori','id_kategori',$key['id_kategori']) ?></td>
-                    <td style="text-align: center"><?= $key['waktu_pengerjaan'] ?> Menit</td>
                     <td style="text-align: center"><?= $this->Global_m->count_where($key['id_paket'],'master_isipaket') ?> Soal</td>
+                    <td style="text-align: center"><?= $key['waktu_pengerjaan'] ?> Menit</td>
                     <td style="text-align: center;">
                         <a href="#" class="btn btn-default" onclick="load_soal('<?= $key['id_paket'] ?>')"><i class="fa fa-plus" data-popup="tooltip" title="Tambah Soal" data-original-title="Tambah Soal" data-placement="bottom"></i></a>
                         <a href="#" class="btn btn-default" onclick="edit('<?= $key['id_paket'] ?>')"><i class="icon-pencil" data-popup="tooltip" title="Edit Paket" data-original-title="Edit Paket" data-placement="bottom"></i></a>
