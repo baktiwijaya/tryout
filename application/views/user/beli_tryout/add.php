@@ -91,12 +91,17 @@ echo form_open_multipart('user/beli_tryout/save', $form_attribute);
                     success: function (data) {
                         $.unblockUI();
                         var obj = JSON.parse(data);
-                        if (obj[0]) {
-                            swal(obj[1],obj[2],'success');
+                        swal({
+                            title: obj[1],
+                            text: obj[2],
+                            type: "success",
+                            showCancelButton: false,
+                            confirmButtonClass: 'btn-danger btn-md waves-effect waves-light',
+                            confirmButtonText: 'Ya!'
+                        }, function (isConfirm) {
+                            if (!isConfirm) return;
                             load();
-                        } else {
-                            swal(obj[1],obj[2],'warning');
-                        }
+                        });
                     }
                 })
         });

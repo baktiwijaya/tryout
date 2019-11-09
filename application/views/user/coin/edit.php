@@ -13,7 +13,8 @@ echo form_open_multipart('user/coin/update', $form_attribute, $hidden_form);
     <label>Catatan</label>
     <input type="text" class="form-control col-md-6" name="note">
 </div>
-
+<hr>
+<br>
 <div class="form-group">
     <label></label>
     <input type="button" value="Batal" class="btn btn-danger" onclick="load();">
@@ -46,16 +47,19 @@ echo form_open_multipart('user/coin/update', $form_attribute, $hidden_form);
             }
         },
         submitHandler: function (form) {
-            swalInit({
-                title: 'Konfirmasi !',
-                text: 'Apakah anda yakin ingin mengubah data ?',
-                type: 'warning',
-                confirmButtonText: 'Ya !',
+            swal({
+                title: "Anda Yakin?",
+                text: "Apakan anda mengupload bukti transaksi ?",
+                type: "warning",
                 showCancelButton: true,
-                cancelButtonText: 'Tidak !',
-            }).then(function (result) {
-                if (result.value) {
-                    var data = new FormData(form);
+                cancelButtonClass: 'btn-success btn-md waves-effect',
+                confirmButtonClass: 'btn-danger btn-md waves-effect waves-light',
+                cancelButtonText: 'Tidak',
+                confirmButtonText: 'Ya!'
+
+            }, function (isConfirm) {
+                if (!isConfirm) return;
+                         var data = new FormData(form);
                     $.ajax({
                         type: 'POST',
                         url: $("#myform").attr('action'),
@@ -87,25 +91,20 @@ echo form_open_multipart('user/coin/update', $form_attribute, $hidden_form);
                         success: function (data) {
                             $.unblockUI();
                             var obj = JSON.parse(data);
-                            if (obj[0]) {
-                                swalInit({
-                                    type: 'success',
-                                    text: obj[2]
-                                }).then(function (con) {
-                                    if (con.value) {
-                                        load();
-                                    }
-                                })
-                            } else {
-                                swalInit({
-                                    type: 'warning',
-                                    text: obj[2]
-                                })
-                            }
+                            swal({
+                                title: obj[1],
+                                text: obj[2],
+                                type: "success",
+                                showCancelButton: false,
+                                confirmButtonClass: 'btn-danger btn-md waves-effect waves-light',
+                                confirmButtonText: 'Ya!'
+                            }, function (isConfirm) {
+                                if (!isConfirm) return;
+                                load();
+                            });
                         }
                     })
-                }
-            });
+               });
         }
     });
 </script>

@@ -18,15 +18,18 @@
 <script type="text/javascript">
 
     function save(id) {
-        swalInit({
-            title: 'Konfirmasi !',
-            text: 'Apakah anda yakin ingin membeli paket coin ini ?',
-            type: 'warning',
-            confirmButtonText: 'Ya !',
+       swal({
+            title: "Anda Yakin?",
+            text: "Apakan anda ingin membeli koin ?",
+            type: "warning",
             showCancelButton: true,
-            cancelButtonText: 'Tidak !',
-        }).then(function (result) {
-            if (result.value) {
+            cancelButtonClass: 'btn-success btn-md waves-effect',
+            confirmButtonClass: 'btn-danger btn-md waves-effect waves-light',
+            cancelButtonText: 'Tidak',
+            confirmButtonText: 'Ya!'
+
+       }, function (isConfirm) {
+            if (!isConfirm) return;
                 $.ajax({
                     type: 'POST',
                     url: '<?php echo base_url() ?>user/coin/save',
@@ -58,25 +61,20 @@
                     success: function (data) {
                         $.unblockUI();
                         var obj = JSON.parse(data);
-                        if (obj[0]) {
-                            swalInit({
-                                type: 'success',
-                                text: obj[2]
-                            }).then(function (con) {
-                                if (con.value) {
-                                    load();
-                                }
-                            })
-                        } else {
-                            swalInit({
-                                type: 'warning',
-                                text: obj[2]
-                            })
-                        }
+                        swal({
+                            title: obj[1],
+                            text: obj[2],
+                            type: "success",
+                            showCancelButton: false,
+                            confirmButtonClass: 'btn-danger btn-md waves-effect waves-light',
+                            confirmButtonText: 'Ya!'
+                        }, function (isConfirm) {
+                            if (!isConfirm) return;
+                            load();
+                        });
                     }
                 })
-            }
-        });
+       });
     }
 
 </script>

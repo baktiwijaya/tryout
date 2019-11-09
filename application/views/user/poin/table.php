@@ -112,56 +112,77 @@
         });
     }
 
-    function hapus(id) {
-        swalInit({
-            title: 'Konfirmasi !',
-            text: 'Apakah anda yakin ingin membatalkan transaksi ini ?',
-            type: 'warning',
-            confirmButtonText: 'Ya !',
+    function hapus(id_transaksi) {
+        swal({
+            title: "Anda Yakin?",
+            text: "Apakan anda ingin membatalkan pembelian ?",
+            type: "error",
             showCancelButton: true,
-            cancelButtonText: 'Tidak !',
-        }).then(function (result) {
-            if (result.value) {
+            cancelButtonClass: 'btn-success btn-md waves-effect',
+            confirmButtonClass: 'btn-danger btn-md waves-effect waves-light',
+            cancelButtonText: 'Tidak',
+            confirmButtonText: 'Ya!'
+
+        }, function (isConfirm) {
+            if (!isConfirm) return;
                 $.ajax({
-                    url: "<?= base_url() ?>user/poin/delete",
-                    type: "POST",
+                    type: 'POST',
+                    url: '<?php echo base_url() ?>user/poin/delete',
                     data: {
-                        id: id
+                        id : id_transaksi,
+                    },
+                    beforeSend: function (data) {
+                        $.blockUI({
+                            message: '<i class="icon-spinner4 spinner"></i>',
+                            overlayCSS: {
+                                backgroundColor: '#1b2024',
+                                opacity: 0.8,
+                                zIndex: 1200,
+                                cursor: 'wait'
+                            },
+                            css: {
+                                border: 0,
+                                color: '#fff',
+                                zIndex: 1201,
+                                padding: 0,
+                                backgroundColor: 'transparent'
+                            }
+                        });
                     },
                     error: function (data) {
+                        $.unblockUI();
+                        alert('Proses data gagal', 'info')
                     },
                     success: function (data) {
+                        $.unblockUI();
                         var obj = JSON.parse(data);
                         if (obj[0]) {
-                            swalInit({
-                                type: 'success',
-                                text: obj[2]
-                            }).then(function (con) {
-                                if (con.value) {
-                                    load()
-                                }
-                            })
+                            swal({
+                                title: obj[1],
+                                text: obj[2],
+                                type: "success",
+                                showCancelButton: false,
+                                confirmButtonClass: 'btn-danger btn-md waves-effect waves-light',
+                                confirmButtonText: 'Ya!'
+                            }, function (isConfirm) {
+                                if (!isConfirm) return;
+                                load();
+                            });
                         } else {
-                            swalInit({
-                                type: 'warning',
-                                text: obj[2]
-                            })
+                            swal(obj[1],obj[2],'warning');
                         }
                     }
-                });
-            }
+                })
         });
-
     }
 
     function instruksi(id,gambar) {
-        console.log(id);
-        swalInit({
+        swal({
           title: 'Instruksi',
           text: id,
           imageUrl: gambar,
-          imageWidth: 400,
-          imageHeight: 200,
+          imageWidth: 300,
+          imageHeight: 300,
           imageAlt: 'Custom image',
           animation: false,
           confirmButtonText: 'Ya !',
