@@ -15,6 +15,7 @@
         <?php
         $no = 1;
         foreach ($list as $key) {
+
             ?>
             <tr>
                 <td><?= $no ?></td>
@@ -76,4 +77,6 @@
             }
         });
     }
+
+    
 </script>

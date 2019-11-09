@@ -94,14 +94,18 @@ echo form_open_multipart('user/beli_tryout/save', $form_attribute);
                         swal({
                             title: obj[1],
                             text: obj[2],
-                            type: "success",
+                            type: obj[3],
                             showCancelButton: false,
                             confirmButtonClass: 'btn-danger btn-md waves-effect waves-light',
                             confirmButtonText: 'Ya!'
                         }, function (isConfirm) {
                             if (!isConfirm) return;
-                            load();
+                            if(obj[0] == true) {
+                                load();
+                            }
+                            
                         });
+                        
                     }
                 })
         });
@@ -152,12 +156,32 @@ echo form_open_multipart('user/beli_tryout/save', $form_attribute);
                     success: function (data) {
                         $.unblockUI();
                         var obj = JSON.parse(data);
-                        if (obj[0]) {
-                            swal(obj[1],obj[2],'success');
-                            load();
+                        console.log(obj);
+                        if(obj[0]) {
+                            swal({
+                                title: obj[1],
+                                text: obj[2],
+                                type: "success",
+                                showCancelButton: false,
+                                confirmButtonClass: 'btn-danger btn-md waves-effect waves-light',
+                                confirmButtonText: 'Ya!'
+                            }, function (isConfirm) {
+                                if (!isConfirm) return;
+                                load();
+                            });
                         } else {
-                            swal(obj[1],obj[2],'warning');
+                            swal({
+                                title: obj[1],
+                                text: obj[2],
+                                type: "warning",
+                                showCancelButton: false,
+                                confirmButtonClass: 'btn-danger btn-md waves-effect waves-light',
+                                confirmButtonText: 'Ya!'
+                            }, function (isConfirm) {
+                                if (!isConfirm) return;
+                            });
                         }
+                        
                     }
                 })
         });

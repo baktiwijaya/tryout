@@ -115,6 +115,17 @@ Class Crud_m extends CI_Model {
         return FALSE;
     }
 
+    function edit_3key($table, $data, $fieldID1, $ID1, $fieldID2, $ID2,$fieldID3, $ID3) {
+        $this->db->where($fieldID1, $ID1);
+        $this->db->where($fieldID2, $ID2);
+        $this->db->where($fieldID3, $ID3);
+        $this->db->update($table, $data);
+        if ($this->db->affected_rows() >= 0) {
+            return TRUE;
+        }
+        return FALSE;
+    }
+
     function delete($table, $fieldID, $ID) {
         $this->db->where($fieldID, $ID);
         $this->db->delete($table);
@@ -322,6 +333,15 @@ Class Crud_m extends CI_Model {
             }
         }
         return $data;
+    }
+
+    function where_in($select,$table,$valkey,$value) {
+        $this->db->select($select);
+        $this->db->from($table);
+        $this->db->where_in($valkey,$value);
+        $res = $this->db->get();
+
+        return $res->result_array();
     }
 
 }

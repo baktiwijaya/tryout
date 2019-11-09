@@ -25,10 +25,17 @@
             <div class="panel-body">
                 <div class="row">
                     <?php $no = 1;foreach($list as $key) : ?>
+                        <?php if($key['is_done'] == 0) {
+                            $color = '';
+                        } else if($key['is_done'] == 1) {
+                            $color = 'bg-success';
+                        } else if($key['is_done'] == 2) {
+                            $color = 'bg-warning';
+                        } ?>
                         <div class="col-md-3">
-                            <div class="panel">
+                            <div class="panel <?php echo $color ?>">
                                 <div class="panel-body">
-                                    <a href="#" onclick="ganti_soal('<?php echo $key['id_soal'] ?>')">
+                                    <a href="#" onclick="ganti_soal('<?php echo $key['nomor'] ?>')">
                                         <?php echo $no; ?> 
                                     </a>
                                 </div>
@@ -52,14 +59,19 @@
                 "sSearch": ""
             }
         })
+
+        if('<?php $this->session->userdata('nomor_soal')?>' == '') {
+            ganti_soal(1);
+        } 
+        
     })
-   
+
     function ganti_soal(id) {
         $.ajax({
             url: "<?= base_url() ?>user/do_tryout/ganti_soal",
             type: "POST",
             data: {
-                id_soal: id
+                nomor: id
             },
             beforeSend: function (data) {
                 $.blockUI({
@@ -89,4 +101,6 @@
             }
         });
     }
+   
+    
 </script>
