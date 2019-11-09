@@ -28,11 +28,9 @@
                         <div class="col-md-3">
                             <div class="card">
                                 <div class="card-body">
-                                    <center>
-                                        <a href="#" onclick="ganti_soal('<?php echo $key['id_soal'] ?>')">
-                                            <?php echo $no; ?> 
-                                        </a>
-                                    </center>
+                                    <a href="#" onclick="ganti_soal('<?php echo $key['id_soal'] ?>')">
+                                        <?php echo $no; ?> 
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -54,8 +52,7 @@
                 "sSearch": ""
             }
         })
-
-
+        $("#1").trigger("click"); 
     })
    
     function ganti_soal(id) {

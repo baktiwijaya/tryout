@@ -20,7 +20,7 @@ class Beli_tryout extends CI_Controller {
     }
 
     public function index() {
-        $data['title'] = 'beli_tryout';
+        $data['title'] = 'Pembelian Tryout';
         $data['content'] = 'user/beli_tryout/index';
         $this->load->view('user/template/main', $data);
     }

@@ -1,10 +1,10 @@
 <div class="row">
     <?php foreach ($coin as $key) : ?>
         <div class="col-md-3">
-            <div class="card">
-                <div class="card-body text-center">
-                <i class="icon-coins icon-2x text-success-400 border-success-400 border-3 rounded-round p-3 mb-3 mt-1"></i>
-                    <h5 class="card-title"><?php echo $key['nama_paketcoin'] ?></h5>
+            <div class="panel">
+                <div class="panel-body text-center">
+                <div class="icon-object border-success text-success"><i class="icon-book"></i></div>
+                    <h5 class="panel-title"><?php echo $key['nama_paketcoin'] ?></h5>
                     <p class="mb-3"><b>Jumlah Coin</b> : <?php echo number_format($key['jumlah_paketcoin']); ?></p>
                     <p class="mb-3"><b>Harga Coin</b> : <?php echo number_format($key['harga_paketcoin'],2,',','.'); ?></p>
                     <a href="#" class="btn bg-success-400" onclick="save('<?php echo $key['id_paketcoin'] ?>')">Beli</a>

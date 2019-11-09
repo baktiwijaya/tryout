@@ -2,9 +2,11 @@
 
 <?php $jawaban = $this->Crud_m->all_data('master_jawaban','*',"id_soal=$list->id_soal"); ?>
 
-<?php foreach($jawaban as $key) : ?>
+<?php $no = 1;foreach($jawaban as $key) : ?>
 	<input type="radio" name="jawaban" value="<?php echo $key['is_true'] ?>">&nbsp;<?php echo $key['nama_jawaban']; ?>
-	<br>
-<?php endforeach; ?>
+	<hr>
+<?php $no++;endforeach; ?>
 <br>
+<button type="button" class="btn btn-danger">Kembali</button>
 <button type="button" class="btn btn-primary">Lanjutkan</button>
+

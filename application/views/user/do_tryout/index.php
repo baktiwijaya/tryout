@@ -2,16 +2,18 @@
 $user_id = $this->session->userdata('id');
 $user_type = $this->session->userdata('user_type');
 ?>
-<div class="card">
-    <div class="card-header header-elements-inline">
-        <h6 class="card-title"><?= $title ?></h6>
-        <div class="header-elements">
-            <div class="list-icons">
-                <a href="#" class="btn btn-primary btn-sm" onclick="load()" title="Reload">Reload</a></a>
-            </div>
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h6 class="panel-title"><?php echo $title ?><a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
+        <div class="heading-elements">
+            <ul class="icons-list">
+                <li><button type="button" class="btn btn-success" onclick="add()">Tambah</button></li>
+                <li><button type="button" class="btn btn-info" onclick="load()">Reload</button></li>
+            </ul>
         </div>
     </div>
-    <div class="card-body">
+    
+    <div class="panel-body">
         <div id="content"></div>
     </div>
 </div>

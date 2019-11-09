@@ -1,9 +1,22 @@
-<script src="<?= base_url() ?>assets/js/jquery-3.4.1.min.js"></script>
 <script src="<?= base_url() ?>assets/ckeditor/ckeditor.js"></script>
 <script src="<?= base_url() ?>assets/ckfinder/ckfinder.js"></script>
+<script src="<?= base_url() ?>assets/js/function.js" type="text/javascript"></script> 
 
-<script src="<?= base_url() ?>assets/limitless/global_assets/js/main/bootstrap.bundle.min.js"></script>
-<script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/loaders/blockui.min.js"></script>
+<!-- Core JS files -->
+<script type="text/javascript" src="<?php echo base_url()?>assets/user/js/plugins/loaders/pace.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>assets/user/js/core/libraries/jquery.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>assets/user/js/core/libraries/bootstrap.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>assets/user/js/plugins/loaders/blockui.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>assets/user/js/plugins/ui/nicescroll.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>assets/user/js/plugins/ui/drilldown.js"></script>
+<!-- /core JS files -->
+
+<!-- Theme JS files -->
+<script type="text/javascript" src="<?php echo base_url()?>assets/user/js/plugins/ui/moment/moment.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>assets/user/js/plugins/pickers/daterangepicker.js"></script>
+
+<script type="text/javascript" src="<?php echo base_url()?>assets/user/js/core/app.js"></script>
+
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/visualization/d3/d3.min.js"></script>
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/visualization/d3/d3_tooltip.js"></script>
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/forms/styling/switchery.min.js"></script>
@@ -14,18 +27,15 @@
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/ui/moment/moment.min.js"></script>
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/pickers/daterangepicker.js"></script>
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/pickers/anytime.min.js"></script>
-<script src="<?= base_url() ?>assets/js/function.js" type="text/javascript"></script> 
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/forms/selects/select2.min.js"></script>
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/ui/dragula.min.js"></script>
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/forms/styling/uniform.min.js"></script>
-<script src="<?= base_url() ?>assets/limitless/js/app.js"></script>
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/demo_pages/dashboard.js"></script>
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/demo_pages/extension_dnd.js"></script>
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/tables/datatables/datatables.min.js"></script>
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/demo_pages/dataTables.editor.min.js"></script>
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/loaders/blockui.min.js"></script>
-<script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/notifications/sweet_alert.min.js"></script>
-<script src="<?= base_url() ?>assets/limitless/helper/js/form.js"></script>
+<script src="<?= base_url() ?>assets/user/js/plugins/notifications/sweet_alert.min.js"></script>
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/forms/tags/tagsinput.min.js"></script>
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/forms/tags/tokenfield.min.js"></script>
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/forms/inputs/typeahead/handlebars.min.js"></script>
