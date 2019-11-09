@@ -1,10 +1,10 @@
 <div class="row">
     <?php foreach ($poin as $key) : ?>
         <div class="col-md-3">
-            <div class="card">
-                <div class="card-body text-center">
-                <i class="icon-poins icon-2x text-success-400 border-success-400 border-3 rounded-round p-3 mb-3 mt-1"></i>
-                    <h5 class="card-title"><?php echo $key['nama_paketpoin'] ?></h5>
+            <div class="panel">
+                <div class="panel-body text-center">
+                <div class="icon-object border-success text-success"><i class="icon-coins"></i></div>
+                    <h5 class="panel-title"><?php echo $key['nama_paketpoin'] ?></h5>
                     <p class="mb-3"><b>Jumlah Poin</b> : <?php echo number_format($key['jumlah_paketpoin']); ?></p>
                     <p class="mb-3"><b>Instruksi</b> : <?php echo $key['instruksi_paketpoin']; ?></p>
                     <a href="#" class="btn bg-success-400" onclick="save('<?php echo $key['id_paketpoin'] ?>')">Beli</a>
@@ -18,15 +18,18 @@
 <script type="text/javascript">
 
     function save(id) {
-        swalInit({
-            title: 'Konfirmasi !',
-            text: 'Apakah anda yakin ingin membeli paket poin ini ?',
-            type: 'warning',
-            confirmButtonText: 'Ya !',
+       swal({
+            title: "Anda Yakin?",
+            text: "Apakan anda ingin membeli poin ?",
+            type: "warning",
             showCancelButton: true,
-            cancelButtonText: 'Tidak !',
-        }).then(function (result) {
-            if (result.value) {
+            cancelButtonClass: 'btn-success btn-md waves-effect',
+            confirmButtonClass: 'btn-danger btn-md waves-effect waves-light',
+            cancelButtonText: 'Tidak',
+            confirmButtonText: 'Ya!'
+
+       }, function (isConfirm) {
+            if (!isConfirm) return;
                 $.ajax({
                     type: 'POST',
                     url: '<?php echo base_url() ?>user/poin/save',
@@ -58,25 +61,20 @@
                     success: function (data) {
                         $.unblockUI();
                         var obj = JSON.parse(data);
-                        if (obj[0]) {
-                            swalInit({
-                                type: 'success',
-                                text: obj[2]
-                            }).then(function (con) {
-                                if (con.value) {
-                                    load();
-                                }
-                            })
-                        } else {
-                            swalInit({
-                                type: 'warning',
-                                text: obj[2]
-                            })
-                        }
+                        swal({
+                            title: obj[1],
+                            text: obj[2],
+                            type: "success",
+                            showCancelButton: false,
+                            confirmButtonClass: 'btn-danger btn-md waves-effect waves-light',
+                            confirmButtonText: 'Ya!'
+                        }, function (isConfirm) {
+                            if (!isConfirm) return;
+                            load();
+                        });
                     }
                 })
-            }
-        });
+       });
     }
 
 </script>

@@ -4,36 +4,38 @@ $form_attribute = array('method' => 'post', 'class' => 'myform', 'id' => 'myform
 echo form_open_multipart('user/beli_tryout/save', $form_attribute);
 ?>
 <?php $id_user = $this->session->userdata('id'); ?>
-<div class="form-row">
-    <?php foreach($tryout as $key) : ?>
+<div class="col-md-12">
+    <div class="form-row">
+        <?php foreach($tryout as $key) : ?>
 
-       <div class="col-md-3">
-            <div class="card">
-                <div class="card-body text-center">
-                <i class="icon-poins icon-2x text-success-400 border-success-400 border-3 rounded-round p-3 mb-3 mt-1"></i>
-                    <h5 class="card-title"><?php echo $key['nama_tryout'] ?></h5>
-                    <p class="mb-3"><b>Koin</b> : <?php echo number_format($key['harga_koin']); ?></p>
-                    <p class="mb-3"><b>Poin</b> : <?php echo $key['harga_poin']; ?></p>
-                    <?php $exist = $this->Global_m->isExists2Key('id_user',$id_user,'id_tryout',$key['id_tryout'],'library_tryout'); ?>
-                    <?php if(!$exist) { ?>
-                        <a href="#" class="btn bg-info-400" onclick="save_koin('<?php echo $key['id_tryout'] ?>')">Koin</a>
-                        <a href="#" class="btn bg-success-400" onclick="save_poin('<?php echo $key['id_tryout'] ?>')">Poin</a>
-                    <?php } else { ?>
-                        <p class="mb-3"><b>Tryout tidak dapat dibeli !</b></p>
-                    <?php } ?>
-                    
+           <div class="col-md-3">
+                <div class="panel panel-flat">
+                    <div class="panel-body text-center">
+                    <i class="icon-poins icon-2x text-success-400 border-success-400 border-3 rounded-round p-3 mb-3 mt-1"></i>
+                        <h5 class="card-title"><?php echo $key['nama_tryout'] ?></h5>
+                        <p class="mb-3"><b>Koin</b> : <?php echo number_format($key['harga_koin']); ?></p>
+                        <p class="mb-3"><b>Poin</b> : <?php echo $key['harga_poin']; ?></p>
+                        <?php $exist = $this->Global_m->isExists2Key('id_user',$id_user,'id_tryout',$key['id_tryout'],'library_tryout'); ?>
+                        <?php if(!$exist) { ?>
+                            <a href="#" class="btn bg-info-400" onclick="save_koin('<?php echo $key['id_tryout'] ?>')">Koin</a>
+                            <a href="#" class="btn bg-success-400" onclick="save_poin('<?php echo $key['id_tryout'] ?>')">Poin</a>
+                        <?php } else { ?>
+                            <p class="mb-3"><b>Tryout tidak dapat dibeli !</b></p>
+                        <?php } ?>
+                        
+                    </div>
                 </div>
             </div>
-        </div>
-    <?php endforeach; ?>
+        <?php endforeach; ?>
+    </div>
+<br>
+<div class="col-md-12">
+    <div class="form-group">
+        <label></label>
+        <input type="button" value="Batal" class="btn btn-danger" onclick="load();">
+    </div>
 </div>
 
-<input type="hidden" name="parent" value="0">    
-<div class="form-group">
-    <label></label>
-    <input type="button" value="Batal" class="btn btn-danger" onclick="load();">
-    <input type="submit" name="save" value="Simpan" class="btn btn-primary">
-</div>
 <?= form_close(); ?>
 <script type="text/javascript">
     $('.form-input-styled').uniform({
@@ -45,15 +47,19 @@ echo form_open_multipart('user/beli_tryout/save', $form_attribute);
     });
     
     function save_koin(id) {
-        swalInit({
-            title: 'Konfirmasi !',
-            text: 'Apakah anda yakin ingin membeli menggunakan koin ?',
-            type: 'warning',
-            confirmButtonText: 'Ya !',
+        swal({
+            title: "Anda Yakin?",
+            text: "Apakan anda ingin membeli tryout menggunakan koin ?",
+            type: "warning",
             showCancelButton: true,
-            cancelButtonText: 'Tidak !',
-        }).then(function (result) {
-            if (result.value) {
+            cancelButtonClass: 'btn-success btn-md waves-effect',
+            confirmButtonClass: 'btn-danger btn-md waves-effect waves-light',
+            cancelButtonText: 'Tidak',
+            confirmButtonText: 'Ya!'
+
+        }, function (isConfirm) {
+            if (!isConfirm) return;
+                var datana = 'id='+id;
                 $.ajax({
                     type: 'POST',
                     url: '<?php echo base_url() ?>user/beli_tryout/save_koin',
@@ -85,37 +91,40 @@ echo form_open_multipart('user/beli_tryout/save', $form_attribute);
                     success: function (data) {
                         $.unblockUI();
                         var obj = JSON.parse(data);
-                        if (obj[0]) {
-                            swalInit({
-                                type: 'success',
-                                text: obj[2]
-                            }).then(function (con) {
-                                if (con.value) {
-                                    load();
-                                }
-                            })
-                        } else {
-                            swalInit({
-                                type: 'warning',
-                                text: obj[2]
-                            })
-                        }
+                        swal({
+                            title: obj[1],
+                            text: obj[2],
+                            type: obj[3],
+                            showCancelButton: false,
+                            confirmButtonClass: 'btn-danger btn-md waves-effect waves-light',
+                            confirmButtonText: 'Ya!'
+                        }, function (isConfirm) {
+                            if (!isConfirm) return;
+                            if(obj[0] == true) {
+                                load();
+                            }
+                            
+                        });
+                        
                     }
                 })
-            }
         });
     }
-
+                    
     function save_poin(id) {
-        swalInit({
-            title: 'Konfirmasi !',
-            text: 'Apakah anda yakin ingin membeli menggunakan poin ?',
-            type: 'warning',
-            confirmButtonText: 'Ya !',
+        swal({
+            title: "Anda Yakin?",
+            text: "Apakan anda ingin membeli tryout menggunakan poin ?",
+            type: "warning",
             showCancelButton: true,
-            cancelButtonText: 'Tidak !',
-        }).then(function (result) {
-            if (result.value) {
+            cancelButtonClass: 'btn-success btn-md waves-effect',
+            confirmButtonClass: 'btn-danger btn-md waves-effect waves-light',
+            cancelButtonText: 'Tidak',
+            confirmButtonText: 'Ya!'
+
+        }, function (isConfirm) {
+            if (!isConfirm) return;
+                var datana = 'id='+id;
                 $.ajax({
                     type: 'POST',
                     url: '<?php echo base_url() ?>user/beli_tryout/save_poin',
@@ -147,24 +156,34 @@ echo form_open_multipart('user/beli_tryout/save', $form_attribute);
                     success: function (data) {
                         $.unblockUI();
                         var obj = JSON.parse(data);
-                        if (obj[0]) {
-                            swalInit({
-                                type: 'success',
-                                text: obj[2]
-                            }).then(function (con) {
-                                if (con.value) {
-                                    load();
-                                }
-                            })
+                        console.log(obj);
+                        if(obj[0]) {
+                            swal({
+                                title: obj[1],
+                                text: obj[2],
+                                type: "success",
+                                showCancelButton: false,
+                                confirmButtonClass: 'btn-danger btn-md waves-effect waves-light',
+                                confirmButtonText: 'Ya!'
+                            }, function (isConfirm) {
+                                if (!isConfirm) return;
+                                load();
+                            });
                         } else {
-                            swalInit({
-                                type: 'warning',
-                                text: obj[2]
-                            })
+                            swal({
+                                title: obj[1],
+                                text: obj[2],
+                                type: "warning",
+                                showCancelButton: false,
+                                confirmButtonClass: 'btn-danger btn-md waves-effect waves-light',
+                                confirmButtonText: 'Ya!'
+                            }, function (isConfirm) {
+                                if (!isConfirm) return;
+                            });
                         }
+                        
                     }
                 })
-            }
         });
     }
 </script>

@@ -1,10 +1,9 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
-<link href="<?= base_url() ?>assets/limitless/global_assets/css/icons/icomoon/styles.min.css" rel="stylesheet" type="text/css">
-<link href="<?= base_url() ?>assets/limitless/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="<?= base_url() ?>assets/limitless/css/bootstrap_limitless.min.css" rel="stylesheet" type="text/css">
-<link href="<?= base_url() ?>assets/limitless/css/layout.min.css" rel="stylesheet" type="text/css">
-<link href="<?= base_url() ?>assets/limitless/css/components.min.css" rel="stylesheet" type="text/css">
-<link href="<?= base_url() ?>assets/limitless/css/colors.min.css" rel="stylesheet" type="text/css">
+<link href="<?= base_url(); ?>assets/limitless/global_assets/css/icons/icomoon/styles.min.css" rel="stylesheet" type="text/css">
+<link href="<?= base_url(); ?>assets/user/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="<?= base_url(); ?>assets/user/css/core.min.css" rel="stylesheet" type="text/css">
+<link href="<?= base_url(); ?>assets/user/css/components.min.css" rel="stylesheet" type="text/css">
+<link href="<?= base_url(); ?>assets/user/css/colors.min.css" rel="stylesheet" type="text/css">
 <link href="<?= base_url(); ?>assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 <link href="<?= base_url(); ?>assets/css/ionicons.min.css" rel="stylesheet" type="text/css" />
 <link href="<?= base_url(); ?>assets/css/morris/morris.css" rel="stylesheet" type="text/css" />

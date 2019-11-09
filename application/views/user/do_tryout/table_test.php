@@ -15,6 +15,7 @@
         <?php
         $no = 1;
         foreach ($list as $key) {
+
             ?>
             <tr>
                 <td><?= $no ?></td>
@@ -48,32 +49,11 @@
             data: {
                 id: id
             },
-            beforeSend: function (data) {
-                $.blockUI({
-                    message: '<i class="icon-spinner4 spinner"></i>',
-                    overlayCSS: {
-                        backgroundColor: '#1b2024',
-                        opacity: 0.8,
-                        zIndex: 1200,
-                        cursor: 'wait'
-                    },
-                    css: {
-                        border: 0,
-                        color: '#fff',
-                        zIndex: 1201,
-                        padding: 0,
-                        backgroundColor: 'transparent'
-                    }
-                });
-            },
-            error: function (data) {
-                $.unblockUI();
-                alert('Proses data gagal', 'info')
-            },
             success: function (data) {
-                $.unblockUI();
                 $('#content').html(data);
             }
         });
     }
+
+    
 </script>
