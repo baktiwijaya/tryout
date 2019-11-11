@@ -22,7 +22,12 @@
                 <td><?= $this->Global_m->getvalue('nama_paket','master_paket','id_paket',$key['id_paket']); ?></td>
                 <td style="text-align: center;">
                     <button type="button" class="btn btn-success">Petunjuk Pengerjaan</button>
-                    <button type="button" class="btn btn-danger" onclick="do_test('<?php echo $key['id_paket'] ?>')">Kerjakan Tryout</button>
+                    <?php if($key['test_status'] == 1) { ?>
+                        <button type="button" class="btn btn-info">Sudah Dikerjakan</button>
+                    <?php } else{ ?>
+                        <button type="button" class="btn btn-danger" onclick="do_test('<?php echo $key['id_librarytryout'] ?>','<?php echo $key['id_paket'] ?>')">Kerjakan Tryout</button>
+                    <?php } ?>
+                    
                 </td>
             </tr>
             <?php
@@ -42,12 +47,13 @@
             }
         })
     })
-    function do_test(id) {
+    function do_test(id_lt,id) {
         $.ajax({
             url: "<?= base_url() ?>user/do_tryout/do_test",
             type: "POST",
             data: {
-                id: id
+                id_paket: id,
+                id_librarytryout: id_lt
             },
             success: function (data) {
                 $('#content').html(data);

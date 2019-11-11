@@ -1,3 +1,12 @@
+<div class="col-md-12">
+    <div class="pull-right">
+        <b style="font-size: 30px" id="countdown">00:00</b>
+    </div>
+</div>
+<?php
+$form_attribute = array('method' => 'post', 'class' => 'myform', 'id' => 'myform');
+echo form_open_multipart('user/do_tryout/save', $form_attribute);
+?>
 <div class="row">
     <div class="col-md-8">
         <?php $no = 1; foreach ($list as $key) : ?>
@@ -12,7 +21,7 @@
                         <?php echo $this->Global_m->getvalue('nama_soal','master_soal','id_soal',$key['id_soal']); ?>
                         <hr>
                         <?php $jawaban = $this->Crud_m->all_data('master_jawaban','*',"id_soal=".$key['id_soal']); ?>
-
+                        <input type="hidden" name="id_librarytrout[]" value="<?php echo $key['id_librarytrout'] ?>">
                         <?php $nos = 1;foreach($jawaban as $value) : ?>
                             <input type="radio" name="id_jawaban_<?php echo $key['nomor'] ?>" onclick="jawaban(this.value,'<?php echo $key['nomor'] ?>');check_value('<?php echo $key['nomor'] ?>')" value="<?php echo $value['id_jawaban'] ?>">&nbsp;<?php echo $value['label']; ?>.&nbsp;<?php echo $value['nama_jawaban']; ?>
                             <hr>
@@ -47,10 +56,13 @@
         </div>
     </div>
 </div>
+<input type="hidden" name="total" value="<?php count($list) ?>">
 <?php for($i = 1;$i <= count($list); $i++) { ?>
-    <input type="text" name="jawab_<?php echo $i ?>" id="jawab_<?php echo $i ?>">
-<?php } ?>
+    <input type="hidden" name="id_jawaban[]" id="jawab_<?php echo $i ?>">
 
+<?php } ?>
+<button type="submit" class="btn btn-success">Simpan Tryout</button>
+<?php echo form_close(); ?>
 <input type="hidden" id="posisi">
 <script type="text/javascript">
     var total = '<?php echo count($list)?>';
@@ -69,6 +81,105 @@
         } else {
             $('#'+nomor).addClass('bg-green');
         }
+    }
+
+    var validator = $('.myform').validate({
+        ignore: 'input[type=hidden], .select2-search__field', // ignore hidden fields
+        errorClass: 'validation-invalid-label',
+        successClass: 'validation-valid-label',
+        validClass: 'validation-valid-label',
+        highlight: function (element, errorClass) {
+            $(element).removeClass(errorClass);
+        },
+        unhighlight: function (element, errorClass) {
+            $(element).removeClass(errorClass);
+        },
+        errorPlacement: function (error, element) {
+            if (element.parents().hasClass('form-check')) {
+                error.appendTo(element.parents('.form-check').parent());
+            } else if (element.parents().hasClass('form-group-feedback') || element.hasClass('select2-hidden-accessible')) {
+                error.appendTo(element.parent());
+            } else if (element.parent().is('.uniform-uploader, .uniform-select') || element.parents().hasClass('input-group')) {
+                error.appendTo(element.parent().parent());
+            }
+            // Other elements
+            else {
+                error.insertAfter(element);
+            }
+        },
+        submitHandler: function (form) {
+            swal({
+            title: "Anda Yakin?",
+            text: "Apakan anda ingin membeli koin ?",
+            type: "warning",
+            showCancelButton: true,
+            cancelButtonClass: 'btn-success btn-md waves-effect',
+            confirmButtonClass: 'btn-danger btn-md waves-effect waves-light',
+            cancelButtonText: 'Tidak',
+            confirmButtonText: 'Ya!'
+
+       }, function (isConfirm) {
+            if (!isConfirm) return;
+                $.ajax({
+                    type: 'POST',
+                    url: $("#myform").attr('action'),
+                    data: $('#myform').serialize(),
+                    beforeSend: function (data) {
+                        $.blockUI({
+                            message: '<i class="icon-spinner4 spinner"></i>',
+                            overlayCSS: {
+                                backgroundColor: '#1b2024',
+                                opacity: 0.8,
+                                zIndex: 1200,
+                                cursor: 'wait'
+                            },
+                            css: {
+                                border: 0,
+                                color: '#fff',
+                                zIndex: 1201,
+                                padding: 0,
+                                backgroundColor: 'transparent'
+                            }
+                        });
+                    },
+                    error: function (data) {
+                        $.unblockUI();
+                        alert('Proses data gagal', 'info')
+                    },
+                    success: function (data) {
+                        $.unblockUI();
+                        var obj = JSON.parse(data);
+                        swal({
+                            title: obj[1],
+                            text: obj[2],
+                            type: obj[3],
+                            showCancelButton: false,
+                            confirmButtonClass: 'btn-danger btn-md waves-effect waves-light',
+                            confirmButtonText: 'Ya!'
+                        }, function (isConfirm) {
+                            if (!isConfirm) return;
+                                if(obj[0] == true) {
+                                    done_tryout();
+                                }
+                        });
+                    }
+                })
+        });
+        }
+    });
+
+    function done_tryout() {
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url() ?>user/do_tryout/done',
+            data: $('#myform').serialize(),
+            error: function (data) {
+                alert('Proses data gagal', 'info')
+            },
+            success: function (data) {
+                load();
+            }
+        })
     }
 
     $('#btnnext_'+total).hide();
@@ -106,5 +217,29 @@
         $('#posisi').val(nomor);
     }
 
-
+    
 </script>
+
+
+<script type="text/javascript">
+
+var timer2 = "5:01";
+var interval = setInterval(function() {
+
+
+  var timer = timer2.split(':');
+  //by parsing integer, I avoid all extra string processing
+  var minutes = parseInt(timer[0], 10);
+  var seconds = parseInt(timer[1], 10);
+  --seconds;
+  minutes = (seconds < 0) ? --minutes : minutes;
+  if (minutes < 0) clearInterval(interval);
+  seconds = (seconds < 0) ? 59 : seconds;
+  seconds = (seconds < 10) ? '0' + seconds : seconds;
+  //minutes = (minutes < 10) ?  minutes : minutes;
+  $('#countdown').html(minutes + ':' + seconds);
+  timer2 = minutes + ':' + seconds;
+}, 1000);
+</script>
+
+

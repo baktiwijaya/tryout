@@ -59,7 +59,6 @@ echo form_open_multipart('user/beli_tryout/save', $form_attribute);
 
         }, function (isConfirm) {
             if (!isConfirm) return;
-                var datana = 'id='+id;
                 $.ajax({
                     type: 'POST',
                     url: '<?php echo base_url() ?>user/beli_tryout/save_koin',

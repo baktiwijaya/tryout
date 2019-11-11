@@ -17,6 +17,8 @@ class Beli_tryout extends CI_Controller {
         if ($user_type != 3 || $session_id == NULL) {
             redirect('authentication/keluar');
         }
+
+        $this->load->model('user/Beli_tryout_model','tbl_beli');
     }
 
     public function index() {
@@ -43,17 +45,21 @@ class Beli_tryout extends CI_Controller {
     }
 
     public function save_koin() {
+        
         extract($_POST);
-        $array = [];
-        $array2 = [];
+        $array = array();
+        $array2 = array();
+        $array_value = array();
+
         $id_user = $this->session->userdata('id');
+
         $koin = $this->Global_m->getvalue('total_koin','transaksi_koinpoin','id_user',$id_user);
         $harga_koin = $this->Global_m->getvalue('harga_koin','master_tryout','id_tryout',$id_tryout);
 
-
-        if( (float)$koin - (float)$harga_koin < 0) {
+        if( ( (float)$koin - (float)$harga_koin ) < 0) {
             $message = array(FALSE, 'Proses Gagal !', 'Pembelian gagal karena saldo tidak cukup !','warning');
         } else {
+            // Masukkan data ke History Pembelian
             $data = array(
                 'id_user' => $id_user,
                 'id_tryout' => $id_tryout,
@@ -62,56 +68,81 @@ class Beli_tryout extends CI_Controller {
                 'tipe_beli' => 1 
             );
 
-            $paket = $this->Crud_m->all_data('master_isitryout','id_paket','id_tryout='.$id_tryout);
-            foreach ($paket as $key => $value) {
-
-                array_push($array,$value['id_paket']);
-            }
-
-
-            
-            $id_soal = $this->Crud_m->where_in('id_soal,id_paket','master_isipaket','id_paket',$array);
-            $no = 1;
-            foreach ($id_soal as $key) {
-                
-                $data4 = array(
-                            'id_tryout' => $id_tryout,
-                            'id_paket' => $key['id_paket'],
-                            'id_soal' => $key['id_soal'],
-                            'id_user' => $id_user,
-                            'nomor' => $no++
-                        );
-                array_push($array2,$data4);
-            }
             $add = $this->Crud_m->add('transaksi_tryout',$data);
+
             if($add) {
-                $data2 = array(
-                    'id_tryout' => $id_tryout,
-                    'id_user' => $id_user,
-                    'test_status' => 0 // Belum dikerjakan
+                // Update jumlah koin 
+                $data3 = array(
+                    'total_koin' => ((float)$koin - (float)$harga_koin)
                 );
-                $add2 = $this->Crud_m->add('library_tryout',$data2);
-                if($add2) {
+                $update = $this->Crud_m->edit('transaksi_koinpoin',$data3,'id_user',$id_user);
 
-                    $add4 = $this->Crud_m->add_batch('library_isitryout',$array2);
+                if($update) {
+                    // Masukkan data ke tryout
+                    $data2 = array(
+                        'id_tryout' => $id_tryout,
+                        'id_user' => $id_user,
+                    );
+                    $add_tryout = $this->Crud_m->add('library_tryout',$data2);
 
-                    if($add4) {
-                        $data3 = array(
-                            'total_koin' => ((float)$koin - (float)$harga_koin)
-                        );
-                        $update = $this->Crud_m->edit('transaksi_koinpoin',$data3,'id_user',$id_user);
-                        if($update) {
-                            $message = array(TRUE, 'Proses Berhasil !', 'Pembelian berhasil !','success');
-                        } else {
-                            $message = array(FALSE, 'Proses Gagal !', 'Pembelian gagal dilakukan !','warning');
+                    if($add_tryout) {
+                        $id_library = $this->db->insert_id();
+
+                        $paket = $this->Crud_m->all_data('master_isitryout','id_paket','id_tryout='.$id_tryout);
+                        foreach($paket as $key => $value) {
+                            $array3 = array(
+                                'id_library' => $id_library,
+                                'id_tryout' => $id_tryout,
+                                'test_status' => 0,
+                                'id_paket' => $value['id_paket']
+                            );
+
+                            array_push($array_value,$array3);
+                            array_push($array,$value['id_paket']);
                         }
-                    }    
+
+                        $add_paket = $this->Crud_m->add_batch('library_pakettryout',$array_value);
+
+                        if($add_paket) {
+
+                            $id_soal = $this->tbl_beli->get_soal($id_tryout);
+                            $no = 1;
+                            foreach ($id_soal as $key) {
+                                $no++;
+                                $data4 = array(
+                                    'id_librarypaket' => $key['id_librarytryout'],
+                                    'id_soal' => $key['id_soal'],
+                                    'id_paket' => $key['id_paket'],
+                                    'nomor' => $key['nomor']
+                                );
+
+                                array_push($array2,$data4);
+                            }
+
+                            $add4 = $this->Crud_m->add_batch('library_isitryout',$array2);
+
+                            if($add4) {
+                                $message = array(TRUE, 'Proses Berhasil !', 'Pembelian Berhasil !','success');
+                            } else {
+                                $message = array(FALSE, 'Proses Gagal !', 'Pembelian gagal !','warning');
+                            }
+                        } else {
+                            $message = array(FALSE, 'Proses Gagal !', 'Pembelian gagal !','warning');
+                        }
+                    } else {
+                        $message = array(FALSE, 'Proses Gagal !', 'Pembelian gagal !','warning');
+                    }
+                } else {
+                    $message = array(FALSE, 'Proses Gagal !', 'Pembelian gagal !','warning');
                 }
 
-            } else {
-                $message = array(FALSE, 'Proses Gagal !', 'Pembelian gagal dilakukan !','warning');
-            }
+            }            
+
+
         }
+        
+
+        
 
         echo json_encode($message);
     }
@@ -138,8 +169,7 @@ class Beli_tryout extends CI_Controller {
             if($add) {
                 $data2 = array(
                     'id_tryout' => $id_tryout,
-                    'id_user' => $id_user,
-                    'test_status' => 0 // Belum dikerjakan
+                    'id_user' => $id_user
                 );
                 $add2 = $this->Crud_m->add('library_tryout',$data2);
                 if($add2) {

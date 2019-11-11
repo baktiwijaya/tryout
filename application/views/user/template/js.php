@@ -16,7 +16,7 @@
 <script type="text/javascript" src="<?php echo base_url()?>assets/user/js/plugins/pickers/daterangepicker.js"></script>
 
 <script type="text/javascript" src="<?php echo base_url()?>assets/user/js/core/app.js"></script>
-
+<script src="<?= base_url() ?>assets/user/js/plugins/timer/jquery.timer.js"></script>
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/visualization/d3/d3.min.js"></script>
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/visualization/d3/d3_tooltip.js"></script>
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/forms/styling/switchery.min.js"></script>
@@ -26,6 +26,7 @@
 <script src="<?= base_url() ?>assets/tagsinput/jquery.tagsinput.min.js" type="text/javascript"></script>
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/ui/moment/moment.min.js"></script>
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/pickers/daterangepicker.js"></script>
+
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/pickers/anytime.min.js"></script>
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/forms/selects/select2.min.js"></script>
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/ui/dragula.min.js"></script>

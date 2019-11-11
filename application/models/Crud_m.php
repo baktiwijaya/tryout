@@ -105,6 +105,16 @@ Class Crud_m extends CI_Model {
         return FALSE;
     }
 
+    function edit_batch($table, $data, $fieldID) {
+        $this->db->update_batch($table,$data,$fieldID); 
+
+        if ($this->db->affected_rows() >= 0) {
+            return TRUE;
+        }
+
+        return FALSE;
+    }
+
     function edit_2key($table, $data, $fieldID1, $ID1, $fieldID2, $ID2) {
         $this->db->where($fieldID1, $ID1);
         $this->db->where($fieldID2, $ID2);
@@ -142,6 +152,19 @@ Class Crud_m extends CI_Model {
 
     function countWhere($table, $where) {
         $this->db->where($where);
+        return $this->db->count_all_results($table);
+    }
+
+    function countWhereValue($table, $where1 = '',$where2 = '',$where3 = '') {
+        if(!$where1 == '') {
+            $this->db->where($where1);
+        }
+        if(!$where2 == '') {
+            $this->db->where($where2);
+        }
+        if(!$where3 == '') {
+            $this->db->where($where3);
+        }
         return $this->db->count_all_results($table);
     }
 

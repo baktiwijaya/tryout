@@ -124,10 +124,11 @@ class Paket extends CI_Controller {
     public function save_soal() {
         extract($_POST);
         $array = [];
+        $no = 1;
         foreach ($id_soal as $key => $value) {
            $data['id_paket'] = $this->session->userdata('id_paket');
            $data['id_soal'] = $value;
-
+           $data['nomor'] = $no++;
            $exist = $this->Global_m->isExists2Key('id_paket',$this->session->userdata('id_paket'),'id_soal',$value,'master_isipaket');
 
             if(!$exist) {
