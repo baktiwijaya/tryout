@@ -40,6 +40,12 @@ class Do_tryout extends CI_Controller {
         $this->load->view($this->_module.'/table_test',$data);
     }
 
+    public function petunjuk() {
+        extract($_POST);
+        $data['detail'] = $this->Crud_m->get_one('*','master_paket','id_paket',$id);
+        $this->load->view($this->_module.'/petunjuk',$data);
+    }
+
     public function rapot() {
         extract($_POST);
         $data['list'] = $this->Crud_m->all_data('library_pakettryout','*','id_library='.$id);

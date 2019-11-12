@@ -3,6 +3,7 @@
         $("[rel=tooltip]").tooltip({placement: 'right'});
     });
 </script>
+
 <table class="table" id="datatable">
     <thead>
         <tr>
@@ -35,6 +36,7 @@
             <?php $no++; endforeach; ?>
     </tbody>
 </table> 
+
 <?= form_close(); ?>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -82,6 +84,7 @@
         });
     }
 
+   
     function rapot(id) {
         $.ajax({
             url: "<?= base_url() ?>user/do_tryout/rapot",
