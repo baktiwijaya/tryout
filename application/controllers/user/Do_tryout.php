@@ -55,6 +55,7 @@ class Do_tryout extends CI_Controller {
     public function do_test() {
         extract($_POST);
         $this->session->set_userdata('id_librarypaket',$id_librarytryout);
+        $data['waktu_pengerjaan'] = $this->Global_m->getvalue('waktu_pengerjaan','master_paket','id_paket',$id_paket);
         $data['list'] = $this->tbl_tryout->all_data($id_paket,$id_librarytryout);
         $this->load->view($this->_module.'/table_do',$data);
     }

@@ -1,6 +1,6 @@
 <div class="col-md-12">
     <div class="pull-right">
-        <b style="font-size: 30px" id="countdown">00:00</b>
+        <b style="font-size: 30px" id="time">00:00</b>
     </div>
 </div>
 <?php
@@ -223,23 +223,28 @@ echo form_open_multipart('user/do_tryout/save', $form_attribute);
 
 <script type="text/javascript">
 
-var timer2 = "5:01";
-var interval = setInterval(function() {
+function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
 
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
 
-  var timer = timer2.split(':');
-  //by parsing integer, I avoid all extra string processing
-  var minutes = parseInt(timer[0], 10);
-  var seconds = parseInt(timer[1], 10);
-  --seconds;
-  minutes = (seconds < 0) ? --minutes : minutes;
-  if (minutes < 0) clearInterval(interval);
-  seconds = (seconds < 0) ? 59 : seconds;
-  seconds = (seconds < 10) ? '0' + seconds : seconds;
-  //minutes = (minutes < 10) ?  minutes : minutes;
-  $('#countdown').html(minutes + ':' + seconds);
-  timer2 = minutes + ':' + seconds;
-}, 1000);
+        display.text(minutes + ":" + seconds);
+
+        if (--timer < 0) {
+            timer = duration;
+        }
+    }, 1000);
+}
+
+jQuery(function ($) {
+    var fiveMinutes = 60 * '<?php echo $waktu_pengerjaan ?>',
+        display = $('#time');
+    startTimer(fiveMinutes, display);
+});
 </script>
 
 
