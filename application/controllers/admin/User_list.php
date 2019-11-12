@@ -28,4 +28,10 @@ class User_list extends CI_Controller {
         $this->load->view('admin/user_list/table', $data);
     }
 
+    public function load_user() {
+        extract($_POST);
+        $data['detail'] = $this->Crud_m->get_one('*','user_info','id',$id);
+        $this->load->view('admin/user_list/detail', $data);
+    }
+
 }

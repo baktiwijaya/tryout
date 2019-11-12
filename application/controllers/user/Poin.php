@@ -31,7 +31,8 @@ class Poin extends CI_Controller {
     }
 
     public function add() {
-        $data['poin'] = $this->Crud_m->all_data('master_paketpoin', '*');
+        $date = date('Y-m-d H:i:s');
+        $data['poin'] = $this->Crud_m->all_data('master_paketpoin', '*',"end_date >= '".$date."'");
         $this->load->view('user/poin/add',$data);
     }
 

@@ -23,7 +23,7 @@ class User extends CI_Controller {
 
     public function index() {
         $data['title'] = 'Daftar User';
-        $data['user_role'] = $this->Crud_m->all_data('user_type', '*');
+        $data['user_role'] = $this->Crud_m->all_data('user_type', '*','id != 3');
        
         $data['content'] = 'admin/user/index';
         $this->load->view('admin/template/main', $data);

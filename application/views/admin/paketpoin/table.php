@@ -42,10 +42,10 @@
                     <td style="text-align: center"><?php echo $key['instruksi_paketpoin'] ?></td>
                     <td style="text-align: center"><?php echo $key['end_date']; ?></td>
                     <td style="text-align: center"><?php 
-                    if($key['status'] == 1) {
-                        echo "Aktif";
-                    } else {
+                    if($key['end_date'] <= date('Y-m-d H:i:s')) {
                         echo "Tidak Aktif";
+                    } else {
+                        echo "Aktif";
                     }?>
                         
                     </td>
