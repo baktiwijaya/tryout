@@ -26,6 +26,7 @@ echo form_open_multipart('admin/paket/update', $form_attribute, $hidden_form);
     </select>
 </div>
 
+
 <label class="col-form-label">Waktu Pengerjaan</label>
 <div class="input-group">
     <input type="number" class="form-control col-md-5" name="waktu_pengerjaan" placeholder="Input Waktu Pengerjaan.." value="<?php echo $detail->waktu_pengerjaan ?>">
@@ -33,6 +34,12 @@ echo form_open_multipart('admin/paket/update', $form_attribute, $hidden_form);
         <span class="input-group-text">Menit</span>
     </span>
 </div>
+
+<div class="form-group">
+    <label class="col-form-label">Petunjuk Pengerjaan</label>
+    <textarea class="form-control col-md-6" name="petunjuk_pengerjaan" id="editor1"><?php echo $detail->petunjuk_pengerjaan ?></textarea>
+</div>
+
 <br>
 <div class="form-group">
     <label></label>
@@ -41,7 +48,15 @@ echo form_open_multipart('admin/paket/update', $form_attribute, $hidden_form);
 </div>
 <?= form_close(); ?>
 <script type="text/javascript">
-
+    var editor = CKEDITOR.replace('editor1', {
+        filebrowserBrowseUrl: '<?= base_url(); ?>assets/ckfinder/ckfinder.html',
+        filebrowserImageBrowseUrl: '<?= base_url(); ?>assets/ckfinder/ckfinder.html?type=Images',
+        filebrowserFlashBrowseUrl: '<?= base_url(); ?>assets/ckfinder/ckfinder.html?type=Flash',
+        filebrowserUploadUrl: '<?= base_url(); ?>assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+        filebrowserImageUploadUrl: '<?= base_url(); ?>assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+        filebrowserFlashUploadUrl: '<?= base_url(); ?>assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
+        height: '200px'
+    });
     var validator = $('.myform').validate({
         ignore: 'input[type=hidden], .select2-search__field', // ignore hidden fields
         errorClass: 'validation-invalid-label',

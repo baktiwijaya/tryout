@@ -24,6 +24,11 @@ echo form_open_multipart('admin/paket/save', $form_attribute);
         <span class="input-group-text">Menit</span>
     </span>
 </div>
+
+<div class="form-group">
+    <label class="col-form-label">Petunjuk Pengerjaan</label>
+    <textarea class="form-control" name="petunjuk_pengerjaan" id="editor1"></textarea>
+</div>
 <br>
 <div class="form-group">
     <label></label>
@@ -35,6 +40,16 @@ echo form_open_multipart('admin/paket/save', $form_attribute);
 <script type="text/javascript">
     $('.form-input-styled').uniform({
         fileButtonClass: 'action btn bg-blue'
+    });
+
+    var editor = CKEDITOR.replace('editor1', {
+        filebrowserBrowseUrl: '<?= base_url(); ?>assets/ckfinder/ckfinder.html',
+        filebrowserImageBrowseUrl: '<?= base_url(); ?>assets/ckfinder/ckfinder.html?type=Images',
+        filebrowserFlashBrowseUrl: '<?= base_url(); ?>assets/ckfinder/ckfinder.html?type=Flash',
+        filebrowserUploadUrl: '<?= base_url(); ?>assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+        filebrowserImageUploadUrl: '<?= base_url(); ?>assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+        filebrowserFlashUploadUrl: '<?= base_url(); ?>assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
+        height: '200px'
     });
 
     var validator = $('.myform').validate({
