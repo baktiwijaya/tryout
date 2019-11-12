@@ -28,7 +28,7 @@
                         ?>
                         <li class="dropdown">
                             <a href="#" class="dropdown" data-toggle="dropdown">
-                                <i class="icon-make-group position-left"></i> <?php echo $value['nama_menu']; ?> <span class="caret"></span>
+                                <i class="icon-basket position-left"></i> <?php echo $value['nama_menu']; ?> <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu width-250">

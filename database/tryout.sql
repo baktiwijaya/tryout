@@ -11,7 +11,7 @@
  Target Server Version : 50637
  File Encoding         : 65001
 
- Date: 06/11/2019 14:50:08
+ Date: 07/11/2019 02:08:55
 */
 
 SET NAMES utf8mb4;
@@ -43,12 +43,7 @@ CREATE TABLE `library_tryout`  (
   `start_date` datetime(0) NULL DEFAULT NULL,
   `end_date` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id_library`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of library_tryout
--- ----------------------------
-INSERT INTO `library_tryout` VALUES (10, 1, 29, NULL, '0', NULL, NULL);
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for master_isipaket
@@ -63,16 +58,7 @@ CREATE TABLE `master_isipaket`  (
   INDEX `Soal ID`(`id_soal`) USING BTREE,
   CONSTRAINT `Id Paket` FOREIGN KEY (`id_paket`) REFERENCES `master_paket` (`id_paket`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `Soal ID` FOREIGN KEY (`id_soal`) REFERENCES `master_soal` (`id_soal`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of master_isipaket
--- ----------------------------
-INSERT INTO `master_isipaket` VALUES (16, 4, 2);
-INSERT INTO `master_isipaket` VALUES (17, 4, 3);
-INSERT INTO `master_isipaket` VALUES (18, 4, 1);
-INSERT INTO `master_isipaket` VALUES (19, 6, 1);
-INSERT INTO `master_isipaket` VALUES (20, 6, 3);
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for master_isitryout
@@ -83,18 +69,7 @@ CREATE TABLE `master_isitryout`  (
   `id_tryout` int(11) NULL DEFAULT NULL,
   `id_paket` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id_isitryout`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of master_isitryout
--- ----------------------------
-INSERT INTO `master_isitryout` VALUES (1, 6, 4);
-INSERT INTO `master_isitryout` VALUES (2, 6, 5);
-INSERT INTO `master_isitryout` VALUES (3, 7, 4);
-INSERT INTO `master_isitryout` VALUES (6, 8, 5);
-INSERT INTO `master_isitryout` VALUES (7, 8, 4);
-INSERT INTO `master_isitryout` VALUES (17, 1, 5);
-INSERT INTO `master_isitryout` VALUES (18, 1, 6);
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for master_jawaban
@@ -111,15 +86,7 @@ CREATE TABLE `master_jawaban`  (
   PRIMARY KEY (`id_jawaban`) USING BTREE,
   INDEX `Id Soal`(`id_soal`) USING BTREE,
   CONSTRAINT `Id Soal` FOREIGN KEY (`id_soal`) REFERENCES `master_soal` (`id_soal`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of master_jawaban
--- ----------------------------
-INSERT INTO `master_jawaban` VALUES (1, 'A', 1, 'asdasdqweasd', '1', '', NULL);
-INSERT INTO `master_jawaban` VALUES (2, 'a', 4, 'qweqweqwe', '1', '', NULL);
-INSERT INTO `master_jawaban` VALUES (5, 'A', 3, 'Jawaban A Benar', '2', '', NULL);
-INSERT INTO `master_jawaban` VALUES (6, 'B', 3, 'Jawaban B Benar', '1', '', NULL);
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for master_kategori
@@ -155,13 +122,7 @@ CREATE TABLE `master_nominal`  (
   `nama_nominal` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `nominal` decimal(18, 2) NULL DEFAULT NULL,
   PRIMARY KEY (`id_nominal`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of master_nominal
--- ----------------------------
-INSERT INTO `master_nominal` VALUES (1, 'Koin A', 10000.00);
-INSERT INTO `master_nominal` VALUES (2, 'Koin B', 20000.00);
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for master_paket
@@ -178,13 +139,6 @@ CREATE TABLE `master_paket`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
--- Records of master_paket
--- ----------------------------
-INSERT INTO `master_paket` VALUES (4, 'Paket A (Penalaran Umum)', 1, 35);
-INSERT INTO `master_paket` VALUES (5, 'Paket Premium', 2, NULL);
-INSERT INTO `master_paket` VALUES (6, 'Paket Middle', 1, 60);
-
--- ----------------------------
 -- Table structure for master_paketcoin
 -- ----------------------------
 DROP TABLE IF EXISTS `master_paketcoin`;
@@ -194,13 +148,7 @@ CREATE TABLE `master_paketcoin`  (
   `jumlah_paketcoin` int(100) NULL DEFAULT NULL,
   `harga_paketcoin` decimal(18, 2) NULL DEFAULT NULL,
   PRIMARY KEY (`id_paketcoin`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of master_paketcoin
--- ----------------------------
-INSERT INTO `master_paketcoin` VALUES (2, 'Paket Coin 1', 10000, 50000.00);
-INSERT INTO `master_paketcoin` VALUES (3, 'Paket Coin 2', 20000, 90000.00);
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for master_paketpoin
@@ -216,14 +164,7 @@ CREATE TABLE `master_paketpoin`  (
   `status` varchar(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `gambar` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_paketpoin`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of master_paketpoin
--- ----------------------------
-INSERT INTO `master_paketpoin` VALUES (1, 1, 'Paket Poin 1', 2000, 'Upload Gambar ini', '2019-11-02 16:00:22', '1', '1572710625_Jellyfish.jpg');
-INSERT INTO `master_paketpoin` VALUES (4, 3, 'asdasd', 1243, '123asdasree', '2019-11-20 16:46:56', '0', '1572710625_Jellyfish.jpg');
-INSERT INTO `master_paketpoin` VALUES (5, 1, 'Paket Poin 1', 10000, 'Upload gambar ini jika ini', '2019-11-02 22:45:59', '0', '1572710625_Jellyfish.jpg');
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for master_soal
@@ -244,14 +185,6 @@ CREATE TABLE `master_soal`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
--- Records of master_soal
--- ----------------------------
-INSERT INTO `master_soal` VALUES (1, '<p>Sampai saat ini narkoba masih mengancam masyarakat Indonesia meski Indonesia telah berkomitmen untuk bebas dari narkoba dan HIV/AIDS pada tahun 2015. Hal itu dapat dilihat dari jumlah pengguna narkoba yang terus meningkat setiap tahunnya. Pada tahun 1970 diperkirakan hanya 130.000 orang yang menggunakan narkoba dan pada tahun 2009 terdeteksi 2% penduduk Indonesia pernah bersentuhan dengan narkoba atau meningkat 0,5% dibandingkan tahun sebelumnya. Hal tersebut sangat mengkhawatirkan semua pihak, khususnya Badan Narkotika Nasional (BNN). Dari 2% penduduk yang pernah bersentuhan dengan narkoba tersebut, 60% berusia produktif dan 40% pelajar.</p>\r\n\r\n<p>Awalnya, pengguna narkoba adalah orang dewasa, berusia sekitar 25 tahun dan dari kalangan kelas ekonomi menengah ke atas. Dalam perkembangannya, pengguna narkoba sudah merambah para remaja dan masyarakat kelas menengah ke bawah. Bahkan, gelandangan pun ada yang kecanduan narkoba. Keadaan tersebut sungguh sangat ironis. Kondisi pengguna narkoba di Indonesia pada tahun 2005 &ndash; 2007 dipaparkan sebagai berikut.</p>\r\n\r\n<p style=\"text-align:center\"><strong><img alt=\"3-51\" src=\"https://blog.ruangguru.com/hs-fs/hubfs/3-51.png?width=321&amp;name=3-51.png\" style=\"width:321px\" /></strong></p>\r\n\r\n<p style=\"text-align:center\"><strong>Tabel 1. Pengguna Narkoba di Indonesia Tahun 2005 -2007</strong></p>\r\n\r\n<p>Tabel tersebut menunjukkan bahwa pengguna narkoba semakin meningkat. Untuk mengatasinya perlu upaya sinergis dari semua pihak, khususnya BNN dengan masyarakat. Tanpa sinergi tersebut tidak mungkin bahaya narkoba dapat diatasi.</p>\r\n\r\n<p>Berdasarkan paragraf 1, manakah di bawah ini pernyataan yang <strong>BENAR</strong>?</p>\r\n', 1, '', NULL, NULL, NULL, NULL);
-INSERT INTO `master_soal` VALUES (2, '<p><em>Sesuai kalimat kedua pada paragraf pertama.</em></p>\r\n\r\n<p>Berdasarkan paragraf 2, apabila dalam perkembangannya, pengguna narkoba sudah merambah para remaja dan masyarakat kelas menengah ke bawah, manakah di bawah ini simpulan yang <strong>PALING MUNGKIN</strong> benar?</p>\r\n', 1, '', NULL, NULL, NULL, NULL);
-INSERT INTO `master_soal` VALUES (3, '<p>Berdasarkan Tabel 1, pada rentang usia berapakah jumlah pengguna narkoba yang pernah mengalami kenaikan jumlah sekitar lebih dari 50%?&nbsp;&nbsp;</p>\r\n', 1, '', NULL, NULL, NULL, NULL);
-INSERT INTO `master_soal` VALUES (4, '<p>asdasd123123123123</p>\r\n', 11, 'asd', NULL, NULL, NULL, NULL);
-
--- ----------------------------
 -- Table structure for master_sosmed
 -- ----------------------------
 DROP TABLE IF EXISTS `master_sosmed`;
@@ -259,17 +192,7 @@ CREATE TABLE `master_sosmed`  (
   `id_sosmed` int(11) NOT NULL AUTO_INCREMENT,
   `nama_sosmed` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_sosmed`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of master_sosmed
--- ----------------------------
-INSERT INTO `master_sosmed` VALUES (1, 'Instagram');
-INSERT INTO `master_sosmed` VALUES (2, 'Facebook');
-INSERT INTO `master_sosmed` VALUES (3, 'Line');
-INSERT INTO `master_sosmed` VALUES (4, 'Twitter');
-INSERT INTO `master_sosmed` VALUES (5, 'Whatsapp');
-INSERT INTO `master_sosmed` VALUES (6, 'Other');
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for master_tryout
@@ -282,14 +205,9 @@ CREATE TABLE `master_tryout`  (
   `harga_poin` decimal(18, 2) NULL DEFAULT NULL,
   `start_date` datetime(0) NULL DEFAULT NULL,
   `end_date` datetime(0) NULL DEFAULT NULL,
+  `status` char(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_tryout`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of master_tryout
--- ----------------------------
-INSERT INTO `master_tryout` VALUES (1, 'Tryout 1', 123.00, 41232.00, '2019-12-02 22:52:00', '0002-06-18 15:00:00');
-INSERT INTO `master_tryout` VALUES (2, 'Tryout 2', 1000.00, 1000.00, '2019-11-02 20:20:20', '2020-11-02 22:20:26');
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for menu
@@ -393,25 +311,7 @@ CREATE TABLE `transaksi_coin`  (
   `note` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
   `note_admin` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
   PRIMARY KEY (`id_transaksi`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of transaksi_coin
--- ----------------------------
-INSERT INTO `transaksi_coin` VALUES (1, 28, 2, '1572723086_95d67299-e3b3-4394-8ab0-a0b7ca11a96f.jpg', '2', 1, '2019-11-03 02:30:34', '2019-11-03 02:41:15', '2019-11-03 02:31:26', 'ok', NULL);
-INSERT INTO `transaksi_coin` VALUES (2, 28, 3, '1572723094_arrow.png', '2', 1, '2019-11-03 02:30:38', '2019-11-03 02:41:46', '2019-11-03 02:31:34', '', NULL);
-INSERT INTO `transaksi_coin` VALUES (3, 28, 2, '1572723102_arrow.png', '2', 1, '2019-11-03 02:30:46', '2019-11-03 02:41:55', '2019-11-03 02:31:42', '', NULL);
-INSERT INTO `transaksi_coin` VALUES (4, 29, 2, '1572723111_arrow.png', '2', 1, '2019-11-03 02:31:06', '2019-11-03 02:42:34', '2019-11-03 02:31:51', '', NULL);
-INSERT INTO `transaksi_coin` VALUES (5, 29, 2, '1572723119_demo.jpg', '2', 1, '2019-11-03 02:31:10', '2019-11-03 02:42:41', '2019-11-03 02:31:59', '', NULL);
-INSERT INTO `transaksi_coin` VALUES (6, 29, 2, '1572727835_demo.jpg', '2', 1, '2019-11-03 03:50:18', '2019-11-03 03:51:08', '2019-11-03 03:50:35', '', NULL);
-INSERT INTO `transaksi_coin` VALUES (7, 29, 3, '1572727844_hadrian.jpg', '2', 1, '2019-11-03 03:50:22', '2019-11-03 03:51:11', '2019-11-03 03:50:44', '', NULL);
-INSERT INTO `transaksi_coin` VALUES (8, 29, 3, '1572727852_95d67299-e3b3-4394-8ab0-a0b7ca11a96f.jpg', '2', 1, '2019-11-03 03:50:26', '2019-11-03 03:51:14', '2019-11-03 03:50:52', '', NULL);
-INSERT INTO `transaksi_coin` VALUES (9, 28, 2, '1572729264_320998 mrk (1).JPG', '2', 1, '2019-11-03 04:14:07', '2019-11-03 04:17:45', '2019-11-03 04:14:24', '', NULL);
-INSERT INTO `transaksi_coin` VALUES (10, 29, 3, '1572729305_95d67299-e3b3-4394-8ab0-a0b7ca11a96f.jpg', '2', 30, '2019-11-03 04:14:12', '2019-11-03 04:18:48', '2019-11-03 04:15:05', '', NULL);
-INSERT INTO `transaksi_coin` VALUES (11, 28, 3, '1572729278_320998 mrk (1).JPG', '2', 30, '2019-11-03 04:14:14', '2019-11-03 04:18:51', '2019-11-03 04:14:38', '', NULL);
-INSERT INTO `transaksi_coin` VALUES (12, 29, 2, '1572729315_arrow.png', '2', 30, '2019-11-03 04:14:18', '2019-11-03 04:18:54', '2019-11-03 04:15:15', '', NULL);
-INSERT INTO `transaksi_coin` VALUES (13, 28, 2, '1572932756_demo.jpg', '1', NULL, '2019-11-05 12:45:40', NULL, '2019-11-05 12:45:56', 'sudah di upload', NULL);
-INSERT INTO `transaksi_coin` VALUES (14, 31, 2, '1573026182_Hydrangeas.jpg', '2', 1, '2019-11-06 14:42:44', '2019-11-06 14:43:38', '2019-11-06 14:43:02', 'ini udah kubayar anjing', NULL);
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for transaksi_koinpoin
@@ -423,14 +323,7 @@ CREATE TABLE `transaksi_koinpoin`  (
   `total_poin` decimal(18, 2) NULL DEFAULT NULL,
   `total_koin` decimal(18, 2) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of transaksi_koinpoin
--- ----------------------------
-INSERT INTO `transaksi_koinpoin` VALUES (1, 28, 14243.00, 69000.00);
-INSERT INTO `transaksi_koinpoin` VALUES (3, 29, 24243.00, 79754.00);
-INSERT INTO `transaksi_koinpoin` VALUES (4, 31, NULL, 10000.00);
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for transaksi_poin
@@ -449,20 +342,7 @@ CREATE TABLE `transaksi_poin`  (
   `note` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
   `note_admin` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
   PRIMARY KEY (`id_transaksi`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of transaksi_poin
--- ----------------------------
-INSERT INTO `transaksi_poin` VALUES (1, 29, 5, '1572727434_arrow.png', '2', 1, '2019-11-03 03:43:21', '2019-11-03 03:49:34', '2019-11-03 03:43:54', '', NULL);
-INSERT INTO `transaksi_poin` VALUES (2, 29, 4, '1572727445_demo.jpg', '2', 1, '2019-11-03 03:43:26', '2019-11-03 03:49:37', '2019-11-03 03:44:05', '', NULL);
-INSERT INTO `transaksi_poin` VALUES (3, 29, 1, '1572727632_hadrian.jpg', '2', 1, '2019-11-03 03:43:30', '2019-11-03 03:49:41', '2019-11-03 03:47:12', '', NULL);
-INSERT INTO `transaksi_poin` VALUES (4, 29, 5, '1572727642_arrow.png', '2', 1, '2019-11-03 03:43:34', '2019-11-03 03:49:43', '2019-11-03 03:47:22', '', NULL);
-INSERT INTO `transaksi_poin` VALUES (5, 28, 1, '1572727672_320998 mrk (1).JPG', '2', 1, '2019-11-03 03:44:00', '2019-11-03 03:49:18', '2019-11-03 03:47:52', '', NULL);
-INSERT INTO `transaksi_poin` VALUES (6, 28, 4, '1572727686_320998 mrk (1).JPG', '2', 1, '2019-11-03 03:46:53', '2019-11-03 03:48:36', '2019-11-03 03:48:06', '', NULL);
-INSERT INTO `transaksi_poin` VALUES (7, 29, 1, '1572729294_demo.jpg', '2', 1, '2019-11-03 04:14:26', '2019-11-03 04:17:32', '2019-11-03 04:14:54', '', NULL);
-INSERT INTO `transaksi_poin` VALUES (8, 29, 4, '1572729284_demo.jpg', '1', NULL, '2019-11-03 04:14:32', NULL, '2019-11-03 04:14:44', '', NULL);
-INSERT INTO `transaksi_poin` VALUES (9, 28, 5, '1572729312_320998 mrk (1).JPG', '1', NULL, '2019-11-03 04:14:55', NULL, '2019-11-03 04:15:12', '', NULL);
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for transaksi_tryout
@@ -476,17 +356,7 @@ CREATE TABLE `transaksi_tryout`  (
   `tipe_beli` char(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `tanggal_beli` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of transaksi_tryout
--- ----------------------------
-INSERT INTO `transaksi_tryout` VALUES (3, 2, 28, 1000.00, '1', '2019-11-05 23:27:29');
-INSERT INTO `transaksi_tryout` VALUES (8, 2, 28, NULL, '2', '2019-11-05 23:37:27');
-INSERT INTO `transaksi_tryout` VALUES (9, 2, 28, 1000.00, '2', '2019-11-05 23:38:01');
-INSERT INTO `transaksi_tryout` VALUES (10, 1, 29, 123.00, '1', '2019-11-05 23:43:30');
-INSERT INTO `transaksi_tryout` VALUES (11, 2, 29, 1000.00, '2', '2019-11-05 23:45:48');
-INSERT INTO `transaksi_tryout` VALUES (12, 1, 29, 123.00, '1', '2019-11-05 23:51:01');
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for user_info
@@ -514,7 +384,7 @@ CREATE TABLE `user_info`  (
   `status` tinyint(2) NULL DEFAULT NULL,
   `post_ap_status` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of user_info
@@ -524,6 +394,7 @@ INSERT INTO `user_info` VALUES (28, 'inul@gmail.com', NULL, NULL, 'e10adc3949ba5
 INSERT INTO `user_info` VALUES (29, 'ambon@gmail.com', NULL, NULL, 'e10adc3949ba59abbe56e057f20f883e', 'Ambon', 'Ambon', 'Situm', NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, NULL, NULL, 1, 0);
 INSERT INTO `user_info` VALUES (30, 'gg@gmail.com', NULL, NULL, 'e10adc3949ba59abbe56e057f20f883e', 'Archie', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 1, 0);
 INSERT INTO `user_info` VALUES (31, 'budi@gmail.com', NULL, NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, NULL, NULL, 1, 0);
+INSERT INTO `user_info` VALUES (32, 'bobi@gmail.com', NULL, NULL, 'e10adc3949ba59abbe56e057f20f883e', 'bobi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, NULL, NULL, 1, 0);
 
 -- ----------------------------
 -- Table structure for user_type

@@ -26,7 +26,8 @@
 <script src="<?= base_url() ?>assets/tagsinput/jquery.tagsinput.min.js" type="text/javascript"></script>
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/ui/moment/moment.min.js"></script>
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/pickers/daterangepicker.js"></script>
-
+<script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/buttons/spin.min.js"></script>
+<script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/buttons/ladda.min.js"></script>
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/pickers/anytime.min.js"></script>
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/forms/selects/select2.min.js"></script>
 <script src="<?= base_url() ?>assets/limitless/global_assets/js/plugins/ui/dragula.min.js"></script>

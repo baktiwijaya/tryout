@@ -1,113 +1,39 @@
+
 <?php
-$user_id = $this->session->userdata('id');
-$user_type = $this->session->userdata('user_type');
+$form_attribute = array('method' => 'post', 'class' => 'myform', 'id' => 'myform');
+echo form_open_multipart('admin/sosiologi/save', $form_attribute);
 ?>
-<div class="panel panel-flat">
-    <div class="panel-heading">
-        <h6 class="panel-title"><?php echo $title ?><a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
-    </div>
-    
-    <div class="panel-body">
-        <?php
-        $form_attribute = array('method' => 'post', 'class' => 'myform', 'id' => 'myform');
-        echo form_open_multipart('user/user_profile/save', $form_attribute);
-        ?>
-        <div class="row">
-            <!-- Kolom Pertama -->
-            <div class="col-md-6">
-
-                <div class="form-group">
-                    <label class="col-form-label">Email</label>
-                    <input type="text" name="topic" class="form-control" value="<?php echo $detail->email ?>">
-                </div>
-
-                <div class="form-group">
-                    <label class="col-form-label">No HP</label>
-                    <input type="number" name="topic" class="form-control" value="<?php echo $detail->no_hp ?>">
-                </div>
-
-                <div class="form-group">
-                    <label class="col-form-label">Password</label>
-                    <input type="password" name="topic" class="form-control" value="<?php echo $detail->password ?>">
-                </div>
-
-                <div class="form-group">
-                    <label class="col-form-label">Nama Lengkap</label>
-                    <input type="text" name="topic" class="form-control" value="<?php echo $detail->nama_lengkap ?>">
-                </div>
-
-                <div class="form-group">
-                    <label class="col-form-label">Nama Panggilan</label>
-                    <input type="text" name="topic" class="form-control" value="<?php echo $detail->nama_panggilan ?>">
-                </div>
-
-                <div class="form-group">
-                    <label class="col-form-label">Jenis Kelamin</label>
-                    <select class="form-control">
-                        <option value="">-- Pilih Jenis Kelamin --</option>
-                        <option value="1">Pria</option>
-                        <option value="2">Wanita</option>
-                    </select>
-                </div>
-
-            </div>
-
-
-            <!-- Kolom kedua -->
-            <div class="col-md-6">
-
-
-                <div class="form-group">
-                    <label class="col-form-label">Kampus Impian</label>
-                    <input type="text" name="topic" class="form-control" value="<?php echo $detail->kampus_impian ?>">
-                </div>
-
-                <div class="form-group">
-                    <label class="col-form-label">Nomor ID</label>
-                    <input type="text" name="topic" class="form-control" value="<?php echo $detail->verification_id_no ?>">
-                </div>
-
-                <div class="form-group">
-                    <label class="col-form-label">Tipe ID</label>
-                    <input type="text" name="topic" class="form-control" value="<?php echo $detail->verification_type ?>">
-                </div>
-
-                 <div class="form-group">
-                    <label class="col-form-label">Tempat Lahir</label>
-                    <input type="text" name="topic" class="form-control" value="<?php echo $detail->tempat_lahir ?>">
-                </div>
-
-                <div class="form-group">
-                    <label class="col-form-label">Tanggal Lahir</label>
-                    <input type="text" name="topic" id="datepicker" class="form-control" value="<?php echo $detail->tanggal_lahir ?>">
-                </div>
-
-                <div class="form-group">
-                    <label class="col-form-label">Photo</label>
-                    <input type="file" name="topic" class="form-control" value="<?php echo $detail->photo ?>">
-                </div>
-
-            </div>
-
-
-        </div>
-        
-        
-        <div class="form-group">
-            <label></label>
-            <button type="button" class="btn btn-outline-primary">Submit</button>
-        </div>
-        <?= form_close(); ?>
-    </div>
+<div class="form-group">
+    <label class="col-form-label">Nama Soal</label>
+    <textarea rows="5" id="editor1" name="nama_soal" class="form-control" required></textarea>
 </div>
+<div class="form-group">
+    <label>Topic</label>
+    <input type="text" name="topic" class="form-control col-md-6">
+</div>
+<div class="form-group">
+    <label></label>
+    <input type="button" value="Batal" class="btn btn-danger" onclick="load();">
+    <input type="submit" name="save" value="Simpan" class="btn btn-primary">
+</div>
+<?= form_close(); ?>
 <script type="text/javascript">
-
     $('.form-input-styled').uniform({
         fileButtonClass: 'action btn bg-blue'
     });
     var elems = Array.prototype.slice.call(document.querySelectorAll('.form-input-switchery'));
     elems.forEach(function (html) {
         var switchery = new Switchery(html);
+    });
+
+    var editor = CKEDITOR.replace('editor1', {
+        filebrowserBrowseUrl: '<?= base_url(); ?>assets/ckfinder/ckfinder.html',
+        filebrowserImageBrowseUrl: '<?= base_url(); ?>assets/ckfinder/ckfinder.html?type=Images',
+        filebrowserFlashBrowseUrl: '<?= base_url(); ?>assets/ckfinder/ckfinder.html?type=Flash',
+        filebrowserUploadUrl: '<?= base_url(); ?>assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+        filebrowserImageUploadUrl: '<?= base_url(); ?>assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+        filebrowserFlashUploadUrl: '<?= base_url(); ?>assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
+        height: '500px'
     });
 
     var validator = $('.myform').validate({
@@ -198,7 +124,3 @@ $user_type = $this->session->userdata('user_type');
         }
     });
 </script>
-
-
-
-

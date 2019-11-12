@@ -5,7 +5,7 @@
 </script>
 <div class="table-responsive">
     <table class="table" id="datatable">
-        <thead class="thead-dark">
+        <thead>
             <tr>
                 <th style="text-align: center;width: 5%;">#</th>
                 <th style="width: 70%;text-align: center;">Nama Soal</th>
@@ -45,7 +45,7 @@
     })
     function edit(id) {
         $.ajax({
-            url: "<?= base_url() ?>admin/biologi/edit",
+            url: "<?= base_url() ?>admin/sejarah/edit",
             type: "POST",
             data: {
                 id: id
@@ -81,7 +81,7 @@
 
     function load_jawaban(id) {
         $.ajax({
-            url: "<?= base_url() ?>admin/biologi/index_jawaban",
+            url: "<?= base_url() ?>admin/sejarah/index_jawaban",
             type: "POST",
             data: {
                 id: id
