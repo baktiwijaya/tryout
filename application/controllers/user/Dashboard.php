@@ -26,9 +26,9 @@ class Dashboard extends CI_Controller {
 
     public function get_data(){
         extract($_POST);
-
+        $id_tryout = $this->Global_m->getvalue('id_tryout','library_tryout','id_library',$id);
         $id_user = $this->session->userdata('id');
-        $data = $this->dashboard_model->get_data($id,$id_user);
+        $data = $this->dashboard_model->get_data($id_tryout,$id_user);
 
         echo json_encode($data);
     }
