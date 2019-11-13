@@ -15,7 +15,7 @@ class User extends CI_Controller {
             redirect('authentication/keluar');
         }
         $user_type = $this->session->userdata('user_type');
-        if ($user_type !=1) {
+        if ($user_type !=1 || $session_id == NULL) {
             redirect('authentication/keluar');
         }
         $this->load->model('admin/User_model');
@@ -42,14 +42,12 @@ class User extends CI_Controller {
                 $key = md5(microtime() . rand());
                
                     $data = array(
-                        'name' => $name,
+                        'nama_lengkap' => $nama,
                         'email' => $email,
-                        'pen_name' => trim(strtolower(str_replace(array(' ', '!', '@', '#', "$", "%", "^", "&", "*", "(", ")"), "", $pen_name))),
+                        'nama_panggilan' => $nama_panggilan,
                         'password' => md5($password),
-                        'mobile' => $mobile,
+                        'no_hp' => $mobile,
                         'user_type' => $type,
-                        
-                        
                         'status' => 0
                     );
                 $add = $this->Crud_m->add('user_info', $data);

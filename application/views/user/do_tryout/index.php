@@ -5,12 +5,6 @@ $user_type = $this->session->userdata('user_type');
 <div class="panel panel-flat">
     <div class="panel-heading">
         <h6 class="panel-title"><?php echo $title ?><a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
-        <div class="heading-elements">
-            <ul class="icons-list">
-                <li><button type="button" class="btn btn-success" onclick="add()">Tambah</button></li>
-                <li><button type="button" class="btn btn-info" onclick="load()">Reload</button></li>
-            </ul>
-        </div>
     </div>
     
     <div class="panel-body">

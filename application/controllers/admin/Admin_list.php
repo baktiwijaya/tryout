@@ -27,4 +27,10 @@ class Admin_list extends CI_Controller {
         $this->load->view('admin/admin_list/table', $data);
     }
 
+    public function load_user() {
+        extract($_POST);
+        $data['detailadmin'] = $this->Crud_m->get_one('*','user_info','id',$id);
+        $this->load->view('admin/admin_list/detailadmin', $data);
+    }
+
 }

@@ -10,7 +10,7 @@ class Paketcoin extends CI_Controller {
         parent::__construct();
         $session_id = $this->session->userdata('session_id');
         $user_type = $this->session->userdata('user_type');
-        if ($user_type != 1 || $session_id == NULL) {
+        if ($user_type != 1|| $session_id == NULL) {
             redirect('authentication/keluar');
         }
     }

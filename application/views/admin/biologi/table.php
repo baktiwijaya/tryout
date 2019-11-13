@@ -5,7 +5,7 @@
 </script>
 <div class="table-responsive">
     <table class="table" id="datatable">
-        <thead class="thead-dark">
+        <thead>
             <tr>
                 <th style="text-align: center;width: 5%;">#</th>
                 <th style="width: 70%;text-align: center;">Nama Soal</th>
@@ -21,8 +21,8 @@
                     <td><?= $no ?></td>
                     <td><?= $key['nama_soal'] ?></td>
                     <td style="text-align: center;">
-                        <a href="#" class="btn btn-default" onclick="load_jawaban('<?= $key['id_soal'] ?>')"><i class="fa fa-plus"></i></a>
-                        <a href="#" class="btn btn-default" onclick="edit('<?= $key['id_soal'] ?>')"><i class="icon-pencil"></i></a>
+                        <a href="#" class="btn btn-default" onclick="load_jawaban('<?= $key['id_soal'] ?>')"><i class="fa fa-plus text-primary-400"></i></a>
+                        <a href="#" class="btn btn-default" onclick="edit('<?= $key['id_soal'] ?>')"><i class="icon-pencil text-primary-400"></i></a>
                     </td> 
                 </tr>
                 <?php

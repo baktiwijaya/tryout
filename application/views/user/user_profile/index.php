@@ -15,38 +15,44 @@ $user_type = $this->session->userdata('user_type');
         <div class="row">
             <!-- Kolom Pertama -->
             <div class="col-md-6">
-
+                <input type="hidden" name="id" value="<?php echo $detail->id ?>">
                 <div class="form-group">
                     <label class="col-form-label">Email</label>
-                    <input type="text" name="topic" class="form-control" value="<?php echo $detail->email ?>">
+                    <input type="text" name="email" class="form-control" value="<?php echo $detail->email ?>">
                 </div>
 
                 <div class="form-group">
                     <label class="col-form-label">No HP</label>
-                    <input type="number" name="topic" class="form-control" value="<?php echo $detail->no_hp ?>">
+                    <input type="number" name="no_hp" class="form-control" value="<?php echo $detail->no_hp ?>">
                 </div>
 
                 <div class="form-group">
                     <label class="col-form-label">Password</label>
-                    <input type="password" name="topic" class="form-control" value="<?php echo $detail->password ?>">
+                    <input type="password" name="password" class="form-control" value="<?php echo $detail->password ?>">
                 </div>
 
                 <div class="form-group">
                     <label class="col-form-label">Nama Lengkap</label>
-                    <input type="text" name="topic" class="form-control" value="<?php echo $detail->nama_lengkap ?>">
+                    <input type="text" name="nama_lengkap" class="form-control" value="<?php echo $detail->nama_lengkap ?>">
                 </div>
 
                 <div class="form-group">
                     <label class="col-form-label">Nama Panggilan</label>
-                    <input type="text" name="topic" class="form-control" value="<?php echo $detail->nama_panggilan ?>">
+                    <input type="text" name="nama_panggilan" class="form-control" value="<?php echo $detail->nama_panggilan ?>">
                 </div>
 
                 <div class="form-group">
                     <label class="col-form-label">Jenis Kelamin</label>
-                    <select class="form-control">
+                    <select class="form-control" name="jenis_kelamin">
                         <option value="">-- Pilih Jenis Kelamin --</option>
-                        <option value="1">Pria</option>
-                        <option value="2">Wanita</option>
+                        <?php if($detail->jenis_kelamin == 1) { ?>
+                            <option value="1" selected>Pria</option>
+                            <option value="2">Wanita</option>
+                        <?php } else { ?>
+                            <option value="1">Pria</option>
+                            <option value="2" selected>Wanita</option>
+                        <?php } ?>
+                       
                     </select>
                 </div>
 
@@ -59,32 +65,32 @@ $user_type = $this->session->userdata('user_type');
 
                 <div class="form-group">
                     <label class="col-form-label">Kampus Impian</label>
-                    <input type="text" name="topic" class="form-control" value="<?php echo $detail->kampus_impian ?>">
+                    <input type="text" name="kampus_impian" class="form-control" value="<?php echo $detail->kampus_impian ?>">
                 </div>
 
                 <div class="form-group">
                     <label class="col-form-label">Nomor ID</label>
-                    <input type="text" name="topic" class="form-control" value="<?php echo $detail->verification_id_no ?>">
+                    <input type="text" name="verification_id_no" class="form-control" value="<?php echo $detail->verification_id_no ?>">
                 </div>
 
                 <div class="form-group">
                     <label class="col-form-label">Tipe ID</label>
-                    <input type="text" name="topic" class="form-control" value="<?php echo $detail->verification_type ?>">
+                    <input type="text" name="verification_type" class="form-control" value="<?php echo $detail->verification_type ?>">
                 </div>
 
                  <div class="form-group">
                     <label class="col-form-label">Tempat Lahir</label>
-                    <input type="text" name="topic" class="form-control" value="<?php echo $detail->tempat_lahir ?>">
+                    <input type="text" name="tempat_lahir" class="form-control" value="<?php echo $detail->tempat_lahir ?>">
                 </div>
 
                 <div class="form-group">
                     <label class="col-form-label">Tanggal Lahir</label>
-                    <input type="text" name="topic" id="datepicker" class="form-control" value="<?php echo $detail->tanggal_lahir ?>">
+                    <input type="text" name="tanggal_lahir" class="form-control" value="<?php echo $detail->tanggal_lahir ?>">
                 </div>
 
                 <div class="form-group">
                     <label class="col-form-label">Photo</label>
-                    <input type="file" name="topic" class="form-control" value="<?php echo $detail->photo ?>">
+                    <input type="file" name="photo" class="form-control" value="<?php echo $detail->photo ?>">
                 </div>
 
             </div>
@@ -95,7 +101,7 @@ $user_type = $this->session->userdata('user_type');
         
         <div class="form-group">
             <label></label>
-            <button type="button" class="btn btn-outline-primary">Submit</button>
+            <button type="submit" class="btn btn-outline-primary">Submit</button>
         </div>
         <?= form_close(); ?>
     </div>
@@ -105,6 +111,16 @@ $user_type = $this->session->userdata('user_type');
     $('.form-input-styled').uniform({
         fileButtonClass: 'action btn bg-blue'
     });
+
+    $('input[name="tanggal_lahir"]').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        minYear: 2000,
+        maxYear: parseInt(moment().format('YYYY'),10),
+        locale: {
+            format: 'YYYY-MM-DD'
+        }
+      });
     var elems = Array.prototype.slice.call(document.querySelectorAll('.form-input-switchery'));
     elems.forEach(function (html) {
         var switchery = new Switchery(html);
@@ -135,66 +151,64 @@ $user_type = $this->session->userdata('user_type');
             }
         },
         submitHandler: function (form) {
-            swalInit({
-                title: 'Konfirmasi !',
-                text: 'Apakah anda yakin ingin menyimpan data ?',
-                type: 'warning',
-                confirmButtonText: 'Ya !',
-                showCancelButton: true,
-                cancelButtonText: 'Tidak !',
-            }).then(function (result) {
-                if (result.value) {
-                    var data = new FormData(form);
-                    $.ajax({
-                        type: 'POST',
-                        url: $("#myform").attr('action'),
-                        data: data,
-                        contentType: false,
-                        processData: false,
-                        beforeSend: function (data) {
-                            $.blockUI({
-                                message: '<i class="icon-spinner4 spinner"></i>',
-                                overlayCSS: {
-                                    backgroundColor: '#1b2024',
-                                    opacity: 0.8,
-                                    zIndex: 1200,
-                                    cursor: 'wait'
-                                },
-                                css: {
-                                    border: 0,
-                                    color: '#fff',
-                                    zIndex: 1201,
-                                    padding: 0,
-                                    backgroundColor: 'transparent'
-                                }
-                            });
-                        },
-                        error: function (data) {
-                            $.unblockUI();
-                            alert('Proses data gagal', 'info')
-                        },
-                        success: function (data) {
-                            $.unblockUI();
-                            var obj = JSON.parse(data);
-                            if (obj[0]) {
-                                swalInit({
-                                    type: 'success',
-                                    text: obj[2]
-                                }).then(function (con) {
-                                    if (con.value) {
-                                        load();
-                                    }
-                                })
-                            } else {
-                                swalInit({
-                                    type: 'warning',
-                                    text: obj[2]
-                                })
+             swal({
+            title: "Anda Yakin?",
+            text: "Apakan anda yakin ingin mengubah profil ?",
+            type: "warning",
+            showCancelButton: true,
+            cancelButtonClass: 'btn-success btn-md waves-effect',
+            confirmButtonClass: 'btn-danger btn-md waves-effect waves-light',
+            cancelButtonText: 'Tidak',
+            confirmButtonText: 'Ya!'
+
+        }, function (isConfirm) {
+            if (!isConfirm) return;
+                var data = new FormData(form);
+                $.ajax({
+                    type: 'POST',
+                    url: $("#myform").attr('action'),
+                    data: data,
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function (data) {
+                        $.blockUI({
+                            message: '<i class="icon-spinner4 spinner"></i>',
+                            overlayCSS: {
+                                backgroundColor: '#1b2024',
+                                opacity: 0.8,
+                                zIndex: 1200,
+                                cursor: 'wait'
+                            },
+                            css: {
+                                border: 0,
+                                color: '#fff',
+                                zIndex: 1201,
+                                padding: 0,
+                                backgroundColor: 'transparent'
                             }
-                        }
-                    })
-                }
-            });
+                        });
+                    },
+                    error: function (data) {
+                        $.unblockUI();
+                        alert('Proses data gagal', 'info')
+                    },
+                    success: function (data) {
+                        $.unblockUI();
+                        var obj = JSON.parse(data);
+                        swal({
+                            title: obj[1],
+                            text: obj[2],
+                            type: obj[3],
+                            showCancelButton: false,
+                            confirmButtonClass: 'btn-danger btn-md waves-effect waves-light',
+                            confirmButtonText: 'Ya!'
+                        }, function (isConfirm) {
+                            if (!isConfirm) return;
+                            
+                        });
+                    }
+                })
+        });
         }
     });
 </script>

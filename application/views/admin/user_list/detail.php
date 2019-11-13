@@ -39,11 +39,8 @@ $user_type = $this->session->userdata('user_type');
 
                 <div class="form-group">
                     <label class="col-form-label">Jenis Kelamin</label>
-                    <select class="form-control" disabled>
-                        <option value="">-- Pilih Jenis Kelamin --</option>
-                        <option value="1">Pria</option>
-                        <option value="2">Wanita</option>
-                    </select>
+                    <?php $jenis_kelamin = ($detail->jenis_kelamin == 1) ? "Pria" : "Wanita"; ?>
+                    <input type="text" class="form-control" value="<?php echo $jenis_kelamin ?>" disabled>
                 </div>
 
             </div>
