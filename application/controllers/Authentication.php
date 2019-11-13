@@ -87,7 +87,7 @@ class Authentication extends CI_Controller {
                     'logged_in' => TRUE,
                 );
                 $this->session->set_userdata($session_data);
-                if ($data['user_type'] == 1) {
+                if ($data['user_type'] != 3) {
                     redirect("admin/dashboard");
                 } else if ($data['user_type'] == 3) {
                     redirect("user/dashboard");

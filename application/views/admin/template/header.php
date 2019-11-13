@@ -1,7 +1,7 @@
   
 <body>
     <!-- Main navbar -->
-    <div class="navbar navbar-expand-md navbar-light">
+    <div class="navbar navbar-dark navbar-expand-md bg-primary-300">
         <!-- Header with logos -->
         <div class="navbar-header navbar-dark d-none d-md-flex align-items-md-center">
             <div class="navbar-brand navbar-brand-md">

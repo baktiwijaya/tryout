@@ -1,64 +1,74 @@
-<div class="card">
-    <div class="card-header header-elements-inline">
-        <h6 class="card-title"><?= $title ?></h6>
-        <div class="header-elements">
-            <div class="list-icons">
-                <a class="list-icons-item" data-action="collapse"></a>
-                <a class="list-icons-item" data-action="reload" onclick="load()"></a>
+<?php
+$user_id = $this->session->userdata('id');
+$user_type = $this->session->userdata('user_type');
+?>
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h6 class="panel-title">User Profile<a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
+    </div>
+    
+    <div class="panel-body">
+        <div class="row">
+            <!-- Kolom Pertama -->
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label class="col-form-label">Nama Lengkap</label>
+                    <input type="text" name="topic" class="form-control" value="<?php echo $detailadmin->nama_lengkap ?>" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-form-label">Nama Panggilan</label>
+                    <input type="text" name="topic" class="form-control" value="<?php echo $detailadmin->nama_panggilan ?>" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-form-label">Email</label>
+                    <input type="text" name="topic" class="form-control" value="<?php echo $detailadmin->email ?>" disabled>
+                </div>
+
+            </div>
+
+
+            <!-- Kolom kedua -->
+            <div class="col-md-6">
+
+
+                <div class="form-group">
+                    <label class="col-form-label">Photo</label>
+                    <input type="text" name="topic" class="form-control" value="<?php echo $detailadmin->photo ?>" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-form-label">No HP</label>
+                    <input type="number" name="topic" class="form-control" value="<?php echo $detailadmin->no_hp ?>" disabled>
+                </div>
+
+                
+                <div class="form-group">
+                    <label class="col-form-label">Sebagai</label>
+                    <input type="text" class="form-control" value="<?php echo $this->Global_m->getvalue('user_type','user_type','id',$detailadmin->user_type); ?>" disabled>
+                </div>
             </div>
         </div>
-    </div>
-    <?php
-    $attributes = array('class' => 'myform', 'name' => '', 'id' => 'myform');
-    echo form_open_multipart('admin/User/save', $attributes);
-    ?>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>Nama Lengkap</label>
-                    <input type="text" name="nama" class="form-control" required="">
-                </div>
-                <div class="form-group">
-                    <label>Nama Panggilan</label>
-                    <input type="text" name="nama_panggilan" class="form-control" required="">
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="text" name="email" class="form-control" required="">
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" name="password" class="form-control" required="">
-                </div>               
-                <div class="form-group">
-                    <label>No. HP</label>
-                    <input type="text" name="no_hp" class="form-control" required="">
-                </div>   
-                <div class="form-group">
-                    <label>Photo</label>
-                    <input type="file" name="photo" class="form-control">
-                </div>   
-                <div class="form-group">
-                    <label>Sebagai</label>
-                    <select name="type" class="form-control" id="type">
-                        <option value="">-- Pilih User Role --</option>
-                        <?php foreach ($user_role as $key) : ?>
-                            <option value="<?= $key['id'] ?>"><?= $key['user_type'] ?></option>   
-                        <?php endforeach; ?>
-                        
-                    </select>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                </div> 
-            </div>    
+        
+        
+        <div class="form-group">
+            <label></label>
+            <button type="button" class="btn btn-outline-danger" onclick="load()">Kembali</button>
         </div>
     </div>
-    <?= form_close(); ?>
 </div>
 <script type="text/javascript">
-    $('.select2').select2();
+
+    $('.form-input-styled').uniform({
+        fileButtonClass: 'action btn bg-blue'
+    });
+    var elems = Array.prototype.slice.call(document.querySelectorAll('.form-input-switchery'));
+    elems.forEach(function (html) {
+        var switchery = new Switchery(html);
+    });
+
     var validator = $('.myform').validate({
         ignore: 'input[type=hidden], .select2-search__field', // ignore hidden fields
         errorClass: 'validation-invalid-label',
@@ -85,12 +95,12 @@
         },
         submitHandler: function (form) {
             swalInit({
-                title: 'Konfirmasi!',
-                text: 'Apakah anda sudah yakin ini ingin menyimpan data?',
+                title: 'Konfirmasi !',
+                text: 'Apakah anda yakin ingin menyimpan data ?',
                 type: 'warning',
-                confirmButtonText: 'Ya!',
+                confirmButtonText: 'Ya !',
                 showCancelButton: true,
-                cancelButtonText: 'Tidak!',
+                cancelButtonText: 'Tidak !',
             }).then(function (result) {
                 if (result.value) {
                     var data = new FormData(form);
@@ -131,7 +141,7 @@
                                     text: obj[2]
                                 }).then(function (con) {
                                     if (con.value) {
-                                        $('#myform')[0].reset;
+                                        load();
                                     }
                                 })
                             } else {
@@ -140,7 +150,6 @@
                                     text: obj[2]
                                 })
                             }
-
                         }
                     })
                 }
@@ -148,3 +157,7 @@
         }
     });
 </script>
+
+
+
+

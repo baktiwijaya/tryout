@@ -1,4 +1,4 @@
-<div class="sidebar sidebar-light sidebar-dark sidebar-expand-md">
+<div class="sidebar sidebar-light sidebar-expand-md">
     <!-- Sidebar mobile toggler -->
     <div class="sidebar-mobile-toggler text-center">
         <a href="#" class="sidebar-mobile-main-toggle">

@@ -31,12 +31,20 @@ class User_profile extends CI_Controller {
         extract($_POST);
         
         $data = array(
-            'nama_soal' => $nama_soal,
-            'kategori' => $this->_kategori,
-            'topic' => $topic
+            'email' => $email,
+            'no_hp' => $no_hp,
+            'password' => md5($password),
+            'nama_lengkap' => $nama_lengkap,
+            'nama_panggilan' => $nama_panggilan,
+            'jenis_kelamin' => $jenis_kelamin,
+            'kampus_impian' => $kampus_impian,
+            'verification_id_no' => $verification_id_no,
+            'verification_type' => $verification_type,
+            'tempat_lahir' => $tempat_lahir,
+            'tanggal_lahir' => $tanggal_lahir
         );
 
-        $update = $this->Crud_m->edit('master_soal', $data,'id_soal',$id);
+        $update = $this->Crud_m->edit('user_info', $data,'id',$id);
         if ($update) {
             $message = array(TRUE, 'Proses Berhasil !', 'Proses penyimpanan data berhasil !');
         } else {
