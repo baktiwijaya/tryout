@@ -105,7 +105,7 @@ class Beli_tryout extends CI_Controller {
 
                         if($add_paket) {
 
-                            $id_soal = $this->tbl_beli->get_soal($id_tryout);
+                            $id_soal = $this->tbl_beli->get_soal($id_tryout,$id_user);
                             $no = 1;
                             foreach ($id_soal as $key) {
                                 $no++;

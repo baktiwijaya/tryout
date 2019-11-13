@@ -24,6 +24,16 @@ echo form_open_multipart('user/do_tryout/save', $form_attribute);
                         <input type="hidden" name="id_librarytrout[]" value="<?php echo $key['id_librarytrout'] ?>">
                         <?php $nos = 1;foreach($jawaban as $value) : ?>
                             <input type="radio" name="id_jawaban_<?php echo $key['nomor'] ?>" onclick="jawaban(this.value,'<?php echo $key['nomor'] ?>');check_value('<?php echo $key['nomor'] ?>')" value="<?php echo $value['id_jawaban'] ?>">&nbsp;<?php echo $value['label']; ?>.&nbsp;<?php echo $value['nama_jawaban']; ?>
+                            <?php 
+                            $filename = 'uploads/jawaban/'.$value['gambar'];
+                                if (file_exists($filename)) {
+                                    $gambar = $filename;
+                                    echo '<img src="'.base_url().$gambar.'" width="100" height="100">';
+                                } else {
+                                    $gambar = ''; 
+                                }
+                            ?>
+                             
                             <hr>
                         <?php $nos++;endforeach; ?>
                         <button type="button" class="btn btn-md btn-danger" onclick="javascript:show_prev('<?php echo $no ?>');" id="btnprev_<?php echo $no; ?>" hidden>Kembali</button>

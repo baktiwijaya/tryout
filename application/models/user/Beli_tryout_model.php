@@ -12,11 +12,13 @@ class Beli_tryout_model extends CI_Model {
 
 #------------------------------------
 
-    public function get_soal($id_tryout) {
+    public function get_soal($id_tryout,$id_user) {
         $this->db->select('a.id_librarytryout,b.id_soal,a.id_paket,b.nomor');
         $this->db->from('library_pakettryout a');
+        $this->db->join('library_tryout c','a.id_tryout = c.id_tryout');
         $this->db->join('master_isipaket b','a.id_paket = b.id_paket');
         $this->db->where('a.id_tryout',$id_tryout);
+        $this->db->where('c.id_user',$id_user);
         $res = $this->db->get();
         return $res->result_array();
     }
