@@ -22,7 +22,7 @@
 
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li><a href="<?php echo base_url() ?>user/user_profile"><i class="icon-user-plus"></i> My profile</a></li>
-                    <li><a href="#"><i class="icon-coins"></i> My balance</a></li>
+                    <li><a href="<?php echo base_url() ?>user/trans_history"><i class="icon-coins"></i> My balance</a></li>
                     <li><a href="#"><span class="badge badge-warning pull-right">58</span> <i class="icon-comment-discussion"></i> Messages</a></li>
                     <li class="divider"></li>
                     <li><a href="<?php echo base_url()?>authentication/keluar"><i class="icon-switch2"></i> Logout</a></li>
