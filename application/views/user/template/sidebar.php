@@ -16,7 +16,7 @@
 
     <div class="navbar-collapse collapse" id="navbar-second-toggle">
         <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html"><i class="icon-display4 position-left"></i> Dashboard</a></li>
+            <li class="active"><a href="<?php echo base_url() ?>user/dashboard"><i class="icon-display4 position-left"></i> Dashboard</a></li>
             <?php
                 $mutama = $this->Crud_m->all_data('menu', '*', "parent = 0 and role ='" . $this->session->userdata('user_type') . "' and is_aktif = 1", 'order asc');
                 foreach ($mutama as $value) :
