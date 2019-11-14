@@ -10,73 +10,52 @@ class Dashboard_model extends CI_Model {
         parent::__construct();
     }
 
-#------------------------------------
-
-
-    public function get_data($start, $end) {
-        $kanal = $this->session->userdata('kanal_management');
-        $query = "
-            SELECT a.nama_kanal, a.id_kanal, a.icon,
-            SUM(CASE WHEN flag_status = 0 and DATE_FORMAT(c.date_published,'%Y-%m-%d') BETWEEN '$start' AND '$end' THEN 1 ELSE 0 END) as belum_tayang,
-            SUM(CASE WHEN flag_status = 1 and DATE_FORMAT(c.date_published,'%Y-%m-%d') BETWEEN '$start' AND '$end'THEN 1 ELSE 0 END) as sudah_tayang,
-            SUM(CASE WHEN flag_status in (0,1,2) and DATE_FORMAT(c.date_published,'%Y-%m-%d') BETWEEN '$start' AND '$end' THEN 1 ELSE 0 END) as total
-            FROM kanal a
-            LEFT JOIN kanal b ON a.id_kanal = b.parent
-            LEFT JOIN news c ON b.id_kanal = c.sub_kanal 
-            WHERE a.parent = '0' and a.is_aktif = '1'";
-        if($this->session->userdata('user_type') != 4) {
-            $query.= " and a.id_kanal = '$kanal'";
-        }
-        $query.=" GROUP BY a.id_kanal ORDER BY a.column_order ASC";
-                
-        $res = $this->db->query($query);
-        return $res->result_array();
+    public function get_userkoin() {
+        $query = "SELECT COUNT(DISTINCT(id_user)) AS TOTAL FROM transaksi_coin";
+        $sql = $this->db->query($query)->row();
+        return $sql->TOTAL;
+    }
+	public function get_userpoin() {
+        $query = "SELECT COUNT(DISTINCT(id_user)) as TOTAL FROM transaksi_poin WHERE `status` = 2";
+        $sql = $this->db->query($query)->row();
+        return $sql->TOTAL;
+    }
+    public function get_userkoinpoin() {
+        $query = "SELECT COUNT(DISTINCT(id_user)) as TOTAL FROM transaksi_koinpoin WHERE total_poin IS NOT NULL AND total_koin IS NOT NULL";
+        $sql = $this->db->query($query)->row();
+        return $sql->TOTAL;
+    }
+    public function get_usertotal() {
+        $query = "SELECT COUNT(id) as TOTAL FROM user_info";
+        $sql = $this->db->query($query)->row();
+        return $sql->TOTAL;
     }
 
-    public function get_data_($start, $end, $id_kanal) {
-        $kanal = $this->session->userdata('kanal_management');
-        $query = "
-            SELECT b.nama_kanal, b.column_order,
-            SUM(CASE WHEN flag_status = 0 and DATE_FORMAT(a.date_published,'%Y-%m-%d') BETWEEN '$start' AND '$end' THEN 1 ELSE 0 END) as belum_tayang,
-            SUM(CASE WHEN flag_status = 1 and DATE_FORMAT(a.date_published,'%Y-%m-%d') BETWEEN '$start' AND '$end'THEN 1 ELSE 0 END) as sudah_tayang,
-            SUM(CASE WHEN flag_status in (0,1,2) and DATE_FORMAT(a.date_published,'%Y-%m-%d') BETWEEN '$start' AND '$end' THEN 1 ELSE 0 END) as total
-            FROM news a
-            RIGHT JOIN kanal b on a.sub_kanal=b.id_kanal
-            where b.parent = '$id_kanal' and b.is_aktif = '1'
-            GROUP BY b.nama_kanal, b.column_order
-            ORDER BY b.column_order ASC";
-        $res = $this->db->query($query);
-        return $res->result_array();
+    public function get_totalpoin($id) {
+    	$query = "SELECT
+				  CASE WHEN SUM(b.jumlah_paketpoin) IS NULL THEN 0 ELSE SUM(b.jumlah_paketpoin) END AS TOTAL
+				  FROM transaksi_poin a
+				  LEFT JOIN master_paketpoin b on a.id_paketpoin = b.id_paketpoin
+				  LEFT JOIN master_sosmed c ON b.id_sosmed = c.id_sosmed
+				  WHERE a.`status` = 2 AND c.id_sosmed = $id";
+		$sql = $this->db->query($query)->row();
+        return $sql->TOTAL;
     }
 
-    public function get_latest() {
-        $kanal = $this->session->userdata('kanal_management');
-        $query = "SELECT * FROM news where kanal_id = '$kanal' ORDER BY date_published desc LIMIT 4";
-        $res = $this->db->query($query);
-        return $res->result_array();
+    public function get_revenue() {
+    	$query = "SELECT SUM(harga_paketcoin) AS TOTAL FROM master_paketcoin a
+				  LEFT JOIN transaksi_coin b ON b.id_paketcoin = a.id_paketcoin
+                  WHERE `status`=2";
+        $sql = $this->db->query($query)->row();
+        return $sql->TOTAL;
     }
 
-    public function get_berita($start, $end) {
-        $kanal = $this->session->userdata('kanal_management');
-        $query = "
-            SELECT 
-            SUM(CASE WHEN flag_status = 0 and DATE_FORMAT(c.date_published,'%Y-%m-%d') BETWEEN '$start' AND '$end' THEN 1 ELSE 0 END) as belum_tayang,
-            SUM(CASE WHEN flag_status = 1 and DATE_FORMAT(c.date_published,'%Y-%m-%d') BETWEEN '$start' AND '$end'THEN 1 ELSE 0 END) as sudah_tayang,
-            SUM(CASE WHEN flag_status in (0,1,2) and DATE_FORMAT(c.date_published,'%Y-%m-%d') BETWEEN '$start' AND '$end' THEN 1 ELSE 0 END) as total
-            FROM kanal a
-            LEFT JOIN kanal b ON a.id_kanal = b.parent
-            LEFT JOIN news c ON b.id_kanal = c.sub_kanal 
-            WHERE a.parent = '0' and a.is_aktif = '1' and a.id_kanal = '$kanal'";
-        $res = $this->db->query($query);
-        return $res->row_array();
+    public function get_totalcoin() {
+    	$query = "SELECT SUM(jumlah_paketcoin) as TOTAL FROM master_paketcoin a
+					LEFT JOIN transaksi_coin b ON b.id_paketcoin = a.id_paketcoin
+					WHERE `status`=2";
+        $sql = $this->db->query($query)->row();
+        return $sql->TOTAL;
     }
 
-    public function get_kanal($id) {
-        $this->db->select('*');
-        $this->db->from('kanal');
-        $this->db->where('parent', $id);
-        $query = $this->db->get();
-        return $query->result_array();
-    }
-
-}
+ }

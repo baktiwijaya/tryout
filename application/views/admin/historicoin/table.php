@@ -26,7 +26,7 @@
                 <td style="text-align: center"><?= number_format($this->Global_m->getvalue('harga_paketcoin','master_paketcoin','id_paketcoin',$key['id_paketcoin']),'2',',','.'); ?></td>
                 <td style="text-align: center;"><?php echo ($key['tanggal_pembelian'] != '') ? $key['tanggal_pembelian'] : '-' ?></td>
                 <td style="text-align: center"><?php echo $this->Global_m->getvalue('nama_lengkap','user_info','id',$key['id_user']) ?></td>
-                <td style="text-align: center;"><?php echo ($key['tanggal_verifikasi'] != '') ? $key['tanggal_verifikasi'] : '-' ?></td>
+                <td style="text-align: center;"><?php echo ($key['tanggal_verifikasi'] != '') ? $this->fungsi->RegularDateTime($key['tanggal_verifikasi']) : '-' ?></td>
                 <td style="text-align: center;">
                    <?php echo $this->Global_m->getvalue('nama_lengkap','user_info','id',$key['verified_by']) ?>
                 </td> 
