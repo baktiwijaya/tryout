@@ -44,7 +44,9 @@ class Pengetahuan extends CI_Controller {
         
         $data = array(
             'nama_soal' => $nama_soal,
-            'kategori' => $this->_kategori
+            'kategori' => $this->_kategori,
+            'pembahasan' => $pembahasan,
+            'topic' => $topic
         );
        
         $add = $this->Crud_m->add('master_soal', $data);
@@ -63,7 +65,9 @@ class Pengetahuan extends CI_Controller {
       
         $data = array(
             'nama_soal' => $nama_soal,
-            'kategori' => $this->_kategori
+            'kategori' => $this->_kategori,
+            'pembahasan' => $pembahasan,
+            'topic' => $topic
         );
 
         $update = $this->Crud_m->edit('master_soal', $data,'id_soal',$id);

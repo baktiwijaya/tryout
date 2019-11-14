@@ -5,14 +5,19 @@ $hidden_form = array('id' => $id);
 echo form_open_multipart('admin/sosiologi/update', $form_attribute, $hidden_form);
 ?>
 <div class="form-group">
+    <label>Topic</label>
+    <?php $topic = array('name' => 'topic', 'maxlength' => '50', 'size' => '80', 'class' => 'form-control col-md-6', 'value' => $detail->topic); ?>
+    <?= form_input($topic); ?>
+</div>
+
+<div class="form-group">
     <label class="col-form-label">Nama Soal</label>
     <textarea id="editor1" name="nama_soal" required><?php echo $detail->nama_soal ?></textarea>
 </div>
 
 <div class="form-group">
-    <label>Topic</label>
-    <?php $topic = array('name' => 'topic', 'maxlength' => '50', 'size' => '80', 'class' => 'form-control col-md-6', 'value' => $detail->topic); ?>
-    <?= form_input($topic); ?>
+    <label class="col-form-label">Pembahasan Jawaban</label>
+    <textarea name="pembahasan" id="editor2" required><?php echo $detail->pembahasan ?></textarea>
 </div>
 <div class="form-group">
     <label></label>
@@ -29,7 +34,17 @@ echo form_open_multipart('admin/sosiologi/update', $form_attribute, $hidden_form
         filebrowserUploadUrl: '<?= base_url(); ?>assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
         filebrowserImageUploadUrl: '<?= base_url(); ?>assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
         filebrowserFlashUploadUrl: '<?= base_url(); ?>assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
-        height: '500px'
+        height: '200px'
+    });
+
+    var editor2 = CKEDITOR.replace('editor2', {
+        filebrowserBrowseUrl: '<?= base_url(); ?>assets/ckfinder/ckfinder.html',
+        filebrowserImageBrowseUrl: '<?= base_url(); ?>assets/ckfinder/ckfinder.html?type=Images',
+        filebrowserFlashBrowseUrl: '<?= base_url(); ?>assets/ckfinder/ckfinder.html?type=Flash',
+        filebrowserUploadUrl: '<?= base_url(); ?>assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+        filebrowserImageUploadUrl: '<?= base_url(); ?>assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+        filebrowserFlashUploadUrl: '<?= base_url(); ?>assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
+        height: '200px'
     });
 
     var validator = $('.myform').validate({

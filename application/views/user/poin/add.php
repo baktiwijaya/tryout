@@ -1,3 +1,4 @@
+<?php $id_user = $this->session->userdata('id'); ?>
 <div class="row">
     <?php foreach ($poin as $key) : ?>
         <div class="col-md-3">
@@ -7,7 +8,13 @@
                     <h5 class="panel-title"><?php echo $key['nama_paketpoin'] ?></h5>
                     <p class="mb-3"><b>Jumlah Poin</b> : <?php echo number_format($key['jumlah_paketpoin']); ?></p>
                     <p class="mb-3"><b>Instruksi</b> : <?php echo $key['instruksi_paketpoin']; ?></p>
-                    <a href="#" class="btn bg-success-400" onclick="save('<?php echo $key['id_paketpoin'] ?>')">Beli</a>
+                    <?php $exist = $this->Global_m->isExists2Key('id_user',$id_user,'id_paketpoin',$key['id_paketpoin'],'transaksi_poin'); ?>
+                    <?php if($exist) { ?>
+                        Tidak dapat membeli paket yang sama
+                    <?php } else { ?>
+                        <a href="#" class="btn bg-success-400" onclick="save('<?php echo $key['id_paketpoin'] ?>')">Beli</a>
+                    <?php } ?>
+                    
                 </div>
             </div>
         </div>

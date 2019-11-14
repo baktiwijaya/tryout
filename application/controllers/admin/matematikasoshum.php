@@ -45,6 +45,7 @@ class matematikasoshum extends CI_Controller {
         $data = array(
             'nama_soal' => $nama_soal,
             'kategori' => $this->_kategori,
+            'pembahasan' => $pembahasan,
             'topic' => $topic
         );
        
@@ -65,6 +66,7 @@ class matematikasoshum extends CI_Controller {
         $data = array(
             'nama_soal' => $nama_soal,
             'kategori' => $this->_kategori,
+            'pembahasan' => $pembahasan,
             'topic' => $topic
         );
 
