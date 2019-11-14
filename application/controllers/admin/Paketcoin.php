@@ -16,6 +16,8 @@ class Paketcoin extends CI_Controller {
     }
 
     public function index() {
+        $data['menu'] = 'Transaksi Coin';
+        $data['smenu'] = 'Manage Coin';
         $data['title'] = 'Paket Coin';
         $data['content'] = 'admin/paketcoin/index';
         $this->load->view('admin/template/main', $data);

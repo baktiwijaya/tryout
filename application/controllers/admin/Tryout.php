@@ -16,6 +16,8 @@ class Tryout extends CI_Controller {
     }
 
     public function index() {
+        $data['menu'] = 'Tryout';
+        $data['smenu'] = '';
         $data['title'] = 'Master Tryout';
         $data['content'] = 'admin/tryout/index';
         $this->load->view('admin/template/main', $data);

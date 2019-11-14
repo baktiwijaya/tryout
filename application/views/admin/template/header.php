@@ -1,7 +1,7 @@
   
 <body>
     <!-- Main navbar -->
-    <div class="navbar navbar-dark navbar-expand-md bg-primary-300">
+    <div class="navbar navbar-dark navbar-expand-md">
         <!-- Header with logos -->
         <div class="navbar-header navbar-dark d-none d-md-flex align-items-md-center">
             <div class="navbar-brand navbar-brand-md">
@@ -102,13 +102,11 @@
 
                 <li class="nav-item dropdown dropdown-user">
                     <a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
-                        <img src="<?= base_url() ?>assets/limitless/global_assets/images/placeholders/placeholder.jpg" class="rounded-circle mr-2" height="34" alt="">
-                        <span><?= $this->session->userdata('name') ?></span>
+                        <img src="<?= base_url() ?>uploads/foto_admin/<?php echo $this->Global_m->getvalue('photo','user_info','id',$this->session->userdata('id'));?>" class="rounded-circle mr-2" height="34" alt="">
+                        <span><?php echo $this->Global_m->getvalue('nama_lengkap','user_info','id',$this->session->userdata('id'));?></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a href="<?= base_url() ?>profil" class="dropdown-item"><i class="icon-user-plus"></i> Profil Saya</a>
-                        <!--<a href="#" class="dropdown-item"><i class="icon-coins"></i> My balance</a>-->
-                        <!--<a href="#" class="dropdown-item"><i class="icon-comment-discussion"></i> Messages <span class="badge badge-pill bg-indigo-400 ml-auto">58</span></a>-->
+                        <a href="<?php echo base_url()?>admin/admin_profile" class="dropdown-item"><i class="icon-user-plus"></i> Profil Saya</a>
                         <div class="dropdown-divider"></div>
                         <a href="<?= base_url() ?>pengaturan" class="dropdown-item"><i class="icon-cog5"></i> Pengaturan</a>
                         <a href="<?= base_url() ?>authentication/keluar" class="dropdown-item"><i class="icon-switch2"></i> Keluar</a>

@@ -16,6 +16,8 @@ class Paketpoin extends CI_Controller {
     }
 
     public function index() {
+        $data['menu'] = 'Transaksi Poin';
+        $data['smenu'] = 'Manage Poin';
         $data['title'] = 'Paket poin';
         $data['content'] = 'admin/paketpoin/index';
         $this->load->view('admin/template/main', $data);

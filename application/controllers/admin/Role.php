@@ -20,6 +20,8 @@ class Role extends CI_Controller {
     }
 
     public function index() {
+        $data['menu'] = 'Manage User';
+        $data['smenu'] = 'Manage Role';
         $data['title'] = 'User Role';
         $data['content'] = 'admin/role/index';
         $this->load->view('admin/template/main', $data);

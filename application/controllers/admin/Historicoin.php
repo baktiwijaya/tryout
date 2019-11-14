@@ -20,6 +20,8 @@ class Historicoin extends CI_Controller {
     }
 
     public function index() {
+        $data['menu'] = 'Transaksi Coin';
+        $data['smenu'] = 'Histori Coin';
         $data['title'] = 'Histori Pembelian Coin';
         $data['content'] = 'admin/historicoin/index';
         $this->load->view('admin/template/main', $data);

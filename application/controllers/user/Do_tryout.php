@@ -65,22 +65,33 @@ class Do_tryout extends CI_Controller {
         $array = array();
         $benar = array();
         $salah = array();
+        $nilai_benar = array();
+        $nilai_salah = array();
         foreach ($id_jawaban as $key => $value) {
             $is_true = $this->Global_m->getvalue('is_true','master_jawaban','id_jawaban',$value);
+            $poin = $this->Global_m->getvalue('marks','master_jawaban','id_jawaban',$value);
             $data['id_librarytrout'] = $id_librarytrout[$key];
             $data['id_jawaban'] = $value;
             $data['is_done'] = 1;
 
             if($is_true == 1) {
                 array_push($benar,$is_true);
+                array_push($nilai_benar,$poin);
             } else {
                 array_push($salah,$is_true);
+                array_push($nilai_salah,$poin);
             }
 
             array_push($array,$data);
         }
 
-        $this->session->set_userdata('marks',count($benar));
+
+
+        $total_benar = array_sum($nilai_benar);
+        $total_salah = array_sum($nilai_salah);
+        $marks = (float)$total_benar + (float)$total_salah;
+
+        $this->session->set_userdata('marks',$marks);
         $this->session->set_userdata('benar',count($benar));
         $this->session->set_userdata('salah',count($salah));
         $update = $this->Crud_m->edit_batch('library_isitryout',$array,'id_librarytrout');
@@ -107,6 +118,9 @@ class Do_tryout extends CI_Controller {
 
         $update = $this->Crud_m->edit('library_pakettryout',$data,'id_librarytryout',$id_librarypaket);
         if ($update) {
+            $this->session->unset_userdata('marks');
+            $this->session->unset_userdata('benar');
+            $this->session->unset_userdata('salah');
             $message = array(TRUE, 'Proses Berhasil !', 'Proses penyimpanan data berhasil !');
         } else {
             $message = array(FALSE, 'Proses Gagal !', 'Proses penyimpanan data gagal !');

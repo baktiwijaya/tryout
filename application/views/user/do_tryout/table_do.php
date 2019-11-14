@@ -120,7 +120,7 @@ echo form_open_multipart('user/do_tryout/save', $form_attribute);
         submitHandler: function (form) {
             swal({
             title: "Anda Yakin?",
-            text: "Apakan anda ingin membeli koin ?",
+            text: "Apakan anda yakin sudah menyelesaikan tryout ?",
             type: "warning",
             showCancelButton: true,
             cancelButtonClass: 'btn-success btn-md waves-effect',

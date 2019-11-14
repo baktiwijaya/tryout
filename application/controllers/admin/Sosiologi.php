@@ -2,11 +2,11 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class sosiologi extends CI_Controller {
+class Sosiologi extends CI_Controller {
 
     protected $user_type; 
     private $_kategori = 12;
-    private $_kategori_soal = 'sosiologi';
+    private $_kategori_soal = 'Sosiologi';
 
     public function __construct() {
         parent::__construct();
@@ -18,25 +18,33 @@ class sosiologi extends CI_Controller {
     }
 
     public function index() {
+        $data['menu'] = 'Soal';
+        $data['smenu'] = $this->_kategori_soal;
         $data['title'] = 'Master Soal'." ".$this->_kategori_soal;
-        $data['content'] = 'admin/sosiologi/index';
+        $data['content'] = 'admin/master_soal/index';
+        $data['load_table'] = 'admin/Sosiologi/load_table';
+        $data['add'] = 'admin/Sosiologi/add';
         $this->load->view('admin/template/main', $data);
     }
 
     public function load_table() {
+        $data['edit'] = 'admin/Sosiologi/edit';
+        $data['index_jawaban'] = 'admin/Sosiologi/index_jawaban';
         $data['list'] = $this->Crud_m->all_data('master_soal', '*','kategori='.$this->_kategori);
-        $this->load->view('admin/sosiologi/table', $data);
+        $this->load->view('admin/master_soal/table', $data);
     }
 
     public function add() {
-        $this->load->view('admin/sosiologi/add');
+        $data['form_action'] = 'admin/Sosiologi/save';
+        $this->load->view('admin/master_soal/add',$data);
     }
 
     public function edit() {
         extract($_POST);
         $data['id'] = $id;
+        $data['form_action'] = 'admin/Sosiologi/update';
         $data['detail'] = $this->Crud_m->get_one('*', 'master_soal', 'id_soal', $id);
-        $this->load->view('admin/sosiologi/edit', $data);
+        $this->load->view('admin/master_soal/edit', $data);
     }
 
     public function save() {
@@ -97,27 +105,32 @@ class sosiologi extends CI_Controller {
     public function index_jawaban() {
         extract($_POST);
         $this->session->set_userdata('id_soal',$id);
+        $data['load_jawaban'] = 'admin/Sosiologi/load_jawaban';
+        $data['add_jawaban'] = 'admin/Sosiologi/add_jawaban';
         $data['title'] = 'Master Jawaban'." ".$this->_kategori_soal;
-        $this->load->view('admin/sosiologi/index_jawaban', $data);
+        $this->load->view('admin/master_soal/index_jawaban', $data);
     }
 
     public function load_jawaban() {
         extract($_POST);
+        $data['edit_jawaban'] = 'admin/Sosiologi/edit_jawaban';
         $data['list'] = $this->Crud_m->all_data('master_jawaban','*',"id_soal=$id");
-        $this->load->view('admin/sosiologi/table_jawaban', $data);
+        $this->load->view('admin/master_soal/table_jawaban', $data);
     }
 
     public function add_jawaban() {
         extract($_POST);
+        $data['form_action'] = 'admin/Sosiologi/save_jawaban';
         $data['id_soal'] = $this->session->userdata('id_soal');
-        $this->load->view('admin/sosiologi/add_jawaban',$data);
+        $this->load->view('admin/master_soal/add_jawaban',$data);
     }
 
     public function edit_jawaban() {
         extract($_POST);
         $data['id'] = $id;
+        $data['form_action'] = 'admin/Sosiologi/update_jawaban';
         $data['detail'] = $this->Crud_m->get_one('*', 'master_jawaban', 'id_jawaban', $id);
-        $this->load->view('admin/sosiologi/edit_jawaban', $data);
+        $this->load->view('admin/master_soal/edit_jawaban', $data);
     }
 
     public function save_jawaban() {
@@ -145,6 +158,7 @@ class sosiologi extends CI_Controller {
             'nama_jawaban' => $nama_jawaban,
             'label' => $label,
             'gambar' => $image,
+            'marks' => $poin,
             'id_soal' => $id_soal,
             'is_true' => $is_true
         );
@@ -176,6 +190,7 @@ class sosiologi extends CI_Controller {
             $data = array(
                 'nama_jawaban' => $nama_jawaban,
                 'label' => $label,
+                'marks' => $poin,
                 'gambar' => $data1['file_name'],
                 'is_true' => $is_true
             );
@@ -183,6 +198,7 @@ class sosiologi extends CI_Controller {
             $data = array(
             'nama_jawaban' => $nama_jawaban,
             'label' => $label,
+            'marks' => $poin,
             'is_true' => $is_true
         );
         }

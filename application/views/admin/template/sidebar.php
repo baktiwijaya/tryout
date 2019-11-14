@@ -22,7 +22,7 @@
         <?php $bu_img = base_url(); ?>
         <?php $slug1 = $this->uri->segment(1); ?>
         <?php $slug = $this->uri->segment(2); ?>
-        <?php $slug3 = $this->uri->segment(3); ?>
+        <?php $slug3 = $this->uri->segment(3); ?>       
         <?php $selected = 'active'; ?>
         <!-- Main navigation -->
         <div class="sidebar-user">
@@ -50,7 +50,7 @@
                 <!-- Main -->
                 <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">UTAMA</div> <i class="icon-menu" title="Main"></i></li>
                 <li class="nav-item">
-                    <a href="<?= base_url() ?>admin/dashboard" class="nav-link active">
+                    <a href="<?= base_url() ?>admin/dashboard" class="nav-link">
                         <i class="icon-home4"></i>
                         <span>
                             Beranda
@@ -58,6 +58,7 @@
                     </a>
                 </li>
                 <?php
+
                 $mutama = $this->Crud_m->all_data('menu', '*', "parent = 0 and role ='" . $this->session->userdata('user_type') . "' and is_aktif = 1", 'order asc');
                 foreach ($mutama as $value) :
                     ?>
@@ -66,7 +67,7 @@
                     $jum = $this->Crud_m->get('menu', 'count(*) as jumlah', "parent = '" . $value['id_menu'] . "' and role ='" . $this->session->userdata('user_type') . "' and is_aktif = 1", 1, NULL, TRUE);
                     if ($jum->jumlah > 0) {
                         ?>
-                        <li class="nav-item nav-item-submenu">
+                        <li class="nav-item nav-item-submenu <?php if($menu == $value['nama_menu']){echo 'nav-item-expanded nav-item-open';}?>">
                             <a href="#" class="nav-link">
                                 <i class="<?php echo $value['icon'] ?>"></i>
                                 <span><?php echo $value['nama_menu'] ?></span>
@@ -74,7 +75,7 @@
                             <ul class="nav nav-group-sub">
                                 <?php foreach ($submenu as $key) : ?>
                                     <li class="nav-item">
-                                        <a href="<?= $bu; ?><?php echo $key['target'] ?>" class="nav-link">
+                                        <a href="<?= $bu; ?><?php echo $key['target'] ?>" class="nav-link <?php if($smenu == $key['nama_menu']){echo 'active';}?>">
                                             <i class="<?php echo $key['icon'] ?>"></i> <span><?php echo $key['nama_menu'] ?></span>
                                         </a>
                                     </li>
@@ -83,7 +84,7 @@
                         </li>
                     <?php } else { ?>  
                         <li class="nav-item">
-                            <a href="<?php echo $bu; ?><?php echo $value['target'] ?>" class="nav-link">
+                            <a href="<?php echo $bu; ?><?php echo $value['target'] ?>" class="nav-link <?php if($menu == $value['nama_menu']){echo 'active';}?>">
                                 <i class="<?php echo $value['icon'] ?>"></i>
                                 <span><?php echo $value['nama_menu'] ?></span>
                             </a>

@@ -20,6 +20,8 @@ class transaksipoin extends CI_Controller {
     }
 
     public function index() {
+        $data['menu'] = 'Transaksi Poin';
+        $data['smenu'] = 'Verifikasi Poin';
         $data['title'] = 'Verifikasi Pendapatan Poin';
         $data['content'] = 'admin/transaksipoin/index';
         $this->load->view('admin/template/main', $data);

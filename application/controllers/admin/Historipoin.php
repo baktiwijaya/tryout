@@ -20,6 +20,8 @@ class Historipoin extends CI_Controller {
     }
 
     public function index() {
+        $data['menu'] = 'Transaksi Poin';
+        $data['smenu'] = 'Histori Poin';
         $data['title'] = 'Histori Pembelian Poin';
         $data['content'] = 'admin/historipoin/index';
         $this->load->view('admin/template/main', $data);

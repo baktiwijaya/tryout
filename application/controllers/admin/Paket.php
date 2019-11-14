@@ -13,9 +13,12 @@ class Paket extends CI_Controller {
         if (($user_type == 3) OR ($user_type == 5) || $session_id == NULL) {
             redirect('authentication/keluar');
         }
+
     }
 
     public function index() {
+        $data['menu'] = 'Paket Soal';
+        $data['smenu'] = '';
         $data['title'] = 'Master Paket Soal';
         $data['content'] = 'admin/paket/index';
         $this->load->view('admin/template/main', $data);

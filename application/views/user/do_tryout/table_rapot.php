@@ -22,7 +22,7 @@
                 <td><?= $this->Global_m->getvalue('nama_paket','master_paket','id_paket',$key['id_paket']); ?></td>
                 <td style="text-align: center;"><?php echo $key['jawaban_benar'] ?></td>
                 <td style="text-align: center;"><?php echo $key['jawaban_salah'] ?></td>
-                <td style="text-align: center;"><?php echo number_format($key['nilai'],2) * 3 ?></td>
+                <td style="text-align: center;"><?php echo number_format($key['nilai']) ?></td>
             </tr>
             <?php $no++; endforeach; ?>
     </tbody>

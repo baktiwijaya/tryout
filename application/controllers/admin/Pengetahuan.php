@@ -6,7 +6,7 @@ class Pengetahuan extends CI_Controller {
 
     protected $user_type; 
     private $_kategori = 3;
-    private $_kategori_soal = 'Pengetahuan dan Pemahamam Umum';
+    private $_kategori_soal = 'Pengetahuan dan Pemahaman Umum';
 
     public function __construct() {
         parent::__construct();
@@ -18,25 +18,33 @@ class Pengetahuan extends CI_Controller {
     }
 
     public function index() {
+        $data['menu'] = 'Soal';
+        $data['smenu'] = $this->_kategori_soal;
         $data['title'] = 'Master Soal'." ".$this->_kategori_soal;
-        $data['content'] = 'admin/pengetahuan/index';
+        $data['content'] = 'admin/master_soal/index';
+        $data['load_table'] = 'admin/pengetahuan/load_table';
+        $data['add'] = 'admin/pengetahuan/add';
         $this->load->view('admin/template/main', $data);
     }
 
     public function load_table() {
+        $data['edit'] = 'admin/pengetahuan/edit';
+        $data['index_jawaban'] = 'admin/pengetahuan/index_jawaban';
         $data['list'] = $this->Crud_m->all_data('master_soal', '*','kategori='.$this->_kategori);
-        $this->load->view('admin/pengetahuan/table', $data);
+        $this->load->view('admin/master_soal/table', $data);
     }
 
     public function add() {
-        $this->load->view('admin/pengetahuan/add');
+        $data['form_action'] = 'admin/pengetahuan/save';
+        $this->load->view('admin/master_soal/add',$data);
     }
 
     public function edit() {
         extract($_POST);
         $data['id'] = $id;
+        $data['form_action'] = 'admin/pengetahuan/update';
         $data['detail'] = $this->Crud_m->get_one('*', 'master_soal', 'id_soal', $id);
-        $this->load->view('admin/pengetahuan/edit', $data);
+        $this->load->view('admin/master_soal/edit', $data);
     }
 
     public function save() {
@@ -97,27 +105,32 @@ class Pengetahuan extends CI_Controller {
     public function index_jawaban() {
         extract($_POST);
         $this->session->set_userdata('id_soal',$id);
+        $data['load_jawaban'] = 'admin/pengetahuan/load_jawaban';
+        $data['add_jawaban'] = 'admin/pengetahuan/add_jawaban';
         $data['title'] = 'Master Jawaban'." ".$this->_kategori_soal;
-        $this->load->view('admin/pengetahuan/index_jawaban', $data);
+        $this->load->view('admin/master_soal/index_jawaban', $data);
     }
 
     public function load_jawaban() {
         extract($_POST);
+        $data['edit_jawaban'] = 'admin/pengetahuan/edit_jawaban';
         $data['list'] = $this->Crud_m->all_data('master_jawaban','*',"id_soal=$id");
-        $this->load->view('admin/pengetahuan/table_jawaban', $data);
+        $this->load->view('admin/master_soal/table_jawaban', $data);
     }
 
     public function add_jawaban() {
         extract($_POST);
+        $data['form_action'] = 'admin/pengetahuan/save_jawaban';
         $data['id_soal'] = $this->session->userdata('id_soal');
-        $this->load->view('admin/pengetahuan/add_jawaban',$data);
+        $this->load->view('admin/master_soal/add_jawaban',$data);
     }
 
     public function edit_jawaban() {
         extract($_POST);
         $data['id'] = $id;
+        $data['form_action'] = 'admin/pengetahuan/update_jawaban';
         $data['detail'] = $this->Crud_m->get_one('*', 'master_jawaban', 'id_jawaban', $id);
-        $this->load->view('admin/pengetahuan/edit_jawaban', $data);
+        $this->load->view('admin/master_soal/edit_jawaban', $data);
     }
 
     public function save_jawaban() {
@@ -145,6 +158,7 @@ class Pengetahuan extends CI_Controller {
             'nama_jawaban' => $nama_jawaban,
             'label' => $label,
             'gambar' => $image,
+            'marks' => $poin,
             'id_soal' => $id_soal,
             'is_true' => $is_true
         );
@@ -176,6 +190,7 @@ class Pengetahuan extends CI_Controller {
             $data = array(
                 'nama_jawaban' => $nama_jawaban,
                 'label' => $label,
+                'marks' => $poin,
                 'gambar' => $data1['file_name'],
                 'is_true' => $is_true
             );
@@ -183,6 +198,7 @@ class Pengetahuan extends CI_Controller {
             $data = array(
             'nama_jawaban' => $nama_jawaban,
             'label' => $label,
+            'marks' => $poin,
             'is_true' => $is_true
         );
         }
