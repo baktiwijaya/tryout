@@ -34,4 +34,10 @@ class User_list extends CI_Controller {
         $this->load->view('admin/user_list/detail', $data);
     }
 
+    function export_excel() {
+        header('Content-Type: application/json');
+        $data['list'] = $this->Crud_m->all_data('user_info', '*','user_type = 3');
+        $this->load->view('admin/user_list/export_excel', $data);
+    }
+
 }
