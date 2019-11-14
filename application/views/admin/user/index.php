@@ -37,7 +37,7 @@
                 </div>   
                 <div class="form-group">
                     <label>Photo</label>
-                    <input type="file" name="photo" class="form-control">
+                    <input type="file" name="gambar" class="form-control">
                 </div>   
                 <div class="form-group">
                     <label>Sebagai</label>

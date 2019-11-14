@@ -31,12 +31,30 @@ class User extends CI_Controller {
 
     public function save() {
         extract($_POST);
-        $photo = $_FILES['photo']['name'];
+        
+        $upload1 = $_FILES['gambar']['name'];
+        $nmfile1 = time()."_".$upload1;
+        if($upload1 != '') {
+            $config['upload_path']          = './uploads/foto_admin';
+            $config['allowed_types']        = 'gif|jpg|png';
+            $config['max_size']             = 1024 * 1;
+            $config['file_name']            = $nmfile1;
+
+            $this->load->library('upload', $config);
+            $data1 = $this->upload->data();
+            $this->upload->do_upload('gambar');
+
+            $image = $data1['file_name'];
+        } else {
+            $image = '';
+        }
+
+
         $check_status = $this->Global_m->isExists('email', $email, 'user_info');
         if ($check_status) {
             $message = array(false, 'Proses Gagal !', 'User telah terdaftar !');
         } else {
-            if ($name == '' || $email == '' || $password == '' || $pen_name == '') {
+            if ($nama == '' || $email == '' || $password == '') {
                 $message = array(false, 'Proses Gagal!', 'Informasi tidak boleh kosong !');
             } else {
                 $key = md5(microtime() . rand());
@@ -46,9 +64,10 @@ class User extends CI_Controller {
                         'email' => $email,
                         'nama_panggilan' => $nama_panggilan,
                         'password' => md5($password),
-                        'no_hp' => $mobile,
+                        'no_hp' => $no_hp,
                         'user_type' => $type,
-                        'status' => 0
+                        'status' => 0,
+                        'photo' => $image
                     );
                 $add = $this->Crud_m->add('user_info', $data);
                 if ($add) {

@@ -90,7 +90,7 @@ $user_type = $this->session->userdata('user_type');
 
                 <div class="form-group">
                     <label class="col-form-label">Photo</label>
-                    <input type="file" name="photo" class="form-control" value="<?php echo $detail->photo ?>">
+                    <input type="file" name="gambar" class="form-control" value="<?php echo $detail->photo ?>">
                 </div>
 
             </div>

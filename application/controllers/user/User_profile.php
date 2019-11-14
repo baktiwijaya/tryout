@@ -29,20 +29,36 @@ class User_profile extends CI_Controller {
     public function save() {
 
         extract($_POST);
-        
-        $data = array(
-            'email' => $email,
-            'no_hp' => $no_hp,
-            'password' => md5($password),
-            'nama_lengkap' => $nama_lengkap,
-            'nama_panggilan' => $nama_panggilan,
-            'jenis_kelamin' => $jenis_kelamin,
-            'kampus_impian' => $kampus_impian,
-            'verification_id_no' => $verification_id_no,
-            'verification_type' => $verification_type,
-            'tempat_lahir' => $tempat_lahir,
-            'tanggal_lahir' => $tanggal_lahir
-        );
+        $upload1 = $_FILES['gambar']['name'];
+        $nmfile1 = time()."_".$upload1;
+        if($upload1 != '') {
+            $config['upload_path']          = './uploads/foto_user';
+            $config['allowed_types']        = 'gif|jpg|png';
+            $config['max_size']             = 512 * 1;
+            $config['file_name']            = $nmfile1;
+
+            $this->load->library('upload', $config);
+            $data1 = $this->upload->data();
+            $this->upload->do_upload('gambar');
+
+            $image = $data1['file_name'];
+        } else {
+            $image = '';
+        }
+        $data['email']              = $email;
+        $data['no_hp']              = $no_hp;
+        $data['password']           = md5($password);
+        $data['nama_lengkap']       = $nama_lengkap;
+        $data['nama_panggilan']     = $nama_panggilan;
+        $data['jenis_kelamin']      = $jenis_kelamin;
+        $data['kampus_impian']      = $kampus_impian;
+        $data['verification_id_no'] = $verification_id_no;
+        $data['verification_type']  = $verification_type;
+        $data['tempat_lahir']       = $tempat_lahir;
+        $data['tanggal_lahir']      = $tanggal_lahir;
+        if($image != '') {
+            $data['photo']          = $image; 
+        }
 
         $update = $this->Crud_m->edit('user_info', $data,'id',$id);
         if ($update) {
