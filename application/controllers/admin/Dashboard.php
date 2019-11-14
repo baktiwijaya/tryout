@@ -24,6 +24,18 @@ class Dashboard extends CI_Controller {
         $data['menu'] = '';
         $data['smenu'] = '';
         $data['content'] = 'admin/dashboard/index';
+        $data['koin']      = $this->dashboard_model->get_userkoin();
+        $data['poin']      = $this->dashboard_model->get_userpoin();
+        $data['user']      = $this->dashboard_model->get_usertotal();
+        $data['instagram'] = $this->dashboard_model->get_totalpoin(1);
+        $data['facebook']  = $this->dashboard_model->get_totalpoin(2);
+        $data['line']      = $this->dashboard_model->get_totalpoin(3);
+        $data['twitter']   = $this->dashboard_model->get_totalpoin(4);
+        $data['whatsapp']  = $this->dashboard_model->get_totalpoin(5);
+        $data['other']     = $this->dashboard_model->get_totalpoin(6);
+        $data['revenue']   = $this->dashboard_model->get_revenue();
+        $data['coin']      = $this->dashboard_model->get_totalcoin();
+        $data['koinpoin']  = $this->dashboard_model->get_userkoinpoin();
         $this->load->view('admin/template/main', $data);
     }
 }
