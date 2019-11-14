@@ -3,7 +3,7 @@ $user_id = $this->session->userdata('id');
 $user_type = $this->session->userdata('user_type');
 ?>
 
-<div class="card">
+<!-- <div class="card">
 	<div class="card-body">
 		<div class="col-md-12">
 			<div class="card bg-dark">
@@ -13,7 +13,7 @@ $user_type = $this->session->userdata('user_type');
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->
 
 <div class="card">
 	<div class="card-body">
@@ -127,7 +127,7 @@ $user_type = $this->session->userdata('user_type');
 				<div class="card bg-dark">
 					<div class="card-body">
 						<h3>Total Coin</h3><br>
-						<h1><b><?php echo $coin; ?></b></h1>
+						<h1><b><?php echo number_format($coin,2,',','.'); ?></b></h1>
 					</div>
 				</div>
 			</div>
@@ -151,37 +151,37 @@ $user_type = $this->session->userdata('user_type');
 	</div>
 </div>
 
-<div class="card">
-			<div class="card-body">
-				<h4>PER-TRYOUT-AN</h4>
-				<table class="table table-dark table-bordered table-striped table-hover bg-info-700">
-							<thead>
-								<tr>
-									<th>Nama Tryout</th>
-									<th>Jumlah User Beli Pake Coin</th>
-									<th>Jumlah User Beli Pake Poin</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>1</td>
-									<td>Eugene</td>
-									<td>Kopyov</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>Victoria</td>
-									<td>Baker</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>James</td>
-									<td>Alexander</td>
-								</tr>
-							</tbody>
-						</table>
-			</div>
-		</div>
+<!-- <div class="card">
+	<div class="card-body">
+		<h4>PER-TRYOUT-AN</h4>
+		<table class="table table-dark table-bordered table-striped table-hover bg-info-700">
+			<thead>
+				<tr>
+					<th>Nama Tryout</th>
+					<th>Jumlah User Beli Pake Coin</th>
+					<th>Jumlah User Beli Pake Poin</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>Eugene</td>
+					<td>Kopyov</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>Victoria</td>
+					<td>Baker</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>James</td>
+					<td>Alexander</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div> -->
 <div id="content"></div>
 
 <script type="text/javascript">

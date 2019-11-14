@@ -17,6 +17,8 @@ class Dashboard extends CI_Controller {
         if ($user_type == 3 || $session_id == NULL) {
             redirect('authentication/keluar');
         }
+
+        $this->load->model('admin/Dashboard_model','dashboard_model');
     }
 
     public function index() {

@@ -58,4 +58,10 @@ class Dashboard_model extends CI_Model {
         return $sql->TOTAL;
     }
 
+    // public function get_datauser() {
+    // 	$query = "SELECT COUNT(id_user) AS TOTAL FROM user_info WHERE DATE_FORMAT(date_create,'%Y-%m-%d') = ('Y-m-d')";
+    //     $sql = $this->db->query($query)->row();
+    //     return $sql->TOTAL;
+    // }
+
  }
