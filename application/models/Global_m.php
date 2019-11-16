@@ -118,7 +118,7 @@ class Global_m extends CI_Model {
     function count_where($id,$table) {
         $this->db->select('count(*) as total');
         $this->db->from($table);
-        $this->db->where('id_paket');
+        $this->db->where('id_paket',$id);
         //$this->db->group_by(' ');
         $res = $this->db->get();
         $row = $res->row()->total;
