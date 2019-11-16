@@ -32,7 +32,9 @@ $user_type = $this->session->userdata('user_type');
 	var id = $('#tryout').val();
 	$(document).ready(function(){
 		$('.select2').select2();
-		get_data(id);
+		if (id!= null) {
+			get_data(id);
+		}
 
 		$('#tryout').change(function(){
 			var idt = $(this).val();

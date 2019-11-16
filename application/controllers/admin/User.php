@@ -24,7 +24,7 @@ class User extends CI_Controller {
     public function index() {
         $data['menu'] = 'Manage User';
         $data['smenu'] = 'Tambah Admin';
-        $data['title'] = 'Daftar User';
+        $data['title'] = 'Tambah Admin';
         $data['user_role'] = $this->Crud_m->all_data('user_type', '*','id != 3');
        
         $data['content'] = 'admin/user/index';
