@@ -16,15 +16,15 @@
                     $jum = $this->Crud_m->get('menu', 'count(*) as jumlah', "parent = '" . $value['id_menu'] . "' and role ='" . $this->session->userdata('user_type') . "' and is_aktif = 1", 1, NULL, TRUE);
                     if ($jum->jumlah > 0) {
                         ?>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-item  <?php if($menu == $value['nama_menu']){echo "dropdown-item-open";} ?>" data-toggle="dropdown">
+                        <li class="dropdown <?php if($menu == $value['nama_menu']){echo "dropdown-toggle active";} ?>">
+                            <a href="#" class="dropdown-item" data-toggle="dropdown">
                                 <i class="icon-basket position-left"></i> <?php echo $value['nama_menu']; ?> <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu width-250">
                                 <?php foreach ($submenu as $key) : ?>
-                                   <li class="dropdown">
-                                    <a href="<?php $bu ?><?php echo $key['target'] ?>" class="dropdown-item <?php if($smenu == $key['nama_menu']){echo "active";} ?>"><i class="<?php echo $key['icon'] ?>"></i> <?php echo $key['nama_menu']; ?></a>
+                                   <li class="dropdown  <?php if($smenu == $key['nama_menu']){echo "active";} ?>">
+                                    <a href="<?php $bu ?><?php echo $key['target'] ?>" class="dropdown-item"><i class="<?php echo $key['icon'] ?>"></i> <?php echo $key['nama_menu']; ?></a>
                                 </li>
                                 <?php endforeach; ?>
                                 
