@@ -17,6 +17,8 @@ class Trans_history extends CI_Controller {
 
     public function index() {
         $id = $this->session->userdata('id');
+        $data['menu'] = '';
+        $data['smenu'] = '';
         $data['title'] = 'History';
         $data['content'] = 'user/trans_history/index';
         $data['id'] = $id;

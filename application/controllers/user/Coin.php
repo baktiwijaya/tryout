@@ -20,6 +20,8 @@ class Coin extends CI_Controller {
     }
 
     public function index() {
+        $data['menu'] = 'Beli';
+        $data['smenu'] = 'Coin';
         $data['title'] = 'Pembelian Coin';
         $data['content'] = 'user/coin/index';
         $this->load->view('user/template/main', $data);
@@ -67,31 +69,35 @@ class Coin extends CI_Controller {
         $upload1 = $_FILES['gambar']['name'];
         $nmfile1 = time()."_".$upload1;
         $config['upload_path']          = './uploads/bukti_pembayaran';
-        $config['allowed_types']        = 'gif|jpg|png';
-        $config['max_size']             = 1024 * 1;
+        $config['allowed_types']        = 'jpeg|jpg|png';
+        $config['max_size']             = 512 * 1;
         $config['file_name']            = $nmfile1;
 
         $this->load->library('upload', $config);
         $data1 = $this->upload->data();
-        $this->upload->do_upload('gambar');
 
-        $image = $data1['file_name'];
+        if($this->upload->do_upload('gambar')){
+            $image = $data1['file_name'];
 
-        $data = array(
-            'gambar' => $image,
-            'note' => $note,
-            'tanggal_upload' => date('Y-m-d H:i:s'),
-            'status' => 1
-        );
-        $update = $this->Crud_m->edit('transaksi_coin', $data, 'id_transaksi', $id);
-        if ($update) {
-            $message = array(TRUE, 'Proses Berhasil !', 'Proses pengubahan data berhasil !');
-        } else {
-            $message = array(FALSE, 'Proses Gagal !', 'Proses pengubahan data gagal !');
+            $data = array(
+                'gambar' => $image,
+                'note' => $note,
+                'tanggal_upload' => date('Y-m-d H:i:s'),
+                'status' => 1
+            );
+            $update = $this->Crud_m->edit('transaksi_coin', $data, 'id_transaksi', $id);
+            if ($update) {
+                $message = array(TRUE, 'Proses Berhasil !', 'Proses pengubahan data berhasil !');
+            } else {
+                $message = array(FALSE, 'Proses Gagal !', 'Proses pengubahan data gagal !');
+            }
+           
+        } else{
+             $error = $this->upload->display_errors();
+            $message = array(FALSE, 'Proses Gagal !', $error);
+            
         }
-        echo json_encode($message);
     }
-
     public function delete() {
         extract($_POST);
 

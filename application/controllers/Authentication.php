@@ -18,8 +18,17 @@ class Authentication extends CI_Controller {
 #-----------------------------------
 
     public function keluar() {
-        $this->session->sess_destroy();
-        redirect();
+        $id = $this->session->userdata('id');
+        $active = $this->Global_m->getvalue('is_login','user_info','id',$id);
+        $data['is_login'] = 0;
+        if($active == 1) {
+            $update = $this->Crud_m->edit('user_info',$data,'id',$id);
+            if($update) {
+                $this->session->sess_destroy();
+                redirect();
+            }
+        }
+        
     }
 
     public function login() {
@@ -76,24 +85,44 @@ class Authentication extends CI_Controller {
             // $this->session->set_userdata($sdata);
             redirect('Registration/index');
         } else {
+
+
             $data = $this->auth->user_login($data);
             if ($data) {
-                $session_data = array(
-                    'id' => $data['id'],
-                    'name' => $data['name'],
-                    'user_type' => $data['user_type'],
-                    'email' => $data['email'],
-                    'session_id' => session_id(),
-                    'logged_in' => TRUE,
-                );
-                $this->session->set_userdata($session_data);
-                if ($data['user_type'] != 3) {
-                    redirect("admin/dashboard");
-                } else if ($data['user_type'] == 3) {
-                    redirect("user/dashboard");
-                } else {
+
+                $active = $this->Global_m->getvalue('is_login','user_info','id',$data['id']);
+                if($active == 1) {
+                    $this->session->set_flashdata('exception', 'User sedang login di tempat lain !');
                     redirect('Registration/index');
+                } else {
+                    $session_data = array(
+                        'id' => $data['id'],
+                        'name' => $data['name'],
+                        'user_type' => $data['user_type'],
+                        'email' => $data['email'],
+                        'session_id' => session_id(),
+                        'logged_in' => TRUE,
+                    );
+
+                    $data2['is_login'] = 1;
+
+                    $update = $this->Crud_m->edit('user_info',$data2,'id',$data['id']);
+                    if($update) {
+                        $this->session->set_userdata($session_data);
+                        if ($data['user_type'] == 1) {
+                            redirect("admin/dashboard");
+                        } else if ($data['user_type'] == 4) {
+                            redirect("admin/penalaran");
+                        } else if ($data['user_type'] == 5) {
+                            redirect("admin/transaksicoin");
+                        } else if ($data['user_type'] == 3) {
+                            redirect("user/dashboard");
+                        } else {
+                            redirect('Registration/index');
+                        }
+                    }
                 }
+                
             } else {
                 // $sdata['exception'] = display('log_error_msg');
                 $this->session->set_flashdata('exception', 'Email atau Password Salah !');

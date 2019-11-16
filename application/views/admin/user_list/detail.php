@@ -14,27 +14,27 @@ $user_type = $this->session->userdata('user_type');
 
                 <div class="form-group">
                     <label class="col-form-label">Email</label>
-                    <input type="text" name="topic" class="form-control" value="<?php echo $detail->email ?>" disabled>
+                    <input type="text" name="email" class="form-control" value="<?php echo $detail->email ?>" disabled>
                 </div>
 
                 <div class="form-group">
                     <label class="col-form-label">No HP</label>
-                    <input type="number" name="topic" class="form-control" value="<?php echo $detail->no_hp ?>" disabled>
+                    <input type="number" name="no_hp" class="form-control" value="<?php echo $detail->no_hp ?>" disabled>
                 </div>
 
                 <div class="form-group">
                     <label class="col-form-label">Password</label>
-                    <input type="password" name="topic" class="form-control" value="<?php echo $detail->password ?>" disabled>
+                    <input type="password" name="password" class="form-control" value="<?php echo $detail->password ?>" disabled>
                 </div>
 
                 <div class="form-group">
                     <label class="col-form-label">Nama Lengkap</label>
-                    <input type="text" name="topic" class="form-control" value="<?php echo $detail->nama_lengkap ?>" disabled>
+                    <input type="text" name="nama_lengkap" class="form-control" value="<?php echo $detail->nama_lengkap ?>" disabled>
                 </div>
 
                 <div class="form-group">
                     <label class="col-form-label">Nama Panggilan</label>
-                    <input type="text" name="topic" class="form-control" value="<?php echo $detail->nama_panggilan ?>" disabled>
+                    <input type="text" name="nama_panggilan" class="form-control" value="<?php echo $detail->nama_panggilan ?>" disabled>
                 </div>
 
                 <div class="form-group">
@@ -52,32 +52,32 @@ $user_type = $this->session->userdata('user_type');
 
                 <div class="form-group">
                     <label class="col-form-label">Kampus Impian</label>
-                    <input type="text" name="topic" class="form-control" value="<?php echo $detail->kampus_impian ?>" disabled disabled>
+                    <input type="text" name="kampus_impian" class="form-control" value="<?php echo $detail->kampus_impian ?>" disabled disabled>
                 </div>
 
                 <div class="form-group">
                     <label class="col-form-label">Nomor ID</label>
-                    <input type="text" name="topic" class="form-control" value="<?php echo $detail->verification_id_no ?>" disabled>
+                    <input type="text" name="verification_id_no" class="form-control" value="<?php echo $detail->verification_id_no ?>" disabled>
                 </div>
 
                 <div class="form-group">
                     <label class="col-form-label">Tipe ID</label>
-                    <input type="text" name="topic" class="form-control" value="<?php echo $detail->verification_type ?>" disabled>
+                    <input type="text" name="verification_type" class="form-control" value="<?php echo $detail->verification_type ?>" disabled>
                 </div>
 
                  <div class="form-group">
                     <label class="col-form-label">Tempat Lahir</label>
-                    <input type="text" name="topic" class="form-control" value="<?php echo $detail->tempat_lahir ?>" disabled>
+                    <input type="text" name="tempat_lahir" class="form-control" value="<?php echo $detail->tempat_lahir ?>" disabled>
                 </div>
 
                 <div class="form-group">
                     <label class="col-form-label">Tanggal Lahir</label>
-                    <input type="text" name="topic" id="datepicker" class="form-control" value="<?php echo $detail->tanggal_lahir ?>" disabled>
+                    <input type="text" name="tanggal_lahir" id="datepicker" class="form-control" value="<?php echo $detail->tanggal_lahir ?>" disabled>
                 </div>
 
                 <div class="form-group">
                     <label class="col-form-label">Photo</label>
-                    <input type="file" name="topic" class="form-control" value="<?php echo $detail->photo ?>" disabled>
+                    <input type="file" name="photo" class="form-control" value="<?php echo $detail->photo ?>" disabled>
                 </div>
 
             </div>

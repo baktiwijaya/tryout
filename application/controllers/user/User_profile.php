@@ -19,6 +19,8 @@ class User_profile extends CI_Controller {
 
     public function index() {
         $id = $this->session->userdata('id');
+         $data['menu'] = '';
+        $data['smenu'] = '';
         $data['title'] = 'User Profile';
         $data['detail'] = $this->Crud_m->get_one('*', 'user_info','id',$id);
         $data['content'] = 'user/user_profile/index';
@@ -33,39 +35,45 @@ class User_profile extends CI_Controller {
         $nmfile1 = time()."_".$upload1;
         if($upload1 != '') {
             $config['upload_path']          = './uploads/foto_user';
-            $config['allowed_types']        = 'gif|jpg|png';
+            $config['allowed_types']        = 'jpeg|jpg|png';
             $config['max_size']             = 512 * 1;
             $config['file_name']            = $nmfile1;
 
             $this->load->library('upload', $config);
             $data1 = $this->upload->data();
-            $this->upload->do_upload('gambar');
+           
 
             $image = $data1['file_name'];
         } else {
             $image = '';
         }
-        $data['email']              = $email;
-        $data['no_hp']              = $no_hp;
-        $data['password']           = md5($password);
-        $data['nama_lengkap']       = $nama_lengkap;
-        $data['nama_panggilan']     = $nama_panggilan;
-        $data['jenis_kelamin']      = $jenis_kelamin;
-        $data['kampus_impian']      = $kampus_impian;
-        $data['verification_id_no'] = $verification_id_no;
-        $data['verification_type']  = $verification_type;
-        $data['tempat_lahir']       = $tempat_lahir;
-        $data['tanggal_lahir']      = $tanggal_lahir;
-        if($image != '') {
-            $data['photo']          = $image; 
-        }
+        if ( $this->upload->do_upload('gambar')) {
+            $data['email']              = $email;
+            $data['no_hp']              = $no_hp;
+            $data['password']           = md5($password);
+            $data['nama_lengkap']       = $nama_lengkap;
+            $data['nama_panggilan']     = $nama_panggilan;
+            $data['jenis_kelamin']      = $jenis_kelamin;
+            $data['kampus_impian']      = $kampus_impian;
+            $data['verification_id_no'] = $verification_id_no;
+            $data['verification_type']  = $verification_type;
+            $data['tempat_lahir']       = $tempat_lahir;
+            $data['tanggal_lahir']      = $tanggal_lahir;
+            if($image != '') {
+                $data['photo']          = $image; 
+            }
 
-        $update = $this->Crud_m->edit('user_info', $data,'id',$id);
-        if ($update) {
-            $message = array(TRUE, 'Proses Berhasil !', 'Proses penyimpanan data berhasil !');
+            $update = $this->Crud_m->edit('user_info', $data,'id',$id);
+            if ($update) {
+                $message = array(TRUE, 'Proses Berhasil !', 'Proses penyimpanan data berhasil !');
+            } else {
+                $message = array(FALSE, 'Proses Gagal !', 'Proses penyimpanan data gagal !');
+            }
         } else {
-            $message = array(FALSE, 'Proses Gagal !', 'Proses penyimpanan data gagal !');
+            $error = $this->upload->display_errors();
+            $message = array(FALSE, 'Proses Gagal !', $error);
         }
+        
 
         echo json_encode($message);
     }

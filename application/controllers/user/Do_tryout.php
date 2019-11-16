@@ -23,6 +23,8 @@ class Do_tryout extends CI_Controller {
     }
 
     public function index() {
+        $data['menu'] = 'Kerjakan Tryout';
+        $data['smenu'] = '';
         $data['title'] = 'Kerjakan Tryout';
         $data['content'] = $this->_module.'/index';
         $this->load->view('user/template/main', $data);

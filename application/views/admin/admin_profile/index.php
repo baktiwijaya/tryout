@@ -15,21 +15,6 @@ $user_type = $this->session->userdata('user_type');
         <div class="row">
             <!-- Kolom Pertama -->
             <div class="col-md-6">
-                <input type="hidden" name="id" value="<?php echo $detail->id ?>">
-                <div class="form-group">
-                    <label class="col-form-label">Email</label>
-                    <input type="text" name="email" class="form-control" value="<?php echo $detail->email ?>">
-                </div>
-
-                <div class="form-group">
-                    <label class="col-form-label">No HP</label>
-                    <input type="number" name="no_hp" class="form-control" value="<?php echo $detail->no_hp ?>">
-                </div>
-
-                <div class="form-group">
-                    <label class="col-form-label">Password</label>
-                    <input type="password" name="password" class="form-control" value="<?php echo $detail->password ?>">
-                </div>
 
                 <div class="form-group">
                     <label class="col-form-label">Nama Lengkap</label>
@@ -41,20 +26,11 @@ $user_type = $this->session->userdata('user_type');
                     <input type="text" name="nama_panggilan" class="form-control" value="<?php echo $detail->nama_panggilan ?>">
                 </div>
 
-                <div class="form-group">
-                    <label class="col-form-label">Jenis Kelamin</label>
-                    <select class="form-control" name="jenis_kelamin">
-                        <option value="">-- Pilih Jenis Kelamin --</option>
-                        <?php if($detail->jenis_kelamin == 1) { ?>
-                            <option value="1" selected>Pria</option>
-                            <option value="2">Wanita</option>
-                        <?php } else { ?>
-                            <option value="1">Pria</option>
-                            <option value="2" selected>Wanita</option>
-                        <?php } ?>
-                       
-                    </select>
+                 <div class="form-group">
+                    <label class="col-form-label">Password</label>
+                    <input type="password" name="password" class="form-control" value="<?php echo $detail->password ?>">
                 </div>
+
 
             </div>
 
@@ -64,35 +40,19 @@ $user_type = $this->session->userdata('user_type');
 
 
                 <div class="form-group">
-                    <label class="col-form-label">Kampus Impian</label>
-                    <input type="text" name="kampus_impian" class="form-control" value="<?php echo $detail->kampus_impian ?>">
-                </div>
-
-                <div class="form-group">
-                    <label class="col-form-label">Nomor ID</label>
-                    <input type="text" name="verification_id_no" class="form-control" value="<?php echo $detail->verification_id_no ?>">
-                </div>
-
-                <div class="form-group">
-                    <label class="col-form-label">Tipe ID</label>
-                    <input type="text" name="verification_type" class="form-control" value="<?php echo $detail->verification_type ?>">
-                </div>
-
-                 <div class="form-group">
-                    <label class="col-form-label">Tempat Lahir</label>
-                    <input type="text" name="tempat_lahir" class="form-control" value="<?php echo $detail->tempat_lahir ?>">
-                </div>
-
-                <div class="form-group">
-                    <label class="col-form-label">Tanggal Lahir</label>
-                    <input type="text" name="tanggal_lahir" class="form-control" value="<?php echo $detail->tanggal_lahir ?>">
-                </div>
-
-                <div class="form-group">
                     <label class="col-form-label">Photo</label>
                     <input type="file" name="gambar" class="form-control" value="<?php echo $detail->photo ?>">
                 </div>
 
+                <div class="form-group">
+                    <label class="col-form-label">No HP</label>
+                    <input type="number" name="no_hp" class="form-control" value="<?php echo $detail->no_hp ?>">
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-form-label">Email</label>
+                    <input type="text" name="email" class="form-control" value="<?php echo $detail->email ?>">
+                </div>
             </div>
         </div>
         

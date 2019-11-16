@@ -108,7 +108,6 @@
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="<?php echo base_url()?>admin/admin_profile" class="dropdown-item"><i class="icon-user-plus"></i> Profil Saya</a>
                         <div class="dropdown-divider"></div>
-                        <a href="<?= base_url() ?>pengaturan" class="dropdown-item"><i class="icon-cog5"></i> Pengaturan</a>
                         <a href="<?= base_url() ?>authentication/keluar" class="dropdown-item"><i class="icon-switch2"></i> Keluar</a>
                     </div>
                 </li>

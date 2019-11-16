@@ -18,6 +18,8 @@ class Dashboard extends CI_Controller {
 
     public function index() {
         $id_user = $this->session->userdata('id');
+        $data['menu'] = 'Dashboard';
+        $data['smenu'] = '';
         $data['title'] = 'Dashboard';
         $data['tryout'] = $this->Crud_m->all_data('library_tryout','*','id_user='.$id_user);
         $data['content'] = 'user/dashboard/index';

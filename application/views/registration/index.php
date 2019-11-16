@@ -114,7 +114,7 @@
                     </div>
                     <div class="navbar-collapse collapse" id="navbar-footer">
                         <span class="navbar-text" style="width: 100%;text-align: center;">
-                            <a href="<?= base_url() ?>">Tryout Shocca</a> &copy; <?= date('Y') ?> &mdash; Hak cipta dilindungi oleh undang-undang. :: <i>Halaman dimuat {elapsed_time} detik!</i></a>
+                            <a href="<?= base_url() ?>">Alumni Osis Indonesia</a> &copy; <?= date('Y') ?> &mdash; Hak cipta dilindungi oleh undang-undang. :: <i>Halaman dimuat {elapsed_time} detik!</i></a>
                         </span>
                     </div>
                 </div>

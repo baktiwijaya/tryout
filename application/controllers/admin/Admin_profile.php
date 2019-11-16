@@ -52,14 +52,8 @@ class Admin_profile extends CI_Controller {
         $data['password']           = md5($password);
         $data['nama_lengkap']       = $nama_lengkap;
         $data['nama_panggilan']     = $nama_panggilan;
-        $data['jenis_kelamin']      = $jenis_kelamin;
-        $data['kampus_impian']      = $kampus_impian;
-        $data['verification_id_no'] = $verification_id_no;
-        $data['verification_type']  = $verification_type;
-        $data['tempat_lahir']       = $tempat_lahir;
-        $data['tanggal_lahir']      = $tanggal_lahir;
         if($image != '') {
-            $data['photo']          = $image; 
+            $data['photo']          = $image;
         }
 
         $update = $this->Crud_m->edit('user_info', $data,'id',$id);
