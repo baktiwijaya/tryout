@@ -21,12 +21,12 @@ echo form_open_multipart('admin/tryout/save', $form_attribute);
 
         <div class="form-group">
             <label>Harga Koin</label>
-            <input type="number" name="harga_koin" class="form-control">
+            <input type="number" name="harga_koin" class="form-control" min="0">
         </div>
 
         <div class="form-group">
             <label>Harga Poin</label>
-            <input type="number" name="harga_poin" class="form-control">
+            <input type="number" name="harga_poin" class="form-control" min="0">
         </div>
 
         <div class="form-group">

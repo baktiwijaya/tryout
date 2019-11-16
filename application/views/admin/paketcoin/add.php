@@ -13,12 +13,12 @@ echo form_open_multipart('admin/paketcoin/save', $form_attribute);
 
         <div class="form-group">
             <label>Jumlah Koin</label>
-            <input type="number" name="jumlah_koin" class="form-control">
+            <input type="number" name="jumlah_koin" id="jumlah_koin" class="form-control" min="0">
         </div>
 
         <div class="form-group">
             <label>Harga Koin</label>
-            <input type="number" name="harga_koin" class="form-control">
+            <input type="number" name="harga_koin" id="harga_koin" class="form-control" min="0">
 
         </div>
     </div>
@@ -33,6 +33,11 @@ echo form_open_multipart('admin/paketcoin/save', $form_attribute);
 <script type="text/javascript">
 
     $('.select2').select2();
+
+    $('#harga_koin').change(function(){
+        var myvar = $(this).val();
+        myvar.replace(/\+|\-/ig, '');
+    })
 
     $('#start_date').on('click', function (e) {
         $('#start_date').AnyTime_noPicker().AnyTime_picker().focus();

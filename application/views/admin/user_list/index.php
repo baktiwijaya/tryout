@@ -4,7 +4,7 @@ $user_type = $this->session->userdata('user_type');
 ?>
 <div class="card">
     <div class="card-header header-elements-inline">
-        <h6 class="card-title"><?= $title ?></h6>
+        <h6 class="card-title">List User</h6>
         <div class="header-elements">
             <div class="list-icons">
                 <a href="<?php echo base_url()?>admin/user_list/export_excel" target="_blank" class="btn btn-success btn-sm" title="Download">Export Excel</a>

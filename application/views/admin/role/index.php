@@ -7,7 +7,6 @@ $user_type = $this->session->userdata('user_type');
         <h6 class="card-title"><?= $title ?></h6>
         <div class="header-elements">
             <div class="list-icons">
-                <a href="#" class="btn btn-success btn-sm" onclick="add()" title="Tambah">Tambah</a>
                 <a href="#" class="btn btn-primary btn-sm" onclick="load()" title="Reload">Reload</a>
             </div>
         </div>

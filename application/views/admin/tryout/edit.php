@@ -13,12 +13,12 @@ echo form_open_multipart('admin/tryout/update', $form_attribute, $hidden_form);
 
         <div class="form-group">
             <label>Harga Koin</label>
-            <input type="number" name="harga_koin" class="form-control"value="<?php echo $detail->harga_koin ?>">
+            <input type="number" name="harga_koin" class="form-control"value="<?php echo $detail->harga_koin ?>" min="0">
         </div>
 
         <div class="form-group">
             <label>Harga Poin</label>
-            <input type="number" name="harga_poin" class="form-control"value="<?php echo $detail->harga_poin ?>">
+            <input type="number" name="harga_poin" class="form-control"value="<?php echo $detail->harga_poin ?>" min="0">
         </div>
 
         <div class="form-group">

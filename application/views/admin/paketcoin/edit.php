@@ -13,12 +13,12 @@ echo form_open_multipart('admin/paketcoin/update', $form_attribute, $hidden_form
 
         <div class="form-group">
             <label>Jumlah Koin</label>
-            <input type="number" name="jumlah_koin" class="form-control"value="<?php echo $detail->jumlah_paketcoin ?>">
+            <input type="number" name="jumlah_koin" class="form-control"value="<?php echo $detail->jumlah_paketcoin ?>" min="0">
         </div>
 
         <div class="form-group">
             <label>Harga Koin</label>
-            <input type="number" name="harga_koin" class="form-control"value="<?php echo $detail->harga_paketcoin ?>">
+            <input type="number" name="harga_koin" class="form-control"value="<?php echo $detail->harga_paketcoin ?>" min="0">
         </div>
     </div>
 </div>

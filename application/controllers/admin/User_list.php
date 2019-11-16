@@ -20,7 +20,7 @@ class User_list extends CI_Controller {
     public function index() {
         $data['menu'] = 'Manage User';
         $data['smenu'] = 'List User';
-        $data['title'] = 'Master Soal'." ".$this->_kategori_soal;
+        $data['title'] = 'List User';
         $data['content'] = 'admin/user_list/index';
         $this->load->view('admin/template/main', $data);
     }

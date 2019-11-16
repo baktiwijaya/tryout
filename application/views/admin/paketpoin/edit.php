@@ -13,7 +13,7 @@ echo form_open_multipart('admin/paketpoin/update', $form_attribute, $hidden_form
 
         <div class="form-group">
             <label>Jumlah Poin</label>
-            <input type="number" name="jumlah_paketpoin" class="form-control" value="<?php echo $detail->jumlah_paketpoin ?>">
+            <input type="number" name="jumlah_paketpoin" class="form-control" value="<?php echo $detail->jumlah_paketpoin ?>" min="0">
         </div>
 
         <div class="form-group">
