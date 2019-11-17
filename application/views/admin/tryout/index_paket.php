@@ -7,9 +7,10 @@ $user_type = $this->session->userdata('user_type');
         <h6 class="card-title"><?= $title ?></h6>
         <div class="header-elements">
             <div class="list-icons">
-                <a href="#" class="btn btn-success btn-sm" onclick="add_paket()" title="Tambah">Tambah</a>
-                <a href="#" class="btn btn-primary btn-sm" onclick="load_paket()" title="Reload">Reload</a></a>
+                <button type="button" class="btn btn-outline-primary mr-2" onclick="add_paket()"><b><i class="icon-plus-circle2"></i></b> Tambah</button>
+                <button type="button" class="btn btn-outline-primary mr-2" onclick="load_paket()"><a><i class="icon-rotate-cw2"></i></a> Reload </button>
             </div>
+
         </div>
     </div>
     <div class="card-body">

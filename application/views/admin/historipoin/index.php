@@ -5,10 +5,8 @@ $user_type = $this->session->userdata('user_type');
 <div class="card">
     <div class="card-header header-elements-inline">
         <h6 class="card-title"><?= $title ?></h6>
-        <div class="header-elements">
-            <div class="list-icons">
-                <a href="#" class="btn btn-primary btn-sm" onclick="load()" title="Reload">Reload</a></a>
-            </div>
+         <div class="list-icons">
+            <button type="button" class="btn btn-outline-primary mr-2" onclick="load()"><a><i class="icon-rotate-cw2"></i></a> Reload </button>
         </div>
     </div>
     <div class="card-body">

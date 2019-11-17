@@ -7,8 +7,8 @@ $user_type = $this->session->userdata('user_type');
         <h6 class="card-title">List User</h6>
         <div class="header-elements">
             <div class="list-icons">
-                <a href="<?php echo base_url()?>admin/user_list/export_excel" target="_blank" class="btn btn-success btn-sm" title="Download">Export Excel</a>
-                <a href="#" class="btn btn-primary btn-sm" onclick="load()" title="Reload">Reload</a>
+                <a class="btn btn-outline-primary mr-2" href="<?php echo base_url()?>admin/user_list/export_excel"><b><i class="icon-download"></i></b> Export Excel</a>
+                <button type="button" class="btn btn-outline-primary mr-2" onclick="load()"><a><i class="icon-rotate-cw2"></i></a> Reload </button>
             </div>
         </div>
     </div>

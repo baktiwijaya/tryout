@@ -6,10 +6,11 @@ $user_type = $this->session->userdata('user_type');
     <div class="card-header header-elements-inline">
         <h6 class="card-title"><?= $title ?></h6>
         <div class="header-elements">
-            <div class="list-icons">
-                <a href="#" class="btn btn-success btn-sm" onclick="add_soal()" title="Tambah">Tambah</a>
-                <a href="#" class="btn btn-primary btn-sm" onclick="load_soal()" title="Reload">Reload</a></a>
+             <div class="list-icons">
+                <button type="button" class="btn btn-outline-primary mr-2" onclick="add_soal()"><b><i class="icon-plus-circle2"></i></b> Tambah</button>
+                <button type="button" class="btn btn-outline-primary mr-2" onclick="load_soal()"><a><i class="icon-rotate-cw2"></i></a> Reload </button>
             </div>
+
         </div>
     </div>
     <div class="card-body">

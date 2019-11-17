@@ -3,7 +3,7 @@
         $("[rel=tooltip]").tooltip({placement: 'right'});
     });
 </script>
-<table class="table table-bordered" id="datatable">
+<table class="table" id="datatable">
     <thead>
         <tr>
             <th style="text-align: center;width: 5%;">#</th>
