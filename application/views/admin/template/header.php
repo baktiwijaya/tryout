@@ -5,15 +5,7 @@
         <!-- Header with logos -->
         <div class="navbar-header navbar-dark d-none d-md-flex align-items-md-center">
             <div class="navbar-brand navbar-brand-md">
-                <a href="<?= base_url() . 'admin/Dashboard' ?>" class="d-inline-block">
-                    <img class="td-retina-data img-responsive" src="<?= base_url() ?>assets/image/logo/aoishocca.png" alt="" style="margin-left: 20px; width: 40px; height: 30px;">
-                </a>
-                AOI DASHBOARD
-            </div>
-            <div class="navbar-brand navbar-brand-xs">
-                <a href="<?= base_url() . 'admin/Dashboard' ?>" class="d-inline-block">
-                    <img src="<?= base_url() ?>assets/image/logo/aoishocca.png" alt="" style="width: 49px;">
-                </a>
+                
                 AOI DASHBOARD
             </div>
         </div>
@@ -26,23 +18,14 @@
                     <!-- <img src="<?= base_url() ?>/uploads/images/viraloe-logo1.png" alt=""> -->
                 </a>
             </div>  
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-mobile">
-                <i class="icon-tree5"></i>
-            </button>
-            <button class="navbar-toggler sidebar-mobile-main-toggle" type="button">
-                <i class="icon-paragraph-justify3"></i>
-            </button>
+        
         </div>
         <!-- /mobile controls -->
 
         <!-- Navbar content -->
         <div class="collapse navbar-collapse" id="navbar-mobile">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a href="#" class="navbar-nav-link sidebar-control sidebar-main-toggle d-none d-md-block">
-                        <i class="icon-paragraph-justify3"></i>
-                    </a>
-                </li>
+               
                 <li class="nav-item dropdown">
                         <?php 
                             $query = $this->db->query('SELECT COUNT(*) AS TOTAL FROM transaksi_coin WHERE status = 1')->row();

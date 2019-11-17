@@ -30,7 +30,7 @@ $user_type = $this->session->userdata('user_type');
 			<div class="col-md-3">
 				<div class="card bg-dark">
 					<div class="card-body">
-						<h3>User Punya Koin</h3><br>
+						<h3>User Punya Poin</h3><br>
 						<h1><b><?php echo $poin; ?></b></h1>
 					</div>
 				</div>
