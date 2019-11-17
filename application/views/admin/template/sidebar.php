@@ -1,7 +1,7 @@
 <div class="sidebar sidebar-light sidebar-main sidebar-expand-md">
      <?php
-        $bu = base_url(); 
-        $bu_img = base_url(); 
+        $bu = base_url();
+        $bu_img = base_url();
     ?>
             <!-- Sidebar mobile toggler -->
             <div class="sidebar-mobile-toggler text-center">
@@ -77,23 +77,23 @@
                                                     </a>
                                                 </li>
                                             <?php endforeach; ?>
-                                        </ul>    
+                                        </ul>
                                     </li>
-                                <?php } else { ?>  
+                                <?php } else { ?>
                                     <li class="nav-item">
                                         <a href="<?php echo $bu; ?><?php echo $value['target'] ?>" class="nav-link <?php if($menu == $value['nama_menu']){echo 'active';}?>">
                                             <i class="<?php echo $value['icon'] ?>"></i>
                                             <span><?php echo $value['nama_menu'] ?></span>
                                         </a>
                                     </li>
-                                <?php } ?>  
+                                <?php } ?>
                             <?php endforeach; ?>
-                    
+
                     </ul>
                 </div>
                 <!-- /main navigation -->
 
             </div>
             <!-- /sidebar content -->
-            
+
         </div>

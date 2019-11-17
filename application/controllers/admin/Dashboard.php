@@ -6,9 +6,7 @@ class Dashboard extends CI_Controller {
 
     protected $user_type;
 
-#------------------------------------    
-# constructor function
-#------------------------------------    
+
 
     public function __construct() {
         parent::__construct();
@@ -35,9 +33,14 @@ class Dashboard extends CI_Controller {
         $data['twitter']   = $this->dashboard_model->get_totalpoin(4);
         $data['whatsapp']  = $this->dashboard_model->get_totalpoin(5);
         $data['other']     = $this->dashboard_model->get_totalpoin(6);
-        $data['revenue']   = $this->dashboard_model->get_revenue();
-        $data['coin']      = $this->dashboard_model->get_totalcoin();
         $data['koinpoin']  = $this->dashboard_model->get_userkoinpoin();
+
+        $user = $this->session->userdata('user_type');
+        if ($user == 1) {
+            $data['revenue']   = $this->dashboard_model->get_revenue();
+            $data['coin']      = $this->dashboard_model->get_totalcoin();
+        }
+
         $this->load->view('admin/template/main', $data);
     }
 }
