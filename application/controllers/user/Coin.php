@@ -93,10 +93,11 @@ class Coin extends CI_Controller {
             }
            
         } else{
-             $error = $this->upload->display_errors();
+            $error = $this->upload->display_errors();
             $message = array(FALSE, 'Proses Gagal !', $error);
             
         }
+        echo json_encode($message);
     }
     public function delete() {
         extract($_POST);
