@@ -31,6 +31,7 @@ class Admin_profile extends CI_Controller {
     public function save() {
 
         extract($_POST);
+        $id = $this->session->userdata('id');
         $upload1 = $_FILES['gambar']['name'];
         $nmfile1 = time()."_".$upload1;
         if($upload1 != '') {
