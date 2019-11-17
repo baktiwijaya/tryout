@@ -27,7 +27,7 @@
                     <?php if($exist2 == $exist) { ?>
                         <button type="button" class="btn btn-warning" onclick="rapot('<?php echo $key['id_library'] ?>')">Lihat Rapot</button>
                     <?php } else{ ?>
-                        <button type="button" class="btn btn-success" onclick="edit('<?php echo $key['id_library'] ?>')">Kerjakan Tryout</button>
+                        <a href="" class="btn btn-success" onclick="edit('<?php echo $key['id_library'] ?>')">Kerjakan Tryout</a>
                     <?php } ?>
                     
                     
@@ -43,9 +43,7 @@
         $('#datatable').DataTable({
             bSort: false,
             bLengthChange: false,
-            "oLanguage": {
-                "sSearch": ""
-            }
+            searching: false
         })
     })
     function edit(id) {
