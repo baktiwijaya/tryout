@@ -28,7 +28,7 @@ $user_type = $this->session->userdata('user_type');
 
                  <div class="form-group">
                     <label class="col-form-label">Password</label>
-                    <input type="password" name="password" class="form-control" value="<?php echo $detail->password ?>">
+                    <input type="password" name="password" class="form-control" value="<?php echo $detail->password ?>"readonly>
                 </div>
 
 
@@ -51,7 +51,7 @@ $user_type = $this->session->userdata('user_type');
                 
                 <div class="form-group">
                     <label class="col-form-label">Email</label>
-                    <input type="text" name="email" class="form-control" value="<?php echo $detail->email ?>">
+                    <input type="text" name="email" class="form-control" value="<?php echo $detail->email ?>"readonly>
                 </div>
             </div>
         </div>
