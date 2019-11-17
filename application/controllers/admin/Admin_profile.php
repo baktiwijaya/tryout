@@ -48,9 +48,7 @@ class Admin_profile extends CI_Controller {
         } else {
             $image = '';
         }
-        $data['email']              = $email;
         $data['no_hp']              = $no_hp;
-        $data['password']           = md5($password);
         $data['nama_lengkap']       = $nama_lengkap;
         $data['nama_panggilan']     = $nama_panggilan;
         if($image != '') {

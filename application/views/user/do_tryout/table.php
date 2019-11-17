@@ -3,40 +3,40 @@
         $("[rel=tooltip]").tooltip({placement: 'right'});
     });
 </script>
-
-<table class="table" id="datatable">
-    <thead>
-        <tr>
-            <th style="text-align: center;width: 5%;">#</th>
-            <th style="width: 20%;text-align: center;">Tryout</th>
-            <th style="width: 20%;text-align: center;">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        $id_user = $this->session->userdata('id');
-        $no = 1; foreach ($list as $key) : ?>
+<div class="table-responsive">
+    <table class="table" id="datatable">
+        <thead>
             <tr>
-                <td><?= $no ?></td>
-                <td><?= $this->Global_m->getvalue('nama_tryout','master_tryout','id_tryout',$key['id_tryout']); ?></td>
-                <td style="text-align: center;">
-                    
-                    <?php $exist = $this->Crud_m->countWhereValue('library_pakettryout','id_tryout='.$key['id_tryout'],'test_status = 1'); ?>
-                    <?php $exist2 = $this->Crud_m->countWhere('library_pakettryout','id_tryout='.$key['id_tryout']); ?>
-
-                    <?php if($exist2 == $exist) { ?>
-                        <button type="button" class="btn btn-warning" onclick="rapot('<?php echo $key['id_library'] ?>')">Lihat Rapot</button>
-                    <?php } else{ ?>
-                        <a href="" class="btn btn-success" onclick="edit('<?php echo $key['id_library'] ?>')">Kerjakan Tryout</a>
-                    <?php } ?>
-                    
-                    
-                </td>
+                <th style="text-align: center;width: 5%;">#</th>
+                <th style="width: 20%;text-align: center;">Tryout</th>
+                <th style="width: 20%;text-align: center;">Action</th>
             </tr>
-            <?php $no++; endforeach; ?>
-    </tbody>
-</table> 
+        </thead>
+        <tbody>
+            <?php
+            $id_user = $this->session->userdata('id');
+            $no = 1; foreach ($list as $key) : ?>
+                <tr>
+                    <td><?= $no ?></td>
+                    <td><?= $this->Global_m->getvalue('nama_tryout','master_tryout','id_tryout',$key['id_tryout']); ?></td>
+                    <td style="text-align: center;">
+                        
+                        <?php $exist = $this->Crud_m->countWhereValue('library_pakettryout','id_tryout='.$key['id_tryout'],'test_status = 1'); ?>
+                        <?php $exist2 = $this->Crud_m->countWhere('library_pakettryout','id_tryout='.$key['id_tryout']); ?>
 
+                        <?php if($exist2 == $exist) { ?>
+                            <button type="button" class="btn btn-warning" onclick="rapot('<?php echo $key['id_library'] ?>')">Lihat Rapot</button>
+                        <?php } else{ ?>
+                            <button type="button" class="btn btn-success" onclick="tryout('<?php echo $key['id_library'] ?>')">Kerjakan Tryout</button>
+                        <?php } ?>
+                        
+                        
+                    </td>
+                </tr>
+                <?php $no++; endforeach; ?>
+        </tbody>
+    </table> 
+</div>
 <?= form_close(); ?>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -46,7 +46,7 @@
             searching: false
         })
     })
-    function edit(id) {
+    function tryout(id) {
         $.ajax({
             url: "<?= base_url() ?>user/do_tryout/take_test",
             type: "POST",
