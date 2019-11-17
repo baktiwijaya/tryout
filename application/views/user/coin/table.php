@@ -10,8 +10,8 @@
                 <th style="text-align: center;">#</th>
                 <th style="text-align: center;">Nama Paket Coin</th>
                 <th style="text-align: center;">Jumlah Bayar</th>
-                <th style="text-align: center;">Diverifikasi oleh</th>
                 <th style="text-align: center;">Tanggal Verifikasi</th>
+                <th style="text-align: center;">Diverifikasi oleh</th>
                 <th style="text-align: center;">Status</th>
                 <th style="text-align: center;">Action</th>
             </tr>
