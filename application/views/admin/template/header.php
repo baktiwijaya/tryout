@@ -40,7 +40,10 @@
                     <a href="#" class="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown" aria-expanded="false">
                         <i class="<?php echo $icon ?>"></i>
                         <span class="d-md-none ml-2">Notifikasi</span>
-                        <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0"><?php echo $total?></span>
+                        <?php if($total != 0) { ?>
+                            <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0"><?php echo $total?></span>
+                        <?php } ?>
+
                     </a>
                     
                     <div class="dropdown-menu dropdown-menu-right dropdown-content wmin-md-350">
