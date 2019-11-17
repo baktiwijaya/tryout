@@ -63,7 +63,7 @@ $user_type = $this->session->userdata('user_type');
 				<div class="card bg-dark">
 					<div class="card-body">
 						<h3>Poin dari IG</h3><br>
-						<h1><b><?php echo $instagram; ?></b></h1>
+						<h1><b><?php echo number_format($instagram,2,',','.'); ?></b></h1>
 					</div>
 				</div>
 			</div>
@@ -71,7 +71,7 @@ $user_type = $this->session->userdata('user_type');
 				<div class="card bg-dark">
 					<div class="card-body">
 						<h3>Poin dari FB</h3><br>
-						<h1><b><?php echo $facebook; ?></b></h1>
+						<h1><b><?php echo number_format($facebook,2,',','.'); ?></b></h1>
 					</div>
 				</div>
 			</div>
@@ -79,7 +79,7 @@ $user_type = $this->session->userdata('user_type');
 				<div class="card bg-dark">
 					<div class="card-body">
 						<h3>Poin dari Line</h3><br>
-						<h1><b><?php echo $line; ?></b></h1>
+						<h1><b><?php echo number_format($line,2,',','.'); ?></b></h1>
 					</div>
 				</div>
 			</div>
@@ -87,7 +87,7 @@ $user_type = $this->session->userdata('user_type');
 				<div class="card bg-dark">
 					<div class="card-body">
 						<h3>Poin dari Twitter</h3><br>
-						<h1><b><?php echo $twitter; ?></b></h1>
+						<h1><b><?php echo number_format($twitter,2,',','.'); ?></b></h1>
 					</div>
 				</div>
 			</div>
@@ -95,7 +95,7 @@ $user_type = $this->session->userdata('user_type');
 				<div class="card bg-dark">
 					<div class="card-body">
 						<h3>Poin dari WA</h3><br>
-						<h1><b><?php echo $whatsapp; ?></b></h1>
+						<h1><b><?php echo number_format($whatsapp,2,',','.'); ?></b></h1>
 					</div>
 				</div>
 			</div>
@@ -103,7 +103,7 @@ $user_type = $this->session->userdata('user_type');
 				<div class="card bg-dark">
 					<div class="card-body">
 						<h3>Poin dari Lainnya</h3><br>
-						<h1><b><?php echo $other; ?></b></h1>
+						<h1><b><?php echo number_format($other,2,',','.'); ?></b></h1>
 					</div>
 				</div>
 			</div>
@@ -111,6 +111,7 @@ $user_type = $this->session->userdata('user_type');
 	</div>
 </div>
 
+<?php if ($user_type == 1){ ?>
 <div class="card">
 	<div class="card-body">
 		<h4>PER-UANG-AN</h4>
@@ -150,6 +151,7 @@ $user_type = $this->session->userdata('user_type');
 		</div>
 	</div>
 </div>
+<?php } ?>
 
 <!-- <div class="card">
 	<div class="card-body">
