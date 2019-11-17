@@ -61,14 +61,14 @@ echo form_open_multipart('admin/paketpoin/update', $form_attribute, $hidden_form
 
     $('.select2').select2();
 
-    $('#start_date').on('click', function (e) {
-        $('#start_date').AnyTime_noPicker().AnyTime_picker().focus();
-        e.preventDefault();
-    });
-
-    $('#end_date').on('click', function (e) {
-        $('#end_date').AnyTime_noPicker().AnyTime_picker().focus();
-        e.preventDefault();
+    var today = $('#end_date').val();
+    $('input[name="end_date"]').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        minDate: today,
+        locale: {
+            format: 'YYYY-MM-DD'
+        }
     });
 
     var validator = $('.myform').validate({

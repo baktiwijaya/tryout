@@ -51,11 +51,28 @@ echo form_open_multipart('admin/paketpoin/save', $form_attribute);
 <script type="text/javascript">
 
     $('.select2').select2();
+    var today = new Date(); 
+    var dd = today.getDate(); 
+    var mm = today.getMonth()+1;
+    var yyyy = today.getFullYear(); 
+    if(dd < 10){ dd = '0'+ dd } 
+    if(mm < 10){ mm = '0'+ mm } 
+    var today = yyyy+'-'+mm+'/'+dd; 
 
-
-    $('#end_date').on('click', function (e) {
-        $('#end_date').AnyTime_noPicker().AnyTime_picker().focus();
-        e.preventDefault();
+    $('input[name="end_date"]').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        minDate: today,
+        locale: {
+            format: 'YYYY-MM-DD'
+        },
+        onSelect: function(selectedDate) {
+            console.log(selectedDate);
+            var option = this.id == "from" ? "minDate" : "maxDate",
+                instance = $(this).data("datepicker"),
+                date = $.datepicker.parseDate(instance.settings.dateFormat || $.datepicker._defaults.dateFormat, selectedDate, instance.settings);
+            dates.not(this).datepicker("option", option, date);
+        }
     });
 
     $('.form-input-styled').uniform({
