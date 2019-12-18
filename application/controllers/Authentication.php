@@ -104,7 +104,7 @@ class Authentication extends CI_Controller {
                         'logged_in' => TRUE,
                     );
 
-                    $data2['is_login'] = 1;
+                    $data2['is_login'] = 0;
 
                     $update = $this->Crud_m->edit('user_info',$data2,'id',$data['id']);
                     if($update) {

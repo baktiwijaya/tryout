@@ -3,65 +3,62 @@
         $("[rel=tooltip]").tooltip({placement: 'right'});
     });
 </script>
-<div class="table-responsive">
-    <table class="table" id="datatable">
-        <thead>
-            <tr>
-                <th style="text-align: center;width: 5%;">#</th>
-                <th style="width: 15%;text-align: center;">Nama Paket Poin</th>
-                <th style="width: 10%;text-align: center;">Jumlah Poin</th>
-                <th style="width: 10%;text-align: center;">User Pembeli</th>
-                <th style="width: 20%;text-align: center;">Tanggal Pembelian</th>
-                <th style="width: 10%;text-align: center;">Gambar<br>Event</th>
-                <th style="width: 20%;text-align: center;">Status</th>
-                <th style="width: 20%;text-align: center;">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $no = 1;
-            foreach ($list as $key) {
-                ?>
-                <tr>
-                    <td style="text-align: center"><?= $no ?></td>
-                    <td style="text-align: center"><?= $this->Global_m->getvalue('nama_paketpoin','master_paketpoin','id_paketpoin',$key['id_paketpoin']); ?></td>
-                    <td style="text-align: center"><?= number_format($this->Global_m->getvalue('jumlah_paketpoin','master_paketpoin','id_paketpoin',$key['id_paketpoin']),'2',',','.'); ?></td>
-                    <td style="text-align: center"><?php echo $this->Global_m->getvalue('nama_lengkap','user_info','id',$key['id_user']) ?></td>
-                    <td style="text-align: center;"><?php echo ($key['tanggal_pembelian'] != '') ? $key['tanggal_pembelian'] : '-' ?></td>
-                    <td style="text-align: center;">
-                        <?php $gambar = $this->Global_m->getvalue('gambar','master_paketpoin','id_paketpoin',$key['id_paketpoin']); ?>
-                        <button type="button" class="btn btn-default" onclick="instruksi('<?= $this->Global_m->getvalue('instruksi_paketpoin','master_paketpoin','id_paketpoin',$key['id_paketpoin']); ?>','<?php echo base_url() ?>uploads/sosmed/<?php echo $gambar ?>')"><i class="icon-list"></i></button>
-                    </td>
-                    <td style="text-align: center;">
-                        <?php 
-                            if($key['status'] == 0) {
-                                echo "Belum diproses";
-                            } else if($key['status'] == 1) {
-                                echo "Sedang Review";
-                            } else if($key['status'] == 3){
-                                echo "Sudah diverifikasi";
-                            } else {
-                                echo "Transaksi Dibatalkan";
-                            }
-                        ?>    
-                    </td>
-                    <td style="text-align: center;">
-                        <?php if($key['status'] == 0) { ?>
-                            <a href="#" class="btn btn-default" onclick="edit('<?= $key['id_transaksi'] ?>')"><i class="icon-upload"></i></a>
-                        <?php } else if($key['status'] == 1) { ?>
-                            <a href="#" class="btn btn-default" onclick="hapus('<?= $key['id_transaksi'] ?>','<?php echo base_url() ?>uploads/bukti_pembayaran/<?php echo $key['gambar'] ?>','<?php echo $key['note'] ?>')"><i class="icon-check"></i></a>
-                        <?php } ?>
-                        
-                    </td> 
-                </tr>
-                <?php
-                $no++;
-            }
+<table class="table" id="datatable">
+    <thead>
+        <tr>
+            <th style="text-align: center;width: 5%;">#</th>
+            <th style="width: 15%;text-align: center;">Nama Paket Poin</th>
+            <th style="width: 10%;text-align: center;">Jumlah Poin</th>
+            <th style="width: 10%;text-align: center;">User Pembeli</th>
+            <th style="width: 20%;text-align: center;">Tanggal Pembelian</th>
+            <th style="width: 10%;text-align: center;">Gambar<br>Event</th>
+            <th style="width: 20%;text-align: center;">Status</th>
+            <th style="width: 20%;text-align: center;">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        $no = 1;
+        foreach ($list as $key) {
             ?>
-        </tbody>
-    </table> 
-</div>
-
+            <tr>
+                <td style="text-align: center"><?= $no ?></td>
+                <td style="text-align: center"><?= $this->Global_m->getvalue('nama_paketpoin','master_paketpoin','id_paketpoin',$key['id_paketpoin']); ?></td>
+                <td style="text-align: center"><?= number_format($this->Global_m->getvalue('jumlah_paketpoin','master_paketpoin','id_paketpoin',$key['id_paketpoin']),'2',',','.'); ?></td>
+                <td style="text-align: center"><?php echo $this->Global_m->getvalue('nama_lengkap','user_info','id',$key['id_user']) ?></td>
+                <td style="text-align: center;"><?php echo ($key['tanggal_pembelian'] != '') ? $key['tanggal_pembelian'] : '-' ?></td>
+                <td style="text-align: center;">
+                    <?php $gambar = $this->Global_m->getvalue('gambar','master_paketpoin','id_paketpoin',$key['id_paketpoin']); ?>
+                    <button type="button" class="btn btn-default" onclick="instruksi('<?= $this->Global_m->getvalue('instruksi_paketpoin','master_paketpoin','id_paketpoin',$key['id_paketpoin']); ?>','<?php echo base_url() ?>uploads/sosmed/<?php echo $gambar ?>')"><i class="icon-list"></i></button>
+                </td>
+                <td style="text-align: center;">
+                    <?php 
+                        if($key['status'] == 0) {
+                            echo "Belum diproses";
+                        } else if($key['status'] == 1) {
+                            echo "Sedang Review";
+                        } else if($key['status'] == 3){
+                            echo "Sudah diverifikasi";
+                        } else {
+                            echo "Transaksi Dibatalkan";
+                        }
+                    ?>    
+                </td>
+                <td style="text-align: center;">
+                    <?php if($key['status'] == 0) { ?>
+                        <a href="#" class="btn btn-default" onclick="edit('<?= $key['id_transaksi'] ?>')"><i class="icon-upload"></i></a>
+                    <?php } else if($key['status'] == 1) { ?>
+                        <a href="#" class="btn btn-default" onclick="hapus('<?= $key['id_transaksi'] ?>','<?php echo base_url() ?>uploads/bukti_pembayaran/<?php echo $key['gambar'] ?>','<?php echo $key['note'] ?>')"><i class="icon-check"></i></a>
+                    <?php } ?>
+                    
+                </td> 
+            </tr>
+            <?php
+            $no++;
+        }
+        ?>
+    </tbody>
+</table> 
 <?= form_close(); ?>
 <script type="text/javascript">
     $(document).ready(function () {

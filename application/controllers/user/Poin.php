@@ -94,7 +94,7 @@ class Poin extends CI_Controller {
             }
            
         } else{
-            $error = $this->upload->display_errors();
+             $error = $this->upload->display_errors();
             $message = array(FALSE, 'Proses Gagal !', $error);
             
         }

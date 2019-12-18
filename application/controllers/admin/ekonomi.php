@@ -140,38 +140,35 @@ class Ekonomi extends CI_Controller {
         $nmfile1 = time()."_".$upload1;
         if($upload1 != '') {
             $config['upload_path']          = './uploads/master_jawaban';
-            $config['allowed_types']        = 'jpg|png|jpeg';
-            $config['max_size']             = 512 * 1;
+            $config['allowed_types']        = 'gif|jpg|png';
+            $config['max_size']             = 1024 * 1;
             $config['file_name']            = $nmfile1;
 
             $this->load->library('upload', $config);
             $data1 = $this->upload->data();
+            $this->upload->do_upload('gambar');
 
             $image = $data1['file_name'];
         } else {
             $image = '';
         }
-        if($this->upload->do_upload('gambar')) {
-            $data = array(
-                'nama_jawaban' => $nama_jawaban,
-                'label' => $label,
-                'gambar' => $image,
-                'marks' => $poin,
-                'id_soal' => $id_soal,
-                'is_true' => $is_true
-            );
-           
-            $add = $this->Crud_m->add('master_jawaban', $data);
-            if ($add) {
-                $message = array(TRUE, 'Proses Berhasil !', 'Proses penyimpanan data berhasil !');
-            } else {
-                $message = array(FALSE, 'Proses Gagal !', 'Proses penyimpanan data gagal !');
-            }
-        } else {
-            $error = $this->upload->display_errors();
-            $message = array(FALSE, 'Proses Gagal !', $error);
-        }  
+       
         
+        $data = array(
+            'nama_jawaban' => $nama_jawaban,
+            'label' => $label,
+            'gambar' => $image,
+            'marks' => $poin,
+            'id_soal' => $id_soal,
+            'is_true' => $is_true
+        );
+       
+        $add = $this->Crud_m->add('master_jawaban', $data);
+        if ($add) {
+            $message = array(TRUE, 'Proses Berhasil !', 'Proses penyimpanan data berhasil !');
+        } else {
+            $message = array(FALSE, 'Proses Gagal !', 'Proses penyimpanan data gagal !');
+        }
         echo json_encode($message);
     }
 
@@ -182,42 +179,37 @@ class Ekonomi extends CI_Controller {
             $upload1 = $_FILES['gambar']['name'];
             $nmfile1 = time()."_".$upload1;
             $config['upload_path']          = './uploads/master_jawaban';
-            $config['allowed_types']        = 'jpeg|jpg|png';
-            $config['max_size']             = 512 * 1;
+            $config['allowed_types']        = 'gif|jpg|png';
+            $config['max_size']             = 1024 * 1;
             $config['file_name']            = $nmfile1;
 
-            $this->load->library('upload', $config);            
+            $this->load->library('upload', $config);
+            $this->upload->do_upload('gambar');               
             $data1 = $this->upload->data();
             $image_name = $data1['file_name'];
             $data = array(
                 'nama_jawaban' => $nama_jawaban,
                 'label' => $label,
                 'marks' => $poin,
-                'gambar' => $image_name,
+                'gambar' => $data1['file_name'],
                 'is_true' => $is_true
             );
-
-
         } else {
             $data = array(
-                'nama_jawaban' => $nama_jawaban,
-                'label' => $label,
-                'marks' => $poin,
-                'is_true' => $is_true
-            );
+            'nama_jawaban' => $nama_jawaban,
+            'label' => $label,
+            'marks' => $poin,
+            'is_true' => $is_true
+        );
         }
 
-        if($this->upload->do_upload('gambar')) {
-            $update = $this->Crud_m->edit('master_jawaban', $data,'id_jawaban',$id);
-            if ($update) {
-                $message = array(TRUE, 'Proses Berhasil !', 'Proses penyimpanan data berhasil !');
-            } else {
-                $message = array(FALSE, 'Proses Gagal !', 'Proses penyimpanan data gagal !');
-            }
+        $update = $this->Crud_m->edit('master_jawaban', $data,'id_jawaban',$id);
+        if ($update) {
+            $message = array(TRUE, 'Proses Berhasil !', 'Proses penyimpanan data berhasil !');
         } else {
-            $error = $this->upload->display_errors();
-            $message = array(FALSE, 'Proses Gagal !', $error);
+            $message = array(FALSE, 'Proses Gagal !', 'Proses penyimpanan data gagal !');
         }
+
         echo json_encode($message);
     }
 
